@@ -1,0 +1,6 @@
+python-pptx
+pandas
+openpyxl
+pyyaml
+lxml
+Pillow

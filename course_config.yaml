@@ -1,0 +1,25 @@
+course_name: "ECE 591 Online Deep Learning"
+
+folders:
+  original_slides: "01_Original_Slides"
+  revised_slides: "02_Revised_Slides"
+  scripts: "03_Scripts"
+  notes_quizzes: "04_Notes_and_Quizzes"
+  figures: "05_Figures"
+  exports: "06_Exports"
+  videos: "07_Videos"
+  manifest: "00_Manifest"
+
+video_policy:
+  target_minutes: 30
+  preferred_core_minutes: 24
+  max_minutes: 32
+  min_minutes: 20
+
+slide_policy:
+  preserve_original_files: true
+  preserve_theme: true
+  add_section_divider: true
+  add_recap_slide: true
+  add_quiz_slide: true
+  generate_speaker_notes: true

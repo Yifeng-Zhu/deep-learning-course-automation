@@ -1,0 +1,4 @@
+course_config.local.yaml
+__pycache__/
+.venv/
+logs/

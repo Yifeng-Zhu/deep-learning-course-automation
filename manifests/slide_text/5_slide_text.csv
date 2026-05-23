@@ -1,0 +1,1736 @@
+﻿lecture_number,lecture_title,original_pptx,slide_number,possible_slide_title,visible_text
+5,Modern CNN,5  - Modern CNN.pptx,1,Modern CNN Architecture,"Modern CNN Architecture
+Yifeng Zhu
+Electrical and Computer Engineering
+University of Maine
+1
+From Representation to Optimization to Efficiency"
+5,Modern CNN,5  - Modern CNN.pptx,2,Overview,"Overview
+Part I: Foundations (LeNet →
+AlexNet
+)
+Part II: Depth Hypothesis (VGG)
+Part III: Optimization Crisis
+Part IV: Residual Learning (
+ResNet
+)
+Part V: The Efficiency and Scaling Era
+2
+CNN evolution = solving new constraints at each stage."
+5,Modern CNN,5  - Modern CNN.pptx,3,Evolution of networks,"Evolution of networks
+3
+Evolution of Deep Learning Architectures"
+5,Modern CNN,5  - Modern CNN.pptx,4,Foundation Era Summary (1998–2014),"Foundation Era Summary (1998–2014)
+LeNet (1998): Convolution Works
+Impact: Established Conv → Pool → FC pipeline
+Local receptive fields
+End-to-end backprop
+AlexNet
+(2012): Deep Learning Scales
+Impact: Deep CNNs outperform classical vision methods
+GPU training
+ReLU
+activation
+Dropout regularization
+Data augmentation
+Large-scale ImageNet training
+VGG (2014): Depth Matters
+Impact: Depth significantly improves representation power
+Small 3×3 filters
+Increased depth (16–19 layers)
+Hierarchical feature learning
+4"
+5,Modern CNN,5  - Modern CNN.pptx,5,LeNet-5 (1998): The First Successful CNN,"LeNet-5 (1998): The First Successful CNN
+Problem: Handwritten digit recognition (MNIST)
+70,000 grayscale images
+60,000 training
+10,000 test
+Image size: 28 × 28 pixels
+10 classes: digits 0–9
+Centered and size-normalized handwritten digits
+Used in the original LeNet-5 (1998)
+Standard benchmark for early neural networks
+Paper: Gradient-Based Learning Applied to Document Recognition Yann LeCun, Léon
+Bottou
+, Yoshua Bengio, Patrick Haffner (1998)
+5"
+5,Modern CNN,5  - Modern CNN.pptx,6,LeNet-5 (1998): Why Convolution Works,"LeNet-5 (1998): Why Convolution Works
+Paper: Gradient-Based Learning Applied to Document Recognition Yann LeCun, Léon
+Bottou
+, Yoshua Bengio, Patrick Haffner (1998)
+First practical demonstration of convolutional networks
+Established the CNN design template: Conv → Pool → Conv → Pool → FC
+Foundation for
+AlexNet
+and all modern CNNs
+Key Ideas Introduced
+Local receptive fields
+Weight sharing
+End-to-end gradient training
+Subsampling (early pooling)
+6"
+5,Modern CNN,5  - Modern CNN.pptx,7,AlexNet (2012): Starting Modern Deep Learning,"AlexNet
+(2012): Starting Modern Deep Learning
+7
+ImageNet Classification with Deep Convolutional Neural Networks - Alex
+Krizhevsky
+, Ilya
+Sutskever
+, Geoffrey E. Hinton; 2012
+Why
+AlexNet
+Changed Everything
+First deep CNN to dominate ImageNet
+10%+ absolute Top-5 improvement
+Demonstrated GPU +
+ReLU
++ data scale synergy
+Marked shift from handcrafted features → learned features
+1.2M ImageNet images."
+5,Modern CNN,5  - Modern CNN.pptx,8,AlexNet Architecture (2012): Large-Scale CNN Design,"AlexNet
+Architecture (2012): Large-Scale CNN Design
+Why It Was a Turning Point
+First deep CNN to win ImageNet
+8 learned layers, 60M parameters
+Trained on GPUs (Two GTX 580 GPUs, each with only 3 GB of memory)
+10× performance improvement over classical CV
+8
+What Changed in 2012?
+ReLU
+enabled faster convergence
+Dropout reduced overfitting
+Data augmentation at scale
+Large labeled dataset (ImageNet)"
+5,Modern CNN,5  - Modern CNN.pptx,9,Inside AlexNet: Layer Configuration and Feature Maps,"Inside
+AlexNet
+: Layer Configuration and Feature Maps
+[
+Krizhevsky
+et al
+.,
+2012
+]
+. . .
+227
+×
+227
+×
+3
+55
+×
+55
+×
+9
+6
+27
+×
+27
+×
+96
+27
+×
+27
+×
+256
+13
+×
+13
+×
+256
+13
+×
+13
+×
+384
+13
+×
+13
+×
+384
+13
+×
+13
+×
+256
+6
+×
+6
+×
+256
+11
+×
+11
+s = 4
+P = 0
+3
+×
+3
+s = 2
+max pool
+5
+×
+5
+S = 1
+P = 2
+3
+×
+3
+s = 2
+max pool
+3
+×
+3
+S = 1
+P = 1
+3
+×
+3
+s = 1
+P = 1
+3
+×
+3
+S = 1
+P = 1
+3
+×
+3
+s = 2
+max pool
+conv
+conv
+conv
+conv
+conv
+. . .
+. . .
+9"
+5,Modern CNN,5  - Modern CNN.pptx,10,AlexNet,"DROPOUT =
+0.5
+N_CATEGORY =
+1000
+model_input
+=
+layers.Input
+(shape = (
+227
+,
+227
+,
+3
+))
+# First convolutional Layer (96x11x11)
+z = layers.Conv2D(filters =
+96
+,
+kernel_size
+= (
+11
+,
+11
+), strides = (
+4
+,
+4
+), activation =
+""
+relu
+""
+)(
+model_input
+)
+z = layers.MaxPooling2D(
+pool_size
+= (
+3
+,
+3
+), strides=(
+2
+,
+2
+))(z)
+z =
+layers.BatchNormalization
+()(z)
+# Second convolutional Layer (256x5x5)
+z = layers.ZeroPadding2D(padding = (
+2
+,
+2
+))(z)
+z = layers.Convolution2D(filters =
+256
+,
+kernel_size
+= (
+5
+,
+5
+), strides = (
+1
+,
+1
+), activation =
+""
+relu
+""
+)(z)
+z = layers.MaxPooling2D(
+pool_size
+= (
+3
+,
+3
+), strides=(
+2
+,
+2
+))(z)
+z =
+layers.BatchNormalization
+()(z)
+# Rest 3 convolutional layers
+z = layers.ZeroPadding2D(padding = (
+1
+,
+1
+))(z)
+z = layers.Convolution2D(filters =
+384
+,
+kernel_size
+= (
+3
+,
+3
+), strides = (
+1
+,
+1
+), activation =
+""
+relu
+""
+)(z)
+z = layers.ZeroPadding2D(padding = (
+1
+,
+1
+))(z)
+z = layers.Convolution2D(filters =
+384
+,
+kernel_size
+= (
+3
+,
+3
+), strides = (
+1
+,
+1
+), activation =
+""
+relu
+""
+)(z)
+z = layers.ZeroPadding2D(padding = (
+1
+,
+1
+))(z)
+z = layers.Convolution2D(filters =
+256
+,
+kernel_size
+= (
+3
+,
+3
+), strides = (
+1
+,
+1
+), activation =
+""
+relu
+""
+)(z)
+z = layers.MaxPooling2D(
+pool_size
+= (
+3
+,
+3
+), strides=(
+2
+,
+2
+))(z)
+z =
+layers.Flatten
+()(z)
+z =
+layers.Dense
+(
+4096
+, activation=
+""
+relu
+""
+)(z)
+z =
+layers.Dropout
+(DROPOUT)(z)
+z =
+layers.Dense
+(
+4096
+, activation=
+""
+relu
+""
+)(z)
+z =
+layers.Dropout
+(DROPOUT)(z)
+final_dim
+=
+1
+if
+N_CATEGORY ==
+2
+else
+N_CATEGORY
+final_act
+=
+""sigmoid""
+if
+N_CATEGORY ==
+2
+else
+""
+softmax
+""
+model_output
+=
+layers.Dense
+(
+final_dim
+, activation=
+final_act
+)(z)
+model =
+keras.Model
+(
+model_input
+,
+model_output
+)
+model.summary
+()
+https://colab.research.google.com/drive/1eNWhgg1NMNLJe4d0B7CzKJ8JS9C7WlV4?usp=sharing
+_________________________________________________________________
+Layer (type) Output Shape Param #
+=================================================================
+input (
+InputLayer
+) [(None, 227, 227, 3)] 0
+_________________________________________________________________
+conv2d_15 (Conv2D) (None, 55, 55, 96) 34944
+_________________________________________________________________
+max_pooling2d_9 (MaxPooling2 (None, 27, 27, 96) 0
+_________________________________________________________________
+batch_normalization_6 (Batch (None, 27, 27, 96) 384
+_________________________________________________________________
+zero_padding2d_12 (
+ZeroPaddi
+(None, 31, 31, 96) 0
+_________________________________________________________________
+conv2d_16 (Conv2D) (None, 27, 27, 256) 614656
+_________________________________________________________________
+max_pooling2d_10 (
+MaxPooling
+(None, 13, 13, 256) 0
+_________________________________________________________________
+batch_normalization_7 (Batch (None, 13, 13, 256) 1024
+_________________________________________________________________
+zero_padding2d_13 (
+ZeroPaddi
+(None, 15, 15, 256) 0
+_________________________________________________________________
+conv2d_17 (Conv2D) (None, 13, 13, 384) 885120 ______________________________________________________________
+zero_padding2d_14 (
+ZeroPaddi
+(None, 15, 15, 384) 0
+_________________________________________________________________
+conv2d_18 (Conv2D) (None, 13, 13, 384) 1327488
+_________________________________________________________________
+zero_padding2d_15 (
+ZeroPaddi
+(None, 15, 15, 384) 0
+_________________________________________________________________
+conv2d_19 (Conv2D) (None, 13, 13, 256) 884992
+_________________________________________________________________
+max_pooling2d_11 (
+MaxPooling
+(None, 6, 6, 256) 0
+_________________________________________________________________
+flatten_3 (Flatten) (None, 9216) 0
+_________________________________________________________________
+dense_8 (Dense) (None, 4096) 37752832
+_________________________________________________________________
+dropout_6 (Dropout) (None, 4096) 0
+_________________________________________________________________
+dense_9 (Dense) (None, 4096) 16781312
+_________________________________________________________________
+dropout_7 (Dropout) (None, 4096) 0
+_________________________________________________________________
+dense_10 (Dense) (None, 1000) 4097000
+=================================================================
+Total params: 62,379,752
+Trainable params: 62,379,048
+Non-trainable params: 704
+AlexNet
+10"
+5,Modern CNN,5  - Modern CNN.pptx,11,Simplified AlexNet in PyTorch (Teaching Version),"Simplified
+AlexNet
+in
+PyTorch
+(Teaching Version)
+class
+AlexNet
+(
+nn.Module
+):
+def __
+init
+__(self,
+num_classes
+=1000):
+super(
+AlexNet
+, self).__
+init
+__()
+self.
+features
+=
+nn.Sequential
+(
+nn.
+Conv2d
+(3, 96,
+kernel_size
+=11, stride=4, padding=0),
+nn.
+ReLU
+(
+inplace
+=True),
+nn.
+MaxPool2d
+(
+kernel_size
+=3, stride=2),
+nn.
+Conv2d
+(96, 256,
+kernel_size
+=5, padding=2),
+nn.
+ReLU
+(
+inplace
+=True),
+nn.
+MaxPool2d
+(
+kernel_size
+=3, stride=2),
+)
+self.
+classifier
+=
+nn.Sequential
+(
+nn.
+Dropout
+(0.5),
+nn.
+Linear
+(256 * 6 * 6, 4096),
+nn.
+ReLU
+(
+inplace
+=True),
+nn.
+Dropout
+(0.5),
+nn.
+Linear
+(4096, 4096),
+nn.
+ReLU
+(
+inplace
+=True),
+nn.
+Linear
+(4096,
+num_classes
+),
+)
+def forward(self, x):
+x =
+self.features
+(x)
+x =
+torch.flatten
+(x, 1)
+x =
+self.classifier
+(x)
+return x
+11
+Input: (3, 227, 227) → (96,55,55) → ...→ Output: (1000 classes)
+AlexNet
+Architecture = Feature Extractor (Conv Stack) + Classifier (FC Layers)
+Key Implementation Details
+ReLU
+replaces tanh (faster convergence)
+Dropout = 0.5 for regularization
+No
+BatchNorm
+in original paper
+Final layer outputs logits (
+Softmax
+applied in loss)
+criterion =
+nn.CrossEntropyLoss
+()
+outputs = model(x) # raw logits
+loss = criterion(outputs, labels)
+But for prediction you don’t even need
+softmax
+:
+pred =
+torch.argmax
+(outputs, dim=1)"
+5,Modern CNN,5  - Modern CNN.pptx,12,Modernized AlexNet-Style CNN (Simplified),"Modernized
+AlexNet
+-Style CNN (Simplified)
+class
+AlexNet
+(
+nn.Module
+):
+def __
+init
+__(self,
+num_classes
+=1000):
+super(
+AlexNet
+, self).__
+init
+__()
+self.features
+=
+nn.Sequential
+(
+# Block 1
+nn.Conv2d(3, 64,
+kernel_size
+=3
+, stride=2, padding=1),
+nn.BatchNorm2d(64),
+nn.ReLU
+(
+inplace
+=True),
+nn.MaxPool2d(2),
+# Block 2
+nn.Conv2d(64, 128,
+kernel_size
+=3,
+padding=1),
+nn.BatchNorm2d(128),
+nn.ReLU
+(
+inplace
+=True),
+nn.MaxPool2d(2),
+)
+# Global Average Pooling
+self.
+global_pool
+= nn.
+AdaptiveAvgPool2d
+((1, 1))
+# Small classifier
+self.classifier
+=
+nn.Linear
+(128,
+num_classes
+)
+def forward(self, x):
+x =
+self.features
+(x)
+x =
+self.global_pool
+(x)
+x =
+torch.flatten
+(x, 1)
+x =
+self.classifier
+(x)
+return x
+12
+AlexNet
+was groundbreaking in 2012, but we would not build it the same way now.
+Improvements:
+Add
+BatchNorm
+Stabilizes training
+Allows higher learning rates
+Stabilizes intermediate activation distributions during training → Makes optimization easier and faster
+Replace FC layers with
+Global Average Pooling (GAP)
+Massive parameter reduction
+Less overfitting
+Better spatial invariance
+Use smaller kernels (VGG style)"
+5,Modern CNN,5  - Modern CNN.pptx,13,Global Average Pooling (GAP),"Global Average Pooling (GAP)
+13
+Intuition:
+Each channel detects something:
+Channel 1 → wheels
+Channel 2 → windows
+Channel 3 → edges
+…
+Global average pooling asks:
+How strongly did this feature appear anywhere in the image?
+Why This Works
+Each channel represents a semantic detector
+GAP measures global presence strength
+Eliminates 100M+ FC parameters (VGG)
+Improves translation robustness"
+5,Modern CNN,5  - Modern CNN.pptx,14,Global Average Pooling Enables Variable Input Size,"Global Average Pooling Enables Variable Input Size
+14
+Why This Matters
+Works with different image resolutions
+Removes fixed 7×7 constraint (unlike VGG)
+Eliminates need for flattening
+Makes the network fully convolutional
+Global Average Pooling decouples classification from spatial resolution."
+5,Modern CNN,5  - Modern CNN.pptx,15,Batch Normalization,"Batch Normalization
+15
+In CNNs, normalization is performed independently per channel, using statistics aggregated over batch and spatial dimensions (B × H × W).
+BatchNorm
+in Fully Connected Layers (B, D)
+BatchNorm
+in Convolutional Layers (B, C, H, W)"
+5,Modern CNN,5  - Modern CNN.pptx,16,Overview,"Overview
+Part I: Foundations (LeNet →
+AlexNet
+)
+Part II: Depth Hypothesis (VGG)
+Part III: Optimization Crisis
+Part IV: Residual Learning (
+ResNet
+)
+Part V: The Efficiency and Scaling Era
+16
+CNN evolution = solving new constraints at each stage."
+5,Modern CNN,5  - Modern CNN.pptx,17,Depth vs. Width in Neural Networks,"Depth vs. Width in Neural Networks
+What Does “
+Deep
+” Mean?
+More layers → More hierarchical feature composition
+Example: Edge → texture → part → object
+Enables
+feature reuse
+Builds
+compositional structure
+Often more parameter-efficient
+Encourages hierarchical abstraction
+17
+What Does “
+Wide
+” Mean?
+More neurons per layer
+→ Larger feature subspace at each stage
+Increases raw capacity
+Captures diverse features at same level
+Less hierarchical structure
+Key Inputs
+Depth builds structure
+Width builds capacity
+Modern architectures combine both
+Larger feature space per layer"
+5,Modern CNN,5  - Modern CNN.pptx,18,Why Depth Matters in Practice,"Why Depth Matters in Practice
+Universal Approximation Theorem:
+A single hidden layer can approximate any continuous function given sufficient width.
+BUT:
+May require exponentially many neurons
+Lacks structured hierarchical representation
+Poor parameter efficiency
+Expressivity ≠ Efficiency.
+Depth = structured efficiency
+18"
+5,Modern CNN,5  - Modern CNN.pptx,19,Real-World Vision Is Hierarchical,"Real-World Vision Is Hierarchical
+Natural images have structure
+Visual recognition builds progressively:
+signals → structure → semantics
+Pixels
+Edges
+Textures
+(Recurring patterns of pixels or edges that convey surface qualities)
+Parts
+(Combinations of edges and textures)
+Objects
+Depth mirrors this compositional structure.
+If vision is hierarchical, increasing depth should improve representation power.
+19"
+5,Modern CNN,5  - Modern CNN.pptx,20,From AlexNet to VGG: Testing the Depth Hypothesis,"From
+AlexNet
+to VGG: Testing the Depth Hypothesis
+In
+2012
+:
+AlexNet
+(8 layers) proved deep CNNs work.
+Key Question:
+If 8 layers work… will 16 or 19 work better?
+VGG (Oxford, 2014):
+Research group name: Visual Geometry Group
+Push depth aggressively
+Keep architecture simple
+Use small filters (3×3 only)
+Systematically test depth
+20
+VGG: Keep It Deep. Keep It Simple."
+5,Modern CNN,5  - Modern CNN.pptx,21,VGG (2014): Depth as a Design Principle,"AlexNet
+VGG16
+VGG19
+Core Philosophy:
+Stack small 3×3 convolutions
+Increase depth systematically (16–19 layers)
+Keep design uniform and simple
+Why 3×3 only?
+Same receptive field as larger filters when stacked
+More nonlinearities
+Fewer parameters
+Stronger hierarchical representation
+Key Result:
+7.3% Top-5 error (ILSVRC 2014)
+Established depth as dominant paradigm
+VGG (2014): Depth as a Design Principle
+8 layers
+16
+layers
+19
+layers
+21"
+5,Modern CNN,5  - Modern CNN.pptx,22,conv,"conv
+conv
+conv
+One 7×7 convolution:
+Large parameter count
+One nonlinear activation
+Receptive Field
+22
+Three 3×3 convolutions:
+Same effective receptive field
+More nonlinearities (
+ReLU
+after each layer)
+Fewer parameters
+Deeper representation
+Key Insight: Depth increases expressive power without exploding parameters."
+5,Modern CNN,5  - Modern CNN.pptx,23,VGG 16,"VGG 16
+[
+Simonyan
+and Zisserman, 2014]
+23"
+5,Modern CNN,5  - Modern CNN.pptx,24,VGG 16,"VGG
+16
+Input
+3x3 conv, 64
+3x3 conv, 64
+Pool 1/2
+3x3 conv, 128
+3x3 conv, 128
+Pool 1/2
+3x3 conv, 256
+3x3 conv, 256
+3x3 conv, 256
+Pool 1/2
+3x3 conv, 512
+3x3 conv, 512
+3x3 conv, 512
+Pool 1/2
+3x3 conv, 512
+3x3 conv, 512
+3x3 conv, 512
+Pool 1/2
+FC 4096
+FC 4096
+FC 1000
+Softmax
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+24"
+5,Modern CNN,5  - Modern CNN.pptx,25,Where Does VGG Spend Memory and Parameters?,"Input memory: 224*224*3=150K
+params
+: 0
+3x3 conv, 64 memory: 224*224*64=3.2M
+params
+: (3*3*3)*64 = 1,728
+3x3 conv, 64 memory: 224*224*64=3.2M
+params
+: (3*3*64)*64 = 36,864
+Pool memory: 112*112*64=800K
+params
+: 0
+3x3 conv, 128 memory: 112*112*128=1.6M
+params
+: (3*3*64)*128 = 73,728
+3x3 conv, 128 memory: 112*112*128=1.6M
+params
+: (3*3*128)*128 = 147,456
+Pool memory: 56*56*128=400K
+params
+: 0
+3x3 conv, 256 memory: 56*56*256=800K
+params
+: (3*3*128)*256 = 294,912
+3x3 conv, 256 memory: 56*56*256=800K
+params
+: (3*3*256)*256 = 589,824
+3x3 conv, 256 memory: 56*56*256=800K
+params
+: (3*3*256)*256 = 589,824
+Pool memory: 28*28*256=200K
+params
+: 0
+3x3 conv, 512 memory: 28*28*512=400K
+params
+: (3*3*256)*512 = 1,179,648
+3x3 conv, 512 memory: 28*28*512=400K
+params
+: (3*3*512)*512 = 2,359,296
+3x3 conv, 512 memory: 28*28*512=400K
+params
+: (3*3*512)*512 = 2,359,296
+Pool memory: 14*14*512=100K
+params
+: 0
+3x3 conv, 512 memory: 14*14*512=100K
+params
+: (3*3*512)*512 = 2,359,296
+3x3 conv, 512 memory: 14*14*512=100K
+params
+: (3*3*512)*512 = 2,359,296
+3x3 conv, 512 memory: 14*14*512=100K
+params
+: (3*3*512)*512 = 2,359,296
+Pool memory: 7*7*512=25K
+params
+: 0
+FC 4096 memory: 4096
+params
+: 7*7*512*4096 = 102,760,448
+FC 4096 memory: 4096
+params
+: 4096*4096 = 16,777,216
+FC 1000 memory: 1000
+params
+: 4096*1000 = 4,096,000
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+TOTAL memory: 24M * 4 bytes ~= 96MB / image, TOTAL
+params
+: 138M parameters
+Where Does VGG Spend Memory and Parameters?
+25
+Early layers:
+Most memory (large spatial maps)
+Most computation
+Late FC layers:
+Account for ~120M of 138M parameters.
+VGG is deep but inefficient
+Fully connected layers dominate parameters
+Motivation for Global Average Pooling"
+5,Modern CNN,5  - Modern CNN.pptx,26,Depth Enables Structured Feature Reuse,"Depth Enables Structured Feature Reuse
+What Happens When We Stack 3×3 Convolutions?
+Each layer builds on previous features:
+Layer 1 → Edges
+Layer 2 → Patterns
+Layer 3 → Parts
+Layer 4 → Objects
+Why This Matters:
+Reuses lower-level representations
+Builds compositional abstractions
+More nonlinear transformations
+Exponential representational efficiency
+Depth is structured reuse, not just stacking layers.
+26
+A deep network does not relearn edges at every layer; it builds increasingly abstract representations from them."
+5,Modern CNN,5  - Modern CNN.pptx,27,Overview,"Overview
+Part I: Foundations (LeNet →
+AlexNet
+)
+Part II: Depth Hypothesis (VGG)
+Part III: Optimization Crisis
+Part IV: Residual Learning (
+ResNet
+)
+Part V: The Efficiency and Scaling Era
+27
+CNN evolution = solving new constraints at each stage."
+5,Modern CNN,5  - Modern CNN.pptx,28,Is Deeper Always Better?,"Is Deeper Always Better?
+28
+VGG showed:
+Increasing depth improves performance.
+But:
+What happens if we keep stacking layers?"
+5,Modern CNN,5  - Modern CNN.pptx,29,Degradation Problem in Deep Networks,"Degradation Problem in Deep Networks
+Empirical Observation:
+56
+-
+layer
+model
+performs worse on both training and test
+error
+.
+29
+Both training and test error increase → Not overfitting"
+5,Modern CNN,5  - Modern CNN.pptx,30,Why Is This Surprising?,"Why Is This Surprising?
+30
+But in practice:
+It fails.
+Root Cause:
+optimization
+, not representation.
+Representation power ↑
+Optimization difficulty ↑
+Deeper networks suffer from:
+Vanishing gradients
+Exploding gradients
+Degradation problem
+Even if a good solution exists, SGD cannot find it.
+Shallow Network
+Identity
+output
+input
+Identity
+Identity"
+5,Modern CNN,5  - Modern CNN.pptx,31,Why Gradients Vanish,"Why Gradients Vanish
+The loss depends on the final layer.
+Consider a deep network:
+h
+(1)
+=
+𝑓
+1
+(
+𝑊
+(1)
+𝑥
+)
+h
+(2)
+=
+𝑓
+2
+(
+𝑊
+(
+2
+)
+h
+(1)
+)
+h
+(3)
+=
+𝑓
+3
+(
+𝑊
+(
+3
+)
+h
+(
+2
+)
+)
+⋯
+h
+(
+𝑛
+)
+=
+𝑓
+𝑛
+(
+𝑊
+(
+𝑛
+)
+h
+(
+𝑛
+−1)
+)
+𝐿
+=
+𝑙
+(
+h
+(
+𝑛
+)
+)
+Apply Chain Rule:
+Deep → gradient disappears → Lower layers stop learning.
+We update weights via:"
+5,Modern CNN,5  - Modern CNN.pptx,32,Gradients Exploding,"Gradients Exploding
+Apply Chain Rule:
+We update weights via:
+Depth increases representational power, but multiplies many gradient terms — making optimization unstable.
+The loss depends on the final layer.
+Consider a deep network:
+h
+(
+1
+)
+=
+𝑓
+1
+(
+𝑊
+(
+1
+)
+𝑥
+)
+h
+(
+2
+)
+=
+𝑓
+2
+(
+𝑊
+(
+2
+)
+h
+(
+1
+)
+)
+h
+(
+3
+)
+=
+𝑓
+3
+(
+𝑊
+(
+3
+)
+h
+(
+2
+)
+)
+⋯
+h
+(
+𝑛
+)
+=
+𝑓
+𝑛
+(
+𝑊
+(
+𝑛
+)
+h
+(
+𝑛
+−
+1
+)
+)
+𝐿
+=
+𝑙
+(
+h
+(
+𝑛
+)
+)"
+5,Modern CNN,5  - Modern CNN.pptx,33,Optimization vs Representation,"Optimization vs Representation
+Representation power increases with depth.
+Optimization difficulty also increases.
+Even if a better solution exists, SGD cannot reach it.
+That’s the key insight.
+33"
+5,Modern CNN,5  - Modern CNN.pptx,34,Overview,"Overview
+Part I: Foundations (LeNet →
+AlexNet
+)
+Part II: Depth Hypothesis (VGG)
+Part III: Optimization Crisis
+Part IV: Residual Learning (
+ResNet
+)
+Part V: The Efficiency and Scaling Era
+34
+CNN evolution = solving new constraints at each stage."
+5,Modern CNN,5  - Modern CNN.pptx,35,Can We Make Deep Networks Easier to Optimize?,"Can We Make Deep Networks Easier to Optimize?
+35
+If identity is optimal → F(x) = 0 is easy
+Plain Block
+Conv
+Conv
+ReLU
+𝑥
+𝐻
+𝑥
+Residual Block
+Conv
+Conv
+ReLU
+𝑥
+𝐻
+𝑥
++
+𝐹
+𝑥
+𝑥
+Learning small residual corrections is easier than learning full transformations.
+Instead of learning:
+Learn:
+Thus:
+Direct gradient highway"
+5,Modern CNN,5  - Modern CNN.pptx,36,ResNet (2015): Making Depth Trainable,"shallow
+8
+layers
+8
+layers
+19
+layers
+22
+layers
+152
+layers
+152
+layers
+152
+layers
+36
+Deep Residual Learning for Image Recognition - Kaiming He, Xiangyu Zhang, Shaoqing Ren, Jian Sun; 2015
+ResNet
+(2015): Making Depth Trainable
+152 layers (ImageNet)
+Introduced residual learning
+Solved degradation problem
+Enabled very deep optimization
+Depth was no longer limited by optimization."
+5,Modern CNN,5  - Modern CNN.pptx,37,ResNet Architecture,"ResNet
+Architecture
+37
+Architecture Pattern
+Initial conv (7×7, stride 2)
+Residual block stacks
+Downsample
+between stages
+Global average pooling
+Final FC layer
+Scaling Depth
+ResNet-18
+ResNet-34
+ResNet-50 (uses bottleneck blocks)
+ResNet-101
+ResNet-152"
+5,Modern CNN,5  - Modern CNN.pptx,38,Why ResNet Works,"Why
+ResNet
+Works
+Li et al. Visualizing the Loss Landscape of Neural Nets, NIPS 2018,
+38
+Skip connection provides direct gradient path
+Mitigates vanishing gradients
+Smooths loss landscape
+Identity mapping is easy to learn
+Enables 100+ layer training"
+5,Modern CNN,5  - Modern CNN.pptx,39,ResNet’s Impact,"ResNet’s
+Impact
+Established residual connections as a core design principle
+Inspired
+DenseNet
+,
+EfficientNet
+, Inception-
+ResNet
+Foundation of modern vision backbones
+39"
+5,Modern CNN,5  - Modern CNN.pptx,40,Summary of CNN Design Principles,"Summary of CNN Design Principles
+40
+Modern CNNs succeed by balancing representation power, optimization stability, and computational efficiency.
+Representation
+Optimization
+Efficiency
+Convolution exploits spatial locality
+Residual connections enable deep training
+Factorized convolutions reduce FLOPs
+Depth builds hierarchical abstraction
+BatchNorm
+stabilizes gradients
+Global Average Pooling removes heavy FC layers
+Small filters improve expressive power
+Identity mappings ease optimization
+Compound scaling balances depth, width, resolution"
+5,Modern CNN,5  - Modern CNN.pptx,41,Overview,"Overview
+Part I: Foundations (LeNet →
+AlexNet
+)
+Part II: Depth Hypothesis (VGG)
+Part III: Optimization Crisis
+Part IV: Residual Learning (
+ResNet
+)
+Part V: The Efficiency and Scaling Era
+41
+CNN evolution = solving new constraints at each stage."
+5,Modern CNN,5  - Modern CNN.pptx,42,CNN Design Evolution Pattern,"CNN Design Evolution Pattern
+LeNet → Feature Learning
+Introduced convolution, weight sharing, and end-to-end gradient learning
+AlexNet
+→ Scale
+Demonstrated deep CNNs succeed with GPUs,
+ReLU
+, and large datasets
+VGG → Depth
+Showed stacking small filters and increasing layers improves representation
+ResNet
+→ Optimization
+Enabled very deep networks using residual connections and stable gradients
+Modern CNNs → Efficiency + Stability
+Design for high accuracy per FLOP with scalable, hardware-aware architectures
+42"
+5,Modern CNN,5  - Modern CNN.pptx,43,Why Optimization Was Not the End,"Why Optimization Was Not the End
+ResNet
+made depth trainable.
+But new constraints emerged:
+Mobile devices
+Real-time inference
+Edge deployment
+Energy limits
+Memory bandwidth limits
+New objective: Max Accuracy per FLOP
+43
+Modern CNN design = Representation + Optimization + Efficiency"
+5,Modern CNN,5  - Modern CNN.pptx,44,Computation in Convolution,"Computation in Convolution
+44
+Parameter counts:
+Total computation cost (FLOPs):
+Key observation:
+Channel mixing is expensive.
+Large spatial kernels are expensive.
+Fully connected layers were already removed (GAP).
+Question:
+Can we separate spatial filtering from channel mixing?
+For a standard convolution:"
+5,Modern CNN,5  - Modern CNN.pptx,45,The Problem: What Kernel Size Should We Use?,"The Problem: What Kernel Size Should We Use?
+Before Inception:
+Large kernel → large receptive field
+Small kernel → lower cost
+No clear answer
+Observation:
+Objects appear at multiple spatial scales.
+Question:
+Can we let the network choose the scale?
+45"
+5,Modern CNN,5  - Modern CNN.pptx,46,Inception: Multi-Scale Parallel Design,"Inception: Multi-Scale Parallel Design
+Instead of choosing one kernel size:
+Run multiple branches in parallel:
+1×1
+3×3
+5×5
+Pooling
+Then concatenate outputs along channels.
+Key insight:
+Multi-scale feature extraction within a single layer.
+This increases representational diversity without increasing depth.
+46"
+5,Modern CNN,5  - Modern CNN.pptx,47,1×1 Convolution as a Bottleneck,"1×1 Convolution as a Bottleneck
+Problem:
+5×5 convolution is expensive:
+Solution:
+Reduce channels first using 1×1:
+Then apply 5×5:
+47
+Interpretation:
+1×1 convolution performs channel compression before expensive spatial filtering.
+This is the real efficiency trick.
+If
+Computation drops dramatically."
+5,Modern CNN,5  - Modern CNN.pptx,48,Inception = Parallel Branches + Channel Concatenation,"Inception = Parallel Branches + Channel Concatenation
+48
+We compute multiple transformations in parallel:
+1×1
+3×3
+5×5
+Pooling
+Then concatenate along the channel dimension
+Why Concatenation?
+Preserves information from all scales
+Increases feature diversity
+Expands width without increasing depth
+Key idea:
+Inception increases representational capacity by widening the network intelligently."
+5,Modern CNN,5  - Modern CNN.pptx,49,Inception V2: Factorizing Large Kernels,"Inception V2: Factorizing Large Kernels
+Replace 5×5 with Two 3×3
+Original Inception Module
+Additional benefits:
+Two nonlinearities instead of one
+Deeper representation
+Better regularization
+Key insight: Large receptive fields can be built from smaller kernels more efficiently."
+5,Modern CNN,5  - Modern CNN.pptx,50,Inception V2: Asymmetric Factorization,"Inception V2: Asymmetric Factorization
+factorize
+convolutions of filter size
+nxn
+to a
+combination
+of
+1xn and nx1
+convolutions.
+Interpretation:
+Separate horizontal and vertical filtering.
+Architectural principle:
+Spatial filtering can be decomposed without losing receptive field size.
+Efficiency comes from structural factorization, not just making networks smaller."
+5,Modern CNN,5  - Modern CNN.pptx,51,MobileNet (2017): Accuracy Under Constraint,"MobileNet
+(2017): Accuracy Under Constraint
+ResNet
+solved optimization.
+New question: How do we maximize accuracy per FLOP?
+Target environments:
+Mobile devices
+Edge computing
+Real-time inference
+Low-power hardware
+Core idea: Use
+depthwise
+separable convolution everywhere
+51"
+5,Modern CNN,5  - Modern CNN.pptx,52,Depthwise Separable Convolution,"Depthwise
+Separable Convolution
+Standard convolution:
+52
+Depthwise
+separable convolution:
+MobileNet
+= Efficiency through structural factorization.
+Not:
+Deeper
+Wider
+Bigger
+But: Smarter convolution."
+5,Modern CNN,5  - Modern CNN.pptx,53,DenseNet (2017): Every Layer Connects to All Previous Layers,"DenseNet
+(2017): Every Layer Connects to All Previous Layers
+53
+Concatenate output of a layer to all successive layers
+ResNet
+:
+DenseNet
+:
+Key difference:
+ResNet
+→ additive reuse
+DenseNet
+→ concatenative reuse
+[⋅] = channel-wise concatenation
++ = element-wise addition
+Same number of channels
+Element-wise addition
+Features are blended (combined by summation)
+Earlier representations are modified, not explicitly preserved
+Number of channels increases
+Channel-wise concatenation
+All previous features are explicitly preserved
+Representation grows over depth
+ResNet
+= refinement
+DenseNet
+= accumulation"
+5,Modern CNN,5  - Modern CNN.pptx,54,DenseNet: Why Concatenation?,"DenseNet
+: Why Concatenation?
+Each layer receives:
+Raw input
+Low-level edges
+Mid-level textures
+High-level parts
+All previous representations are preserved.
+Benefits:
+Strong gradient flow
+No feature overwriting
+Encourages feature reuse
+Improves parameter efficiency
+Interpretation:
+DenseNet
+eliminates redundant relearning.
+54"
+5,Modern CNN,5  - Modern CNN.pptx,55,DenseNet: Growth Rate Concept,"DenseNet
+: Growth Rate Concept
+55"
+5,Modern CNN,5  - Modern CNN.pptx,56,Why DenseNet Improves Gradient Flow,"Why
+DenseNet
+Improves Gradient Flow
+Because:
+Path length from layer
+L
+to output is 1 via concatenation.
+There are short paths from:
+Any early layer → output.
+This mitigates vanishing gradients even more strongly than
+ResNet
+.
+ResNet
+: Gradient flows through addition.
+DenseNet
+: Gradient flows through direct concatenation paths.
+56"
+5,Modern CNN,5  - Modern CNN.pptx,57,Why DenseNet Can Use Fewer Parameters,"Why
+DenseNet
+Can Use Fewer Parameters
+Intuition:
+In
+ResNet
+:
+Features may be re-learned
+Information gets overwritten
+In
+DenseNet
+:
+Earlier features are preserved
+Later layers reuse instead of recompute
+This reduces redundancy.
+Even though channel count grows,
+each layer has small width (growth rate k).
+57"
+5,Modern CNN,5  - Modern CNN.pptx,58,DenseNet: Summary,"DenseNet
+: Summary
+VGG: No explicit
+reuse
+ResNet
+: Additive
+reuse
+DenseNet
+:
+Concatenative
+reuse
+Maximizes feature reuse.
+58
+DenseNet
+contributes:
+Direct layer-to-layer connections
+Linear feature growth (growth rate k)
+Strong gradient flow
+Reduced redundancy
+Improved parameter efficiency
+DenseNet
+extends the idea of residual learning into full feature preservation."
+5,Modern CNN,5  - Modern CNN.pptx,59,How Should We Scale CNNs?,"How Should We Scale CNNs?
+After
+MobileNet
+, we can make networks:
+Deeper
+Wider
+Higher resolution
+But how should we scale?
+59
+Naive strategies:
+Only increase depth
+Only increase width
+Only increase input resolution
+Empirical observation: Unbalanced scaling wastes computation
+Depth
+= number of layers
+Width
+= number of channels per layer.
+Resolution
+= input image size."
+5,Modern CNN,5  - Modern CNN.pptx,60,Why Naive Scaling Fails,"Why Naive Scaling Fails
+If we increase:
+Depth only:
+More abstraction
+But bottlenecked by narrow layers
+Width only:
+More capacity
+But shallow feature hierarchy
+Resolution only:
+More spatial detail
+But insufficient representational power
+Scaling one dimension alone leads to diminishing returns.
+60"
+5,Modern CNN,5  - Modern CNN.pptx,61,"Compound Scaling: Scaling Depth, Width, and Resolution Together","Compound Scaling: Scaling Depth, Width, and Resolution Together
+EfficientNet
+proposes:
+Scale all dimensions together:
+61
+Subject to:
+Why squared terms?
+Depth → linear
+Width → quadratic (affects input & output channels)
+Resolution → quadratic (affects spatial area)
+Balanced growth prevents representational bottlenecks.
+Balanced growth prevents representational bottlenecks."
+5,Modern CNN,5  - Modern CNN.pptx,62,EfficientNet Backbone: MBConv Blocks with SE and Swish,"EfficientNet
+Backbone:
+MBConv
+Blocks with SE and Swish
+62
+EfficientNet
+is not a new convolution.
+It is a carefully engineered combination of expansion, attention, and smooth activation.
+MBConv
+Blocks
+1×1 expansion
+Depthwise
+convolution
+1×1 projection
+Residual connection (if shape matches)
+Squeeze-and-Excitation (SE) Blocks
+Channel attention
+Lightweight
+Adaptive feature recalibration
+Three Core Components:
+EfficientNet
+= architectural synergy, not a single innovation."
+5,Modern CNN,5  - Modern CNN.pptx,63,Swish Activation,"Swish Activation
+Swish is non-monotonic and smooth, unlike
+ReLU’s
+hard threshold, which can improve gradient flow.
+For trivial tasks with simple networks, the benefit of richer activation modeling is limited.
+63"
+5,Modern CNN,5  - Modern CNN.pptx,64,MBConv: Mobile Inverted Bottleneck Convolution,"MBConv
+: Mobile Inverted Bottleneck Convolution
+64
+Why “Inverted”?
+Traditional bottleneck (
+ResNet
+):
+Compress → Conv → Expand
+MBConv
+:
+Expand →
+Depthwise
+→ Compress"
+5,Modern CNN,5  - Modern CNN.pptx,65,Squeeze-and-Excitation (SE): Channel Attention Mechanism,"Squeeze-and-Excitation (SE): Channel Attention Mechanism
+65
+Step 1: Squeeze (Global Context)
+Produces one scalar per channel.
+Step 2: Excitation (Learn Channel Importance)
+Small MLP:
+Outputs channel weights in (0,1).
+Step 3 — Reweight
+Important channels amplified.
+Less useful channels suppressed.
+Why SE Matters
+Adds adaptive feature selection
+Minimal computational overhead
+Improves accuracy significantly"
+5,Modern CNN,5  - Modern CNN.pptx,66,EfficientNet Family,"EfficientNet
+Family
+EfficientNet-B0 → B7
+Same architecture pattern
+Scaled using compound coefficient 𝜙
+Example trend:
+B0 → baseline
+B1 → slightly deeper/wider/higher resolution
+...
+B7 → much larger but balanced
+66"
+5,Modern CNN,5  - Modern CNN.pptx,67,Modern CNN Design Principles,"Modern CNN Design Principles
+From 1998 → Now:
+Convolution exploits structure
+Depth builds hierarchy
+Residual connections enable optimization
+BatchNorm
+stabilizes training
+Global pooling reduces parameters
+Factorization reduces computation
+Compound scaling balances capacity
+67
+Modern CNNs are optimized computational systems balancing representation, optimization, and hardware efficiency."
+5,Modern CNN,5  - Modern CNN.pptx,68,CNN Evolution,"CNN Evolution
+LeNet → Feature Learning
+AlexNet
+→ Scale
+VGG → Depth
+ResNet
+→ Optimization
+MobileNet
+→ Efficiency
+EfficientNet
+→ Scalable Efficiency
+Modern networks optimize:
+Representation
+Optimization
+Computation
+Deployment
+68"
+5,Modern CNN,5  - Modern CNN.pptx,69,Modern Objective Function,"Modern Objective Function
+Old goal:
+Modern goal:
+Deep learning moved from pure theory
+to
+Systems engineering.
+69"

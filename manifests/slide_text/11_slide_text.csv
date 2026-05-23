@@ -1,0 +1,213 @@
+﻿lecture_number,lecture_title,original_pptx,slide_number,possible_slide_title,visible_text
+11,Generative Model,11 - Generative Model.pptx,1,"Generative Model
+How Machines Learn to Create Data","Generative Model
+How Machines Learn to Create Data
+Yifeng Zhu
+Electrical and Computer Engineering
+University of Maine"
+11,Generative Model,11 - Generative Model.pptx,2,Supervised vs Unsupervised Learning,"Supervised vs Unsupervised Learning
+2
+Learning is better viewed as a spectrum, not a strict split:
+supervised → semi-supervised → self-supervised → unsupervised."
+11,Generative Model,11 - Generative Model.pptx,3,Unsupervised Learning Example: K-Means Clustering,"Unsupervised Learning Example:
+K-Means Clustering
+3
+Example output for K=4: each red region represents a cluster, and each larger colored dot is a centroid.
+K-means discovers structure by grouping similar samples"
+11,Generative Model,11 - Generative Model.pptx,4,Unsupervised Learning Example: Density Estimation,"Unsupervised Learning Example:
+Density Estimation
+4
+Applications: anomaly detection, generative modeling, compression, and exploratory data analysis.
+Unlike clustering, density estimation asks where data are likely to occur"
+11,Generative Model,11 - Generative Model.pptx,5,From Unsupervised Learning to Generative Models,"From Unsupervised Learning to Generative Models
+5
+Generative models are a natural extension of density estimation."
+11,Generative Model,11 - Generative Model.pptx,6,Two Goals of Generative Modeling,"Two Goals of Generative Modeling
+6
+1. LEARN THE DISTRIBUTION
+2. SAMPLE NEW DATA
+Goal:
+Capture the underlying pattern of the data as a probability distribution.
+Goal:
+Produce realistic and diverse new data drawn from the learned distribution.
+newly generated samples"
+11,Generative Model,11 - Generative Model.pptx,7,End Goal of Generative Model,"End Goal of Generative Model
+7
+Example data
+Previously unseen,
+realistic data
+Generative
+Models
+Let’s formulate the problem using human face generation as an example."
+11,Generative Model,11 - Generative Model.pptx,8,Main Families of Generative Models,"Main Families of Generative Models
+Autoencoder (AE)
+Variational Autoencoder (VAE)
+Generative Adversarial Network (GAN)
+Diffusion Models
+DDPM: Denoising Diffusion Probabilistic Models
+8"
+11,Generative Model,11 - Generative Model.pptx,9,Autoencoders: Learn by Reconstructing,"Autoencoders
+: Learn by Reconstructing
+An autoencoder learns from
+unlabeled
+data
+The
+encoder
+compresses the input into a
+latent
+code 𝑧
+The
+decoder
+uses 𝑧 to reconstruct the input
+Goal: preserve the most important information in a compact representation
+Fei-
+Fei
+Li,
+Jiajun
+Wu,
+Ruohan
+Gao
+Reconstructed
+data
+Decoder
+:
+4-layer
+upconv
+Encoder
+:
+4-layer
+conv
+Decoder
+Encoder
+Input
+data
+Features (latent space)
+9"
+11,Generative Model,11 - Generative Model.pptx,10,Autoencoders: How It Is Trained,"Autoencoders
+: How It Is Trained
+Use the input itself as the target
+Train the decoder to reconstruct the original input
+Minimize reconstruction error
+No labels are required
+Fei-
+Fei
+Li,
+Jiajun
+Wu,
+Ruohan
+Gao
+Reconstructed
+data
+Decoder
+:
+4-layer
+upconv
+Encoder
+:
+4-layer
+conv
+Decoder
+Encoder
+Input
+data
+Features (latent space)
+10"
+11,Generative Model,11 - Generative Model.pptx,11,"Why Autoencoders Matter, and Their Limitation","Why Autoencoders Matter, and Their Limitation
+The encoder can learn useful features for downstream tasks
+Those features can help initialize a supervised model
+But a plain autoencoder is
+not yet a true generative model
+So, we cannot reliably sample new data from random 𝑧
+This motivates the
+Variational Autoencoder (VAE)
+11
+Kingma
+and
+Welling,
+“Auto-
+Encoding
+Variational
+Bayes”,
+ICLR
+2014"
+11,Generative Model,11 - Generative Model.pptx,12,Variational Autoencoder: From Input to a Sampleable Latent Space,"Variational Autoencoder: From Input to a Sampleable Latent Space
+12
+A VAE learns not just features, but a latent space we can sample from."
+11,Generative Model,11 - Generative Model.pptx,13,VAE Demo,"VAE Demo
+Interactive demo: explore how the latent space changes the generated output
+https://xnought.github.io/vae-explainer/
+13"
+11,Generative Model,11 - Generative Model.pptx,14,Generative Adversarial Networks (GANs),"Generative Adversarial Networks (GANs)
+The
+generator
+maps random noise 𝑧 to a synthetic sample 𝐺(𝑧)
+A
+discriminator
+predicts whether an input is real or fake
+The generator tries to fool the discriminator
+The discriminator tries to detect generated samples
+GAN learning happens through this competition
+14
+Ian
+Goodfellow
+et
+al.,
+“Generative
+Adversarial
+Nets”,
+NIPS
+2014
+Generator creates. Discriminator judges.
+Both improve by competing."
+11,Generative Model,11 - Generative Model.pptx,15,"GAN Training: Two Losses, Two Goals","GAN Training: Two Losses, Two Goals
+15
+Ian
+Goodfellow
+et
+al.,
+“Generative
+Adversarial
+Nets”,
+NIPS
+2014
+Discriminator: classify real as 1, fake as 0
+Generator: make fake be classified as 1"
+11,Generative Model,11 - Generative Model.pptx,16,GAN: Strengths and Weaknesses,"GAN: Strengths and Weaknesses
+Weaknesses
+Harder and less stable to train
+Does not answer inference questions such as 𝑝(𝑥) or 𝑝(𝑧∣𝑥)
+Training details often need tuning; there is no single best rule for update balance
+16
+Strengths
+Generates highly realistic samples
+Learns through a two-player game between generator and discriminator
+Focuses directly on sampling, without defining an explicit density function
+GANs can generate highly realistic samples, but they are harder to train and less interpretable than likelihood-based models.
+GAN research has focused heavily on better loss functions, more stable training, and extending GANs to conditional generation and other applications."
+11,Generative Model,11 - Generative Model.pptx,17,Diffusion Models,"Diffusion Models
+17
+Gradually add noise to data
+Learn to reverse the noising process
+Generate new samples from noise
+Denoise step by step
+Use the score to move toward cleaner, more likely data
+Forward diffusion creates noisy training inputs; the model learns the reverse denoising process
+High-Resolution Image Synthesis with Latent Diffusion Models
+, CVPR 2022"
+11,Generative Model,11 - Generative Model.pptx,18,Latent Conditional Diffusion Model,"Latent Conditional Diffusion Model
+18
+High-Resolution Image Synthesis with Latent Diffusion Models
+, CVPR 2022
+Latent diffusion encodes an image into a compact latent space, denoises it step by step with a U-Net, and decodes the result back to pixel space."
+11,Generative Model,11 - Generative Model.pptx,19,Summary: Main Ideas of Generative Models,"Summary: Main Ideas of Generative Models
+19
+Autoencoders (AE)
+learn compact representations by reconstructing the input
+Variational Autoencoders (VAE)
+make the latent space sampleable for generation
+GANs
+generate realistic samples through competition between generator and discriminator
+Diffusion models
+generate data by gradually reversing noise
+Different generative models make different trade-offs in
+sample quality, training stability, efficiency, and interpretability"

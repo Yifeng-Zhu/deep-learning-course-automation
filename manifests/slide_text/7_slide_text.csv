@@ -1,0 +1,1118 @@
+﻿lecture_number,lecture_title,original_pptx,slide_number,possible_slide_title,visible_text
+7,LSTM,7 - LSTM.pptx,1,"Recurrent Neural Networks
+LSTM Fundamentals and Sequence Modeling with PyTorch","Recurrent Neural Networks
+LSTM Fundamentals and Sequence Modeling with
+PyTorch
+Yifeng Zhu
+Electrical and Computer Engineering
+University of Maine
+1"
+7,LSTM,7 - LSTM.pptx,2,Image → Sequence,"Image → Sequence
+2
+e.g.
+Image Captioning
+image -> sequence of words
+Different tasks, same sequence-modeling idea."
+7,LSTM,7 - LSTM.pptx,3,Sequence → Label,"Sequence → Label
+3
+e.g.
+Sentiment Classification
+sequence of words -> sentiment
+Different tasks, same sequence-modeling idea."
+7,LSTM,7 - LSTM.pptx,4,Sequence → Sequence,"Sequence → Sequence
+4
+e.g.
+Machine Translation
+seq
+of words ->
+seq
+of words
+Different tasks, same sequence-modeling idea."
+7,LSTM,7 - LSTM.pptx,5,Frame Sequence → Label,"Frame Sequence → Label
+5
+e.g.
+Video classification from a frame sequence
+Different tasks, same sequence-modeling idea."
+7,LSTM,7 - LSTM.pptx,6,Recurrent Neural Network (RNN),"Recurrent Neural Network (RNN)
+Long sequences are difficult to model with standard RNNs
+Vanishing gradients make long-range dependencies hard to learn
+Exploding gradients can often be controlled with gradient clipping
+RNN: Computational Graph
+An unrolled recurrent neural network
+The same weight and bias shared across all the steps"
+7,LSTM,7 - LSTM.pptx,7,RNN Parameter Sharing Across Time,"7
+Recurrent Neural Networks
+The same function and the same set of parameters are reused at every time step.
+RNN Parameter Sharing Across Time"
+7,LSTM,7 - LSTM.pptx,8,Why Standard RNNs Struggle with Long-Term Dependencies,"Why Standard RNNs Struggle with Long-Term Dependencies
+Short-Term Dependencies
+Relevant information is nearby.
+Standard RNNs can often learn it
+Example: Predict the last word in
+“the clouds are in the
+sky
+,”
+8
+Long-Term Dependencies
+Relevant information is far away
+Gradients may vanish over many time steps
+Learning becomes difficult
+Example: Understanding a word or event much earlier in a sentence or document
+Standard RNNs often struggle when useful information must travel across many time steps. Long Short-Term Memory (LSTM) was designed to address this problem.
+Relevant information is far away"
+7,LSTM,7 - LSTM.pptx,9,LSTM Cell Overview,"LSTM Cell Overview
+Xt
+Memory
+Cell
+Input Gate
+Output Gate
+Forget Gate
+Output
+ht
+Cell state
+: stores long-term memory
+Input gate
+: controls what new information is added
+Forget gate
+: controls what old information is removed
+Output gate
+: controls what information becomes the output"
+7,LSTM,7 - LSTM.pptx,10,LSTM,"10
+LSTM
+Sepp
+Hochreiter
+; Jürgen
+Schmidhuber
+(1997). ""Long short-term memory"".
+Neural Computation
+. 9 (8): 1735–1780.
+The cell is responsible for keeping track of the dependencies between the elements in the input sequence.
+The cell state carries long-term memory across time steps."
+7,LSTM,7 - LSTM.pptx,11,LSTM,"11
+LSTM
+Sepp
+Hochreiter
+; Jürgen
+Schmidhuber
+(1997). ""Long short-term memory"".
+Neural Computation
+. 9 (8): 1735–1780.
+The cell is responsible for keeping track of the dependencies between the elements in the input sequence.
+Hidden state vector also known as output vector of the LSTM unit
+input vector to the LSTM unit"
+7,LSTM,7 - LSTM.pptx,12,Forget Gate,"12
+Forget Gate
+Vector
+f
+t
+Used in element-wise multiplication with the previous cell state C
+t-1
+The forget gate determines how much of the previous cell state C
+t-1
+is kept
+𝒇
+𝒕
+∘
+𝑪
+𝒕
+−
+𝟏
+W
+f
+: Weights of the forget gate
+input vector
+hidden state vector also known as output vector
+cell state vector
+Forget gate's activation vector
+f
+t"
+7,LSTM,7 - LSTM.pptx,13,Activation Functions in LSTM: Sigmoid and Tanh,"13
+Activation Functions in LSTM: Sigmoid and Tanh
+Sigmoid
+Tanh
+Output range: (0,1)
+Often used for gates because it acts like a soft on/off control
+Output range: (-1,1)
+Often used for candidate memory and hidden state values
+Sigmoid controls how much information passes through; tanh creates bounded content values for the cell and hidden state."
+7,LSTM,7 - LSTM.pptx,14,Input Gate,"14
+Input Gate
+Input Gate
+i
+The input gate controls how much new information is written into the cell state
+Input gate's activation vector
+i
+t
+W
+i
+: Weights of the input gate
+W
+C
+: Weights of the memory cell"
+7,LSTM,7 - LSTM.pptx,15,Cell State Update,"15
+Cell State Update
+Internal cell state
+C
+*: element-wise multiplication
++: element-wise addition
+Cell state vector C
+t
+Forget gate:
+decides how much old memory to keep
+Input gate:
+decides how much new information to write
+Together, they update the cell state Ct"
+7,LSTM,7 - LSTM.pptx,16,Output gate,"16
+Output gate
+Output Gate
+o
+controls how much of the cell state is exposed in the output
+Output gate activation vector
+o
+t
+W
+o
+: Weights of the output gate"
+7,LSTM,7 - LSTM.pptx,17,Parameter count = 4 h(h + x + 1),"17
+Parameter count = 4 h(h + x + 1)
+Notice
+：
+c, x, and h
+are vectors
+，
+c and h usually have the same size.
+The output of the LSTM cell is h, not c
+Number of parameters = 4 *
+output_dimension
+* (
+input_dimension
++
+output_dimension
++ bias)"
+7,LSTM,7 - LSTM.pptx,18,Affine Transformation,"Affine Transformation
+18
+𝒛
+𝒕
+𝒉
+𝒕
+−
+𝟏
+𝒃
+𝑾
+h
+h
++
+𝑥
+h
+h
+×
+(
+h
++
+𝑥
+)
+Each LSTM Gate Starts with an Affine Transformation"
+7,LSTM,7 - LSTM.pptx,19,Multi-Layer LSTM,"19
+Multi-Layer LSTM
+One LSTM layer processes the original input sequence
+The next LSTM layer processes the hidden outputs from the previous layer
+This creates a deeper sequence model
+hidden size = number of units in one LSTM layer
+num_layers
+= number of stacked LSTM layers
+nn.LSTM
+(
+input_size
+=10,
+hidden_size
+=32,
+num_layers
+=2,
+batch_first
+=True)
+The output sequence from one LSTM layer becomes the input sequence to the next layer."
+7,LSTM,7 - LSTM.pptx,20,PyTorch API: nn.LSTM,"PyTorch
+API:
+nn.LSTM
+import torch
+import
+torch.nn
+as
+nn
+x =
+torch.randn
+(8, 20, 10)
+# 8 samples,
+# 20 time steps,
+# 10 features each
+lstm
+=
+nn.LSTM
+(
+input_size
+=10,
+# features per time step
+hidden_size
+=32,
+# hidden units
+batch_first
+=True
+)
+out, (
+h_n
+,
+c_n
+) =
+lstm
+(x)
+# h0 = 0, c0 = 0
+print(
+out.shape
+) # (8, 20, 32)
+print(
+h_n.shape
+) # (1, 8, 32)
+print(
+c_n.shape
+) # (1, 8, 32)
+20
+out
+: hidden output at every time step
+h_n
+: hidden state at the final time step
+c_n
+: cell state at the final time step
+Setting
+Input Shape
+Output Shape
+batch_first
+=True
+(batch, seq, feature)
+(batch, seq, hidden)
+batch_first
+=False
+(seq, batch, feature)
+(seq, batch, hidden)"
+7,LSTM,7 - LSTM.pptx,21,nn.LSTM: Initial States,"nn.LSTM
+: Initial States
+import torch
+import
+torch.nn
+as
+nn
+x =
+torch.randn
+(8, 20, 10)
+# 8 samples,
+# 20 time steps,
+# 10 features each
+lstm
+=
+nn.LSTM
+(
+input_size
+=10,
+# features per time step
+hidden_size
+=32,
+# hidden units
+batch_first
+=True
+)
+h0 = torch.zeros(1, 8, 32)
+c0 = torch.zeros(1, 8, 32)
+out, (h_n, c_n) =
+lstm
+(x, (
+h0
+,
+c0
+))
+print(
+out.shape
+) # (8, 20, 32)
+print(
+h_n.shape
+) # (1, 8, 32)
+print(
+c_n.shape
+) # (1, 8, 32)
+21
+Custom initial states
+lstm
+(x, (h0, c0))
+use this when you want to control or continue memory
+Setting
+Input Shape
+Output Shape
+batch_first
+=True
+(batch, seq, feature)
+(batch, seq, hidden)
+batch_first
+=False
+(seq, batch, feature)
+(seq, batch, hidden)"
+7,LSTM,7 - LSTM.pptx,22,LSTM Workflow in PyTorch: Define the Model,"22
+class
+MyLSTMModel
+(
+nn.Module
+):
+def
+__
+init
+__(
+self,
+input_size
+,
+hidden_size
+,
+output_size
+):
+super().__
+init
+__()
+self.lstm
+=
+nn.LSTM
+(
+input_size
+,
+hidden_size
+,
+batch_first
+=True)
+self.fc
+=
+nn.Linear
+(
+hidden_size
+,
+output_size
+)
+def
+forward
+(self, x):
+out, _ =
+self.lstm
+(x)
+return
+self.fc
+(out[:,
+-1
+, :])
+#
+use the last time step only
+LSTM Workflow in
+PyTorch
+: Define the Model"
+7,LSTM,7 - LSTM.pptx,23,LSTM Workflow in PyTorch: Train and Inference,"23
+LSTM Workflow in
+PyTorch
+: Train and Inference
+model =
+MyLSTMModel
+(
+input_size
+=8,
+hidden_size
+=25,
+output_size
+=1)
+criterion =
+nn.MSELoss
+()
+optimizer =
+optim.Adam
+(
+model.parameters
+(),
+lr
+=1e-3)
+for
+xb
+,
+yb
+in
+train_loader
+:
+optimizer.zero_grad
+()
+yhat
+= model(
+xb
+)
+loss = criterion(
+yhat
+,
+yb
+)
+loss.backward
+()
+optimizer.step
+()
+torch.save
+(
+model.state_dict
+(), ""lstm_model.pt"")
+model.load_state_dict
+(
+torch.load
+(""lstm_model.pt""))
+model.eval
+()
+with
+torch.no_grad
+():
+yhat
+= model(X)
+print(
+yhat
+)
+For classification tasks, replace
+MSELoss
+()
+with an appropriate classification loss."
+7,LSTM,7 - LSTM.pptx,24,One-to-Many Sequence Model,"One-to-Many Sequence Model
+24
+class
+OneToMany
+(
+nn.Module
+):
+def
+__
+init
+__(
+self,
+in_dim
+,
+hid_dim
+,
+out_dim
+, steps):
+super().__
+init
+__()
+self.steps
+= steps
+self.h0 =
+nn.Linear
+(
+in_dim
+,
+hid_dim
+)
+self.c0 =
+nn.Linear
+(
+in_dim
+,
+hid_dim
+)
+self.lstm
+=
+nn.LSTM
+(
+hid_dim
+,
+hid_dim
+,
+batch_first
+=True)
+self.fc
+=
+nn.Linear
+(
+hid_dim
+,
+out_dim
+)
+def
+forward
+(self, x):
+# x: (B,
+in_dim
+)
+B =
+x.size
+(0)
+# get the batch size
+# # zero inputs; the information comes from (h0, c0)
+decoder_inputs
+=
+torch.zeros
+(B,
+self.steps
+, self.h0.out_features, device=
+x.device
+)
+h0 = self.h0(x).
+unsqueeze
+(0)
+# map input to initial hidden state and add layer dimension
+c0 = self.c0(x).
+unsqueeze
+(0)
+# map input to initial cell state and add layer dimension
+out, _ =
+self.lstm
+(
+decoder_inputs
+, (h0, c0))
+# run the LSTM for several steps starting from (h0, c0)
+return
+self.fc
+(out)
+# map each hidden state to an output at each time step
+x =
+torch.randn
+(4, 10)
+model =
+OneToMany
+(
+in_dim
+=10,
+hid_dim
+=32,
+out_dim
+=6, steps=5)
+y = model(x)
+print(
+y.shape
+) # (4, 5, 6)
+unsqueeze
+(0
+) adds the layer dimension required by
+PyTorch
+LSTM: (B,
+hid_dim
+) -> (1, B,
+hid_dim
+)
+h0 = f(x)
+c0 = g(x)
+(h1, c1) = LSTM(z1, (h0, c0))
+(h2, c2) = LSTM(z2, (h1, c1))
+(h3, c3) = LSTM(z3, (h2, c2))
+...
+x
+y
+1
+y
+2
+y
+3
+The input x is NOT copied into every time step.
+Main idea:
+one input initializes the sequence
+Shape:
+(
+B,d
+) → (1,B,h),(1,B,h) → (
+B,T,o
+)
+Key point:
+the decoder inputs are dummy inputs; the real information comes from (h0,c0)"
+7,LSTM,7 - LSTM.pptx,25,Many-to-One Sequence Model,"Many-to-One Sequence Model
+25
+class
+ManyToOne
+(
+nn.Module
+):
+def
+__
+init
+__
+(self,
+in_dim
+,
+hid_dim
+,
+out_dim
+):
+super().__
+init
+__()
+self.lstm
+=
+nn.LSTM
+(
+in_dim
+,
+hid_dim
+,
+batch_first
+=True
+)
+self.fc
+=
+nn.Linear
+(
+hid_dim
+,
+out_dim
+)
+def
+forward
+(self, x):
+# x: (B, steps,
+in_dim
+)
+out, _ =
+self.lstm
+(x)
+# out: (B, steps,
+hid_dim
+)
+return
+self.fc
+(out[:, -1, :])
+# use the last time step only
+x =
+torch.randn
+(4, 3, 10)
+# batch=4, 3 time steps, 10 features
+model =
+ManyToOne
+(
+in_dim
+=10,
+hid_dim
+=32,
+out_dim
+=1)
+y = model(x)
+print(
+y.shape
+)
+# (4, 1)
+x
+1
+x
+2
+x
+3
+y
+Many inputs enter over time, but only one final output is produced.
+Main idea:
+Read a sequence, produce one output
+Shape:
+(
+B,T,d
+) → (
+B,T,h
+) → (
+B,o
+)
+Key point:
+Use the last hidden output for prediction"
+7,LSTM,7 - LSTM.pptx,26,Many-to-Many Sequence Model,"Many-to-Many Sequence Model
+26
+class
+ManyToMany
+(
+nn.Module
+):
+def
+__
+init
+__
+(self,
+in_dim
+,
+hid_dim
+,
+out_dim
+):
+super().__
+init
+__()
+self.lstm
+=
+nn.LSTM
+(
+in_dim
+,
+hid_dim
+,
+batch_first
+=True)
+self.fc
+=
+nn.Linear
+(
+hid_dim
+,
+out_dim
+)
+def
+forward
+(self, x):
+# x: (B, steps,
+in_dim
+)
+out, _ =
+self.lstm
+(x)
+# out: (B, steps,
+hid_dim
+)
+return
+self.fc
+(out)
+# y: (B, steps,
+out_dim
+)
+y
+1
+y
+2
+y
+3
+x
+1
+x
+2
+x
+3
+x =
+torch.randn
+(4, 3, 10)
+# 4 samples, 3 time steps, 10 features
+model =
+ManyToMany
+(
+in_dim
+=10,
+hid_dim
+=32,
+out_dim
+=6)
+y = model(x)
+print(
+y.shape
+)
+# (4, 3, 6)
+self.fc
+(out) applies the same linear layer to every time step."
+7,LSTM,7 - LSTM.pptx,27,Seq-to-Seq Sequence Model,"27
+Seq-to-Seq Sequence Model
+class
+Seq2Seq
+(
+nn.Module
+):
+def
+__
+init
+__
+(self,
+in_dim
+,
+hid_dim
+,
+out_dim
+,
+out_steps
+):
+super().__
+init
+__()
+self.out_steps
+=
+out_steps
+self.
+encoder
+=
+nn.LSTM
+(
+in_dim
+,
+hid_dim
+,
+batch_first
+=True)
+self.
+decoder
+=
+nn.LSTM
+(
+hid_dim
+,
+hid_dim
+,
+batch_first
+=True)
+self.fc
+=
+nn.Linear
+(
+hid_dim
+,
+out_dim
+)
+def
+forward
+(self, x):
+# x: (B,
+in_steps
+,
+in_dim
+)
+B =
+x.size
+(0)
+_, (
+h_n
+,
+c_n
+) =
+self.encoder
+(x)
+# encode x1, x2, x3
+decoder_inputs
+=
+torch.zeros
+(B,
+self.out_steps
+,
+h_n.size
+(-1), device=
+x.device
+)
+out, _ =
+self.decoder
+(
+decoder_inputs
+, (
+h_n
+,
+c_n
+))
+# decode y1, y2, y3
+return
+self.fc
+(out)
+# (B,
+out_steps
+,
+out_dim
+)
+x =
+torch.randn
+(4, 3, 10)
+# batch=4, 3 input steps, 10 features each
+model =
+Seq2Seq
+(
+in_dim
+=10,
+hid_dim
+=32,
+out_dim
+=6,
+out_steps
+=3)
+y = model(x)
+print(
+y.shape
+)
+# (4, 3, 6)
+x
+1
+x
+2
+x
+3
+y
+1
+y
+2
+y
+3
+Seq-to-Seq"
+7,LSTM,7 - LSTM.pptx,28,Bidirectional LSTM,"28
+Bidirectional LSTM
+x
+1
+x
+2
+x
+3
+x
+4
+x
+5
+x
+6
+y
+1
+y
+2
+y
+3
+y
+4
+y
+5
+y
+6
+import torch
+import
+torch.nn
+as
+nn
+x =
+torch.randn
+(4, 6, 10) # (batch, time,
+input_size
+)
+lstm
+=
+nn.
+LSTM
+(
+input_size
+=10,
+hidden_size
+=32,
+batch_first
+=True,
+bidirectional=True
+)
+out, (
+h_n
+,
+c_n
+) =
+lstm
+(x)
+print(
+out.shape
+)
+# (4, 6, 64)
+print(
+h_n.shape
+)
+# (2, 4, 32)
+print(
+c_n.shape
+)
+# (2, 4, 32)
+A bidirectional LSTM reads the sequence in both forward and backward directions, then combines both hidden representations."
+7,LSTM,7 - LSTM.pptx,29,Seq2Seq Models for Response Generation,"Seq2Seq Models for Response Generation
+how
+are
+you
+?"
+7,LSTM,7 - LSTM.pptx,30,Seq2Seq Models for Response Generation,"Seq2Seq Models for Response Generation
+how
+are
+you
+?
+Encoding"
+7,LSTM,7 - LSTM.pptx,31,Seq2Seq Models for Response Generation,"Seq2Seq Models for Response Generation
+how
+are
+you
+?
+Encoding"
+7,LSTM,7 - LSTM.pptx,32,Seq2Seq Models for Response Generation,"Seq2Seq Models for Response Generation
+how
+are
+you
+?
+Encoding"
+7,LSTM,7 - LSTM.pptx,33,Seq2Seq Models for Response Generation,"Seq2Seq Models for Response Generation
+how
+are
+you
+?
+Encoding"
+7,LSTM,7 - LSTM.pptx,34,Seq2Seq Models for Response Generation,"Seq2Seq Models for Response Generation
+how
+are
+you
+?
+Encoding
+Decoding"
+7,LSTM,7 - LSTM.pptx,35,Seq2Seq Models for Response Generation,"Seq2Seq Models for Response Generation
+how
+are
+you
+?
+I’m
+Encoding
+Decoding
+eos"
+7,LSTM,7 - LSTM.pptx,36,Seq2Seq Models for Response Generation,"Seq2Seq Models for Response Generation
+how
+are
+you
+?
+I’m
+fine
+Encoding
+Decoding
+eos
+I’m"
+7,LSTM,7 - LSTM.pptx,37,Seq2Seq Models for Response Generation,"Seq2Seq Models for Response Generation
+how
+are
+you
+?
+I’m
+fine
+.
+Encoding
+Decoding
+eos
+I’m
+fine"
+7,LSTM,7 - LSTM.pptx,38,Seq2Seq Models for Response Generation,"Seq2Seq Models for Response Generation
+how
+are
+you
+?
+I’m
+fine
+.
+EOS
+Encoding
+Decoding
+eos
+I’m
+fine
+."
+7,LSTM,7 - LSTM.pptx,39,Generating Text Descriptions for Images,"39
+Generating Text Descriptions for Images"
+7,LSTM,7 - LSTM.pptx,40,Generating Text Descriptions for Images,"40
+Generating Text Descriptions for Images"
+7,LSTM,7 - LSTM.pptx,41,Generating Text Descriptions for Images,"41
+Generating Text Descriptions for Images"
+7,LSTM,7 - LSTM.pptx,42,Generating Text Descriptions for Images,"42
+Generating Text Descriptions for Images"
+7,LSTM,7 - LSTM.pptx,43,Generating Text Descriptions for Images,"43
+Generating Text Descriptions for Images"
+7,LSTM,7 - LSTM.pptx,44,Generating Text Descriptions for Images,"44
+Generating Text Descriptions for Images"
+7,LSTM,7 - LSTM.pptx,45,Generating Text Descriptions for Images,"45
+Generating Text Descriptions for Images"
+7,LSTM,7 - LSTM.pptx,46,Generating Text Descriptions for Images,"46
+Generating Text Descriptions for Images"
+7,LSTM,7 - LSTM.pptx,47,LSTM Summary,"LSTM Summary
+RNNs process data one time step at a time.
+Standard RNNs struggle with long-term dependencies.
+LSTM uses cell
+state + gates
+to manage memory.
+nn.LSTM
+supports flexible sequence modeling in
+PyTorch
+.
+Common patterns: one-to-many, many-to-one, many-to-many, seq-to-seq, bidirectional.
+47
+LSTM improves sequence learning by preserving useful information over time."

@@ -1,0 +1,749 @@
+﻿lecture_number,lecture_title,original_pptx,slide_number,possible_slide_title,visible_text
+2,Metrics,2  - Metrics.pptx,1,Evaluating Classifiers,"Evaluating Classifiers
+Yifeng Zhu
+Electrical and Computer Engineering
+University of Maine
+1"
+2,Metrics,2  - Metrics.pptx,2,Why Evaluation Metrics Matter,"Why Evaluation Metrics Matter
+Different problems require different metrics.
+Accuracy alone can be misleading.
+Metrics must reflect real-world cost of errors.
+A model can look good numerically but fail in practice.
+2"
+2,Metrics,2  - Metrics.pptx,3,Binary Classification,"Binary Classification
+FN: False Negative
+TP: True Positive
+FP: False Positive
+TN: True Negative
+3"
+2,Metrics,2  - Metrics.pptx,4,Score based models for binary classification,"Score based models for binary classification
+Score = 1
+Score = 0
+Positive labelled example
+Negative labelled example
+Binary classification
+20 samples
+score between 0 and 1
+0.5
+Classification Threshold
+4"
+2,Metrics,2  - Metrics.pptx,5,From Scores to Class Decisions,"From Scores to Class Decisions
+Th=0.5
+Predict Positive
+Predict Negative
+Label Positive
+Label Negative
+Positive labelled example
+Negative labelled example
+Confusion Matrix
+5"
+2,Metrics,2  - Metrics.pptx,6,Confusion Matrix at Threshold 0.5,"Confusion Matrix at Threshold 0.5
+Th=0.5
+Predict Positive
+Predict Negative
+Th
+0.5
+TP
+9
+TN
+8
+FP
+2
+FN
+1
+True Positive
+9
+True Negative
+8
+False Negative
+1
+False Positive
+2
+Label Positive
+Label Negative
+Positive labelled example
+Negative labelled example
+Confusion Matrix
+Actual +
+Actual -
+Predicted +
+TP
+FP
+Predicted -
+FN
+TN
+Confusion Matrix
+6"
+2,Metrics,2  - Metrics.pptx,7,Accuracy from the Confusion Matrix,"Accuracy from the Confusion Matrix
+Th=0.5
+Predict Positive
+Predict Negative
+Th
+0.5
+TP
+9
+TN
+8
+FP
+2
+FN
+1
+Acc
+.85
+True Positive
+TP = 9
+True Negative
+TN = 8
+False Negative
+FN = 1
+False Positive
+FP = 2
+Label Positive
+Label Negative
+What percent of samples were correctly identified?
+Positive labelled example
+Negative labelled example
+Confusion Matrix
+7"
+2,Metrics,2  - Metrics.pptx,8,Limitation of Accuracy,"Limitation of Accuracy
+Create a model to identify terrorists boarding flights with > 99% accuracy
+Simple model: predict every single person as not a terrorist
+> 800 million passengers on US flights every year
+19 confirmed terrorists who boarded US flights 2000-2017
+Accuracy = (800,000,000 − 19) / 800,000,000 = 99.9999976%
+High accuracy does NOT mean good model.
+Accuracy does not perform well with imbalanced data sets.
+Terrorist
+vs
+not terrorists
+Detecting rare diseases
+8"
+2,Metrics,2  - Metrics.pptx,9,Imbalanced Data,"Imbalanced Data
+95 dog images and 5 cat images
+Predict all images as dogs
+Actual
+Class
+dog
+cat
+Predicted
+Class
+dog
+95
+5
+cat
+0
+0
+Accuracy does not perform well with imbalanced data sets.
+9"
+2,Metrics,2  - Metrics.pptx,10,Sensitivity vs Specificity,"Recall
+measures the model’s ability to correctly
+identify positive cases
+.
+Example:
+Among all truly sick patients, what proportion are correctly identified as sick?
+Specificity
+measures the model’s ability to correctly
+identify negative cases
+.
+Example:
+Among all legitimate credit card transactions, what proportion are correctly approved as legitimate?
+Focus
+Avoiding false negatives
+Avoiding false positives
+When important
+When missing a positive case is costly, e.g., disease screening
+When false alarms are costly, e.g. airport security
+Goal
+Recall protects
+safety
+.
+Specificity protects system
+efficiency
+.
+Positive Samples
+Predicted as Positive
+10
+Sensitivity vs Specificity"
+2,Metrics,2  - Metrics.pptx,11,Precision,"Focus only on the positive class
+(recall)
+Sensitivity
+Positive Samples
+Predicted as Positive
+Recall measures the model’s ability to correctly identify positive cases.
+Example:
+Among all actual intrusion attempts, what proportion are correctly detected as intrusions?
+When important:
+When acting on a positive prediction is costly, e.g., fraud alert.
+Goal:
+Precision protects decision
+reliability
+11
+Precision"
+2,Metrics,2  - Metrics.pptx,12,Precision and Recall at Threshold 0.5,"Precision and Recall at Threshold 0.5
+Th=0.5
+Predict Positive
+Predict Negative
+Th
+0.5
+TP
+9
+TN
+8
+FP
+2
+FN
+1
+Acc
+.85
+Precision
+.81
+Sensitivity
+.90
+True Positive
+TP = 9
+True Negative
+TN = 8
+False Negative
+FN = 1
+False Positive
+FP = 2
+Label Positive
+Label Negative
+Note that the focus is on the positive class
+(also named
+recall
+)
+What percent of positive samples were correctly identified?
+What percent of samples were correctly identified?
+12"
+2,Metrics,2  - Metrics.pptx,13,Specificity at Threshold 0.5,"Specificity at Threshold 0.5
+Th=0.5
+Predict Positive
+Predict Negative
+Th
+0.5
+TP
+9
+TN
+8
+FP
+2
+FN
+1
+Acc
+.85
+Pr
+.81
+Specificity
+.90
+Spec
+.80
+True Positive
+TP = 9
+True Negative
+TN = 8
+False Negative
+FN = 1
+False Positive
+FP = 2
+Label positive
+Label negative
+13"
+2,Metrics,2  - Metrics.pptx,14,F1 Score at Threshold 0.5,"F1 Score at Threshold 0.5
+Th=0.5
+Predict Positive
+Predict Negative
+Th
+0.5
+TP
+9
+TN
+8
+FP
+2
+FN
+1
+Acc
+.85
+Pr
+.81
+Recall
+.90
+Spec
+.80
+F1
+.857
+True Positive
+TP = 9
+True Negative
+TN = 8
+False Negative
+FN = 1
+False Positive
+FP = 2
+Label positive
+Label negative
+Harmonic mean of precision and recall.
+The harmonic mean penalizes imbalance between precision and recall.
+F1 does not consider true negatives.
+Widely used in the natural language processing.
+14"
+2,Metrics,2  - Metrics.pptx,15,Discussion 1: When Is Accuracy Misleading?,"Discussion 1:
+When Is Accuracy Misleading?
+In which of the following scenarios would a
+high accuracy
+value suggest that the ML model is doing a good job?
+A deadly, but curable, medical condition afflicts .01% of the population. An ML model uses symptoms as features and predicts this affliction with an accuracy of 99.99%.
+An expensive robotic chicken crosses a very busy road a thousand times per day. An ML model evaluates traffic patterns and predicts when this chicken can safely cross the street with an accuracy of 99.99%.
+In the game of roulette, a ball is dropped on a spinning wheel and eventually lands in one of 38 slots. Using visual features (the spin of the ball, the position of the wheel when the ball was dropped, the height of the ball over the wheel), an ML model can predict the slot that the ball will land in with an accuracy of 4%.
+15
+When Is Accuracy Misleading?"
+2,Metrics,2  - Metrics.pptx,16,Discussion 2: What Happens When We Raise the Threshold?,"Discussion 2:
+What Happens When We Raise the Threshold?
+Consider a classification model that separates email into two categories:
+spam
+, if the rating is higher than the classification threshold;
+not spam
+, otherwise
+If you raise the classification threshold, what will happen to
+sensitivity
+(
+recall)
+?
+a) Always decrease or stay the same.
+b) Always increase
+c) Always stay constant
+16
+What Happens When We Raise the Threshold?"
+2,Metrics,2  - Metrics.pptx,17,Discussion 2: Analysis,"Discussion 2: Analysis
+Consider a classification model that separates email into two categories:
+spam
+, if the rating is higher than the classification threshold;
+not spam
+, otherwise
+If you raise the classification threshold, what will happen to recall?
+a) Always decrease or stay the same.
+b) Always increase
+c) Always stay constant
+Threshold ↑
+→ More conservative
+→ More false negatives
+→ Recall ↓
+17"
+2,Metrics,2  - Metrics.pptx,18,"Discussion 3: Precision vs Sensitivity,
+Which One Matters?","Discussion 3:
+Precision vs Sensitivity,
+Which One Matters?
+Consider two models, A and B, that each evaluate the same dataset. Which one of the following statements is true?
+If Model A has better precision than model B, then model A is better.
+If model A has better sensitivity (recall) than model B, then model A is better.
+If Model A has higher precision and higher recall than Model B on the same dataset, then Model A is strictly better with respect to those two metrics.
+18"
+2,Metrics,2  - Metrics.pptx,19,"Discussion 4: Precision vs Sensitivity
+Which one Matters?","Which metrics should be used to evaluate the following two systems?
+Intrusion detection systems
+“Alexa” keyword activation
+Discussion 4:
+Precision
+vs
+Sensitivity
+Which one Matters?
+19"
+2,Metrics,2  - Metrics.pptx,20,Intrusion Follow-up,"Intrusion Follow-up
+False negative = catastrophic
+Recall protects security.
+But Can We Ignore Precision?
+Example: 5 intrusion cases and 95 normal cases
+If we predict
+all cases as intrusion
+:
+Recall = 5 / 5 = 100%
+Precision = 5 / (5 + 95) = 5%
+This creates constant false alarms.
+Key Insight
+High recall is essential for safety.
+Precision cannot be ignored.
+A practical system needs
+very high recall with acceptable precision
+.
+20"
+2,Metrics,2  - Metrics.pptx,21,Alexa: Most Important Metric is Precision,"Alexa: Most Important Metric is Precision
+Possible Errors
+False Positive (FP):
+Activated by background noise or normal conversation
+False Negative (FN):
+Fails to activate when user says “Alexa”
+Which Error Is More Costly?
+False positives
+interrupt conversations and reduce user trust.
+False negatives
+only require the user to repeat the command.
+Most Important Metric:
+Precision
+Among all activations, what proportion were truly correct?
+Goal: Minimize false triggers to protect user experience and trust.
+21"
+2,Metrics,2  - Metrics.pptx,22,Receiver Operating Characteristics (ROC) curve,"Receiver Operating Characteristics (ROC) curve
+Illustrate the diagnostic ability of a binary classifier system as its discrimination threshold is varied.
+True Positive Rate
+(TPR), Sensitivity
+False Positive Rate
+(FPR)
+TPR
+FPR
+Fraction of
+true positives
+predicted as
+positive
+Fraction of
+true negatives
+predicted as
+positive
+22"
+2,Metrics,2  - Metrics.pptx,23,Receiver Operating Characteristics (ROC) curve: Demo,"Receiver Operating Characteristics (ROC) curve: Demo
+Illustrate the diagnostic ability of a binary classifier system as its discrimination threshold is varied.
+Sensitivity, True Positive Rate (TPR)
+False Positive Rate (FPR)
+http://www.navan.name/roc/
+23"
+2,Metrics,2  - Metrics.pptx,24,Threshold Scanning,"Threshold
+TP
+TN
+FP
+FN
+Accuracy
+Precision
+Recall
+Specificity
+F1
+1.00
+0
+10
+0
+10
+0.50
+1
+0
+1
+0
+0.95
+1
+10
+0
+9
+0.55
+1
+0.1
+1
+0.182
+0.90
+2
+10
+0
+8
+0.60
+1
+0.2
+1
+0.333
+0.85
+2
+9
+1
+8
+0.55
+0.667
+0.2
+0.9
+0.308
+0.80
+3
+9
+1
+7
+0.60
+0.750
+0.3
+0.9
+0.429
+0.75
+4
+9
+1
+6
+0.65
+0.800
+0.4
+0.9
+0.533
+0.70
+5
+9
+1
+5
+0.70
+0.833
+0.5
+0.9
+0.625
+0.65
+5
+8
+2
+5
+0.65
+0.714
+0.5
+0.8
+0.588
+0.60
+6
+8
+2
+4
+0.70
+0.750
+0.6
+0.8
+0.667
+0.55
+7
+8
+2
+3
+0.75
+0.778
+0.7
+0.8
+0.737
+0.50
+8
+8
+2
+2
+0.80
+0.800
+0.8
+0.8
+0.800
+0.45
+9
+8
+2
+1
+0.85
+0.818
+0.9
+0.8
+0.857
+0.40
+9
+7
+3
+1
+0.80
+0.750
+0.9
+0.7
+0.818
+0.35
+9
+6
+4
+1
+0.75
+0.692
+0.9
+0.6
+0.783
+0.30
+9
+5
+5
+1
+0.70
+0.643
+0.9
+0.5
+0.750
+0.25
+9
+4
+6
+1
+0.65
+0.600
+0.9
+0.4
+0.720
+0.20
+9
+3
+7
+1
+0.60
+0.562
+0.9
+0.3
+0.692
+0.15
+9
+2
+8
+1
+0.55
+0.529
+0.9
+0.2
+0.667
+0.10
+9
+1
+9
+1
+0.50
+0.500
+0.9
+0.1
+0.643
+0.05
+10
+1
+9
+0
+0.55
+0.526
+1
+0.1
+0.690
+0.00
+10
+0
+10
+0
+0.50
+0.500
+1
+0
+0.667
+Score = 1
+Score = 0
+Threshold = 0.00
+Threshold = 1.00
+Threshold Scanning
+24
+Each row corresponds to a different decision threshold."
+2,Metrics,2  - Metrics.pptx,25,Classification: ROC curve,"Classification: ROC curve
+Area Under Curve (the ROC curve)
+AUC measures how well the model ranks positives higher than negatives.
+AUC = 0.5 → random
+AUC < 0.5 → worse than random
+AUC = 1.0 → perfect ranking
+25
+AUC evaluates ranking ability, not probability calibration."
+2,Metrics,2  - Metrics.pptx,26,AUC interpretation,"AUC interpretation
+Area Under Curve (the ROC curve)
+26
+AUC = P(random positive ranked above random negative)"
+2,Metrics,2  - Metrics.pptx,27,AUC for ROC curves,"True Positive Rate
+0%
+100%
+False Positive Rate
+0%
+100%
+True Positive Rate
+0%
+100%
+False Positive Rate
+0%
+100%
+True Positive Rate
+0%
+100%
+False Positive Rate
+0%
+100%
+AUC = 50%
+AUC = 90%
+AUC = 65%
+AUC = 100%
+True Positive Rate
+0%
+100%
+False Positive Rate
+0%
+100%
+AUC for ROC curves
+27
+Curves above the diagonal indicate performance better than random."
+2,Metrics,2  - Metrics.pptx,28,Discussion: ROC and AUC,"Discussion:
+ROC and AUC
+Which of the following ROC curves produce AUC values greater than 0.5?
+(a)
+(b)
+(c)
+(d)
+(e)
+28"
+2,Metrics,2  - Metrics.pptx,29,Discussion 5: What Does AUC Really Measure?,"Discussion 5:
+What Does AUC Really Measure?
+How would multiplying all of the predictions from a given model by 2.0 change the model's performance as measured by AUC?
+(for example, if the model predicts 0.4, we multiply by 2.0 to get a prediction of 0.8)
+It would make AUC better, because the prediction values are all farther apart.
+No change. AUC only cares about relative prediction scores.
+It would make AUC terrible, since the prediction values are now way off.
+29"
+2,Metrics,2  - Metrics.pptx,30,Discussion 5 solution: What Does AUC Really Measure?,"Discussion 5 solution:
+What Does AUC Really Measure?
+How would multiplying all of the predictions from a given model by 2.0 change the model's performance as measured by AUC?
+(for example, if the model predicts 0.4, we multiply by 2.0 to get a prediction of 0.8)
+It would make AUC better, because the prediction values are all farther apart.
+No change. AUC only cares about relative prediction scores.
+It would make AUC terrible, since the prediction values are now way off.
+AUC depends only on ranking, not absolute values.
+If predictions are multiplied by 2: Relative ordering unchanged → ROC unchanged → AUC unchanged
+30"
+2,Metrics,2  - Metrics.pptx,31,Evaluating Classifiers: Summary,"Evaluating Classifiers: Summary
+Metric
+Formula
+What It Measures
+When to Use
+Typical Example
+Accuracy
+(TP + TN) / Total
+Overall correctness
+Balanced datasets
+General classification with similar class sizes
+Recall
+(Sensitivity)
+TP / (TP + FN)
+Ability to detect positives
+Missing a positive is costly
+Disease screening, intrusion detection
+Precision
+TP / (TP + FP)
+Correctness of positive predictions
+False alarms are costly
+Fraud detection, keyword activation
+Specificity
+TN / (TN + FP)
+Ability to detect negatives
+Avoid unnecessary alarms
+Airport security, medical testing
+F1 Score
+2PR / (P + R)
+Balance of precision & recall
+Need tradeoff between FP and FN
+NLP, imbalanced datasets
+AUC (ROC)
+—
+Ranking quality across thresholds
+Threshold-independent metric
+Model comparison
+31"
+2,Metrics,2  - Metrics.pptx,32,Metric Selection Strategy,"Metric Selection Strategy
+Balanced classes → Accuracy is reasonable.
+Rare positive class → Recall, Precision, F1.
+Ranking problem → ROC-AUC.
+Asymmetric cost → Choose metric aligned with real-world risk.
+32"

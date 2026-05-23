@@ -1,0 +1,11137 @@
+﻿lecture_number,lecture_title,source_filename,slide_number,possible_slide_title,visible_text
+1,CNN,1 - CNN.pptx,1,"ECE491/591 Deep Learning
+Convolutional Neural Networks (CNNs)","ECE
+491/591
+Deep Learning
+Convolutional Neural Networks (CNNs)
+Yifeng Zhu
+Electrical and Computer Engineering
+University of Maine
+1"
+1,CNN,1 - CNN.pptx,2,Basic Neural Networks,"Basic Neural Networks
+Multilayer Perceptron (MLP)
+2"
+1,CNN,1 - CNN.pptx,3,Multilayer Perceptron (MLP) Architecture,"Multilayer Perceptron (MLP) Architecture
+3"
+1,CNN,1 - CNN.pptx,4,Neuron,"Neuron
+w1
+w2
+w3
+f is the activation function. It introduces non-linearity into the networks.
+4"
+1,CNN,1 - CNN.pptx,5,Activation Functions: Examples,"Activation Functions: Examples
+5"
+1,CNN,1 - CNN.pptx,6,Neural Network Training Process,"Neural Network Training Process
+Training Loop: Prediction, Error, and Update
+6"
+1,CNN,1 - CNN.pptx,7,Neural Network Playground,"Neural Network
+Playground
+Website link:
+https://playground.tensorflow.org
+7"
+1,CNN,1 - CNN.pptx,8,CIFAR-10 Benchmark Dataset,"CIFAR-10 Benchmark Dataset
+Widely used image classification benchmark dataset
+60,000 color images
+50,000 training images and 10,000 test images
+Small resolution: 32 × 32 × 3
+10 object classes
+Used for prototyping
+8"
+1,CNN,1 - CNN.pptx,9,ImageNet Dataset,"ImageNet Dataset
+Large-scale visual recognition dataset
+Over 14 million labeled images
+More than 20,000 object categories
+Subset
+used for benchmarking: ImageNet Large Scale Visual Recognition Challenge (
+ILSVRC
+)
+Usually resized to
+224x224
+or
+256x256
+pixels
+1,000 classes
+Over
+1.2 million
+images
+Images collected from the web and human-annotated
+Standard benchmark for deep learning in computer vision
+Enabled breakthroughs in CNN architectures (e.g.,
+AlexNet
+, VGG,
+ResNet
+)
+Top-5 error metric widely used for evaluation
+Catalyst for modern deep learning revolution (post-2012)
+9"
+1,CNN,1 - CNN.pptx,10,Why Not Just Use an MLP for Images?,"Why Not Just Use an MLP for Images?
+Example: 32×32×3 image → 3072 inputs
+Hidden layer (1000 neurons) → 3 million parameters
+Problems:
+Too many parameters
+No spatial structure
+MLP ignores 2D geometry and local relationships.
+No translation invariance
+Shifted objects are treated as new patterns.
+Overfitting risk
+Millions of parameters relative to dataset size.
+10"
+1,CNN,1 - CNN.pptx,11,ImageNet Large Scale Visual Recognition Challenge (ILSVRC),"ImageNet Large Scale Visual Recognition Challenge (ILSVRC)
+11"
+1,CNN,1 - CNN.pptx,12,AlexNet on Two GPUs,"AlexNet
+on Two GPUs
+Feature extraction layers
+that extract input features, and most operations are convolutions.
+Classification layers
+that analyze features and classify input images into groups, like fully connected layers.
+12"
+1,CNN,1 - CNN.pptx,13,AlexNet on One GPU,"AlexNet
+on One GPU
+13"
+1,CNN,1 - CNN.pptx,14,Convolutional Neural Networks (CNNs),"Convolutional Neural Networks (CNNs)
+14"
+1,CNN,1 - CNN.pptx,15,Convolution = Local Dot Product,"Convolution = Local Dot Product
+15"
+1,CNN,1 - CNN.pptx,16,Matrix Inner Product in Convolution,"Image
+Filter
+Matrix Inner Product = 4
+Matrix Inner Product in Convolution
+16"
+1,CNN,1 - CNN.pptx,17,Convolution as a Sliding Window Operation,"Convolution as a Sliding Window Operation
+Adapted from: http://deeplearning.stanford.edu/wiki/index.php/File:Convolution_schematic.gif
+- The new size after convolution!
+17"
+1,CNN,1 - CNN.pptx,18,Step-by-Step Sliding of the Convolution Filter: Step 1,"18
+Step-by-Step Sliding of the Convolution Filter: Step 1"
+1,CNN,1 - CNN.pptx,19,Step-by-Step Sliding of the Convolution Filter: Step 2,"19
+Step-by-Step Sliding of the Convolution Filter: Step 2"
+1,CNN,1 - CNN.pptx,20,Step-by-Step Sliding of the Convolution Filter: Step 9,"20
+Step-by-Step Sliding of the Convolution Filter: Step 9"
+1,CNN,1 - CNN.pptx,21,Convolution Output Size,"21
+Convolution Output Size
+Question
+: Why is the output a 3x3
+matrix
+?"
+1,CNN,1 - CNN.pptx,22,Convolving “filters” is not a new idea,"Convolving “filters” is not a new idea
+22"
+1,CNN,1 - CNN.pptx,23,"Edge Detection Filters: Sobel X, Sobel Y, and Laplacian","Edge Detection Filters: Sobel X, Sobel Y, and Laplacian
+Sobel X
+(Detect Vertical Edges):
+[-1 0 1]
+[-2 0 2]
+[-1 0 1]
+Computes gradient in the horizontal (x) direction
+Sobel Y
+(
+Detect
+Horizontal Edges):
+[-1 -2 -1]
+[ 0 0 0]
+[ 1 2 1]
+Computes gradient in the vertical (y) direction
+Laplacian
+(
+Detect Edges in A
+ll Directions):
+[ 0 -1 0]
+[-1 4 -1]
+[ 0 -1 0]
+Measures second-order intensity change (all directions)
+Is this pixel very different from its surrounding neighbors?
+Original Image
+Sobel X Output
+Sobel Y Output
+Laplacian Output
+x
+y
+23
+CNN filters learn similar edge detectors automatically."
+1,CNN,1 - CNN.pptx,24,Convolution,"Convolution
+24"
+1,CNN,1 - CNN.pptx,25,Convolution with a 3x3 kernel,"Convolution with a 3x3 kernel
+25"
+1,CNN,1 - CNN.pptx,26,"Convolution with a 3x3 kernel:
+Step 1","26
+Convolution with a 3x3 kernel:
+Step 1"
+1,CNN,1 - CNN.pptx,27,"Convolution with a 3x3 kernel:
+Animation","27
+Convolution with a 3x3 kernel:
+Animation"
+1,CNN,1 - CNN.pptx,28,Convolution without Padding,"28
+Convolution without Padding"
+1,CNN,1 - CNN.pptx,29,Convolution without Padding: Problem,"29
+Convolution without Padding: Problem"
+1,CNN,1 - CNN.pptx,30,Convolution with padding = 1,"Convolution with padding = 1
+Filter size: 3x3
+Padding: 1
+Stride: 2
+30"
+1,CNN,1 - CNN.pptx,31,Convolution with padding = 2,"Convolution with padding = 2
+Filter size: 3x3
+Padding: 2
+Stride: 1
+31"
+1,CNN,1 - CNN.pptx,32,Convolution Animation with one Kernel,"Convolution Animation with one Kernel
+The same filter is applied to the whole input!
+inputs
+Feature map generated by one filter
+32"
+1,CNN,1 - CNN.pptx,33,Convolution Animation with Two 4x4 Kernels,"33
+Convolution Animation with Two 4x4 Kernels"
+1,CNN,1 - CNN.pptx,34,Understanding the Input Tensor,"34
+Understanding the Input Tensor
+32
+32
+3
+32x32x
+3
+image
+width
+height
+depth"
+1,CNN,1 - CNN.pptx,35,Applying a 5×5×3 Filter,"35
+Applying a 5×5×3 Filter
+32
+32
+3
+32x32x
+3
+image
+width
+height
+depth
+5x5x
+3
+filter
+Convolve
+the filter with the image
+i.e. “slide over the image spatially, computing dot products”
+Filter depth MUST equal input depth
+Each filter produces one feature map
+Number of filters = output depth"
+1,CNN,1 - CNN.pptx,36,Computing One Convolution Output Value,"36
+Computing One Convolution Output Value
+32
+32
+3
+32x32x3 image
+5x5x3 filter
+1 number:
+the result of taking a dot product between the filter and a small 5x5x3 chunk of the image
+i.e. 75 (5x5x3)-dimensional dot product + bias"
+1,CNN,1 - CNN.pptx,37,Generating a Single Feature Map,"37
+Generating a Single Feature Map
+32
+32
+3
+32x32x3 image
+5x5x3 filter
+convolve (slide) over all spatial locations
+activation maps
+1
+28
+28"
+1,CNN,1 - CNN.pptx,38,Multiple Filters Produce Multiple Feature Maps,"38
+Multiple Filters Produce Multiple Feature Maps
+32
+32
+3
+32x32x3 image
+5x5x3 filter
+convolve (slide) over all spatial locations
+activation maps
+2
+28
+28
+consider a second,
+green
+filter"
+1,CNN,1 - CNN.pptx,39,Convolution with Six Kernels,"32
+32
+3
+Convolution Layer
+activation maps
+6
+28
+28
+For example, if we had 6 5x5 filters, we’ll get 6 separate activation maps:
+We stack these up to get a new “image” of size 28x28x6!
+39
+Convolution with Six Kernels"
+1,CNN,1 - CNN.pptx,40,Two Layers of Convolution,"ConvNet is a sequence of Convolution Layers, interspersed with activation functions
+32
+32
+3
+28
+28
+6
+CONV,
+ReLU
+e.g. 6 5x5x3 filters
+40
+Two Layers of Convolution"
+1,CNN,1 - CNN.pptx,41,Multiple Layers of Convolution,"ConvNet is a sequence of Convolution Layers, interspersed with activation functions
+32
+32
+3
+28
+28
+6
+CONV,
+ReLU
+e.g. 6 5x5x
+3
+filters
+CONV,
+ReLU
+e.g. 10 5x5x
+6
+filters
+CONV,
+ReLU
+….
+10
+24
+24
+41
+Multiple Layers of Convolution"
+1,CNN,1 - CNN.pptx,42,How CNNs Differ from MLP,"How CNNs Differ from MLP
+42
+MLP
+CNN
+Fully connected
+Local connectivity
+No spatial bias
+Spatial structure preserved
+Many parameters
+Parameter sharing
+No translation invariance
+Approximate translation invariance
+Why CNNs Work for Images
+Exploit local structure
+Share filters across space
+Translation equivariant (feature maps shift when input shifts).
+Pooling → approximate invariance
+Exploit local structure"
+1,CNN,1 - CNN.pptx,43,What Is Inductive Bias?,"What Is Inductive Bias?
+Inductive bias:
+The assumptions a model makes about the structure of data before seeing any training examples.
+All models have inductive bias.
+Linear regression → assumes linear relationship
+MLP → assumes no spatial structure
+CNN → assumes local correlations and translation consistency
+Images are structured 2D signals:
+Local correlation
+Repeated patterns (edges, textures)
+Spatial hierarchy
+CNNs encode spatial inductive bias through:
+Local connectivity
+Weight sharing
+Translation consistency
+This reduces parameters and improves generalization.
+43
+Good generalization happens when the model’s inductive bias matches the true structure of the data.
+If data is images → spatial bias helps
+If data is time series → temporal bias helps"
+1,CNN,1 - CNN.pptx,44,Hierarchical Feature Learning in CNNs,"44
+Hierarchical Feature Learning in CNNs"
+1,CNN,1 - CNN.pptx,45,1×1 Convolution,"1×1 Convolution
+What Does 1×1 Convolution Do?
+Performs channel mixing
+Earlier layers detect: Edges, Textures, Colors, Simple patterns
+1×1 convolution learns how to combine them.
+Example: Combine “horizontal edge” + “skin color” → “face feature”
+So, it learns interactions between feature maps.
+Reduces dimensionality
+Less computation
+Less memory
+Lower overfitting risk
+Adds non-linearity
+Performs linear projection
+Followed by non-linear activation
+Enables bottleneck architectures (e.g.,
+ResNet
+).
+45
+56×56×64 → 1×1 conv (32 filters) → 56×56×32
+Depth=32
+Acts like a fully connected layer applied independently at each spatial location.
+Efficient Depth Reduction
+Depth=64"
+1,CNN,1 - CNN.pptx,46,Pooling Layer,"Pooling Layer
+Reduces spatial dimension
+Reduces computation
+Adds robustness to small spatial shifts.
+46
+Reduces overfitting risk
+Pooling has no learnable parameters.
+Why Pooling?"
+1,CNN,1 - CNN.pptx,47,Max pooling: Another Example,"Max pooling: Another Example
+47"
+1,CNN,1 - CNN.pptx,48,Pooling: Max vs Average,"48
+Pooling: Max vs Average
+Max Pooling
+Average Pooling
+Focus
+Strongest activation
+Overall activation level
+Edge preservation
+Preserves sharp features
+Smooths features
+Noise sensitivity
+Can amplify noise spikes
+More stable to noise
+Information retention
+Keeps strongest signal only
+Keeps more global information
+Common usage
+Most common in early CNNs
+Often used in final layers
+Intuition
+Keep the strongest evidence
+Capture overall presence.
+When to Use Which?
+Early feature extraction → Max pooling
+Final feature summarization → Global average pooling
+Small datasets → Average pooling can help reduce overfitting"
+1,CNN,1 - CNN.pptx,49,AlexNet Architecture,"INPUT
+CONV1
+CONV2
+CONV3
+CONV4
+CONV5
+FC1
+FC2
+FC4
+49
+AlexNet
+Architecture"
+1,CNN,1 - CNN.pptx,50,AlexNet Architecture: A different view,"50
+AlexNet
+Architecture: A different view
+AlexNet
+demonstrated that deep CNNs scale effectively when spatial inductive bias is properly encoded."
+1,CNN,1 - CNN.pptx,51,AlexNet Keras Implementation,"Keras
+implementation: http://dandxy89.github.io/
+ImageModels
+/
+51
+AlexNet
+Keras
+Implementation"
+1,CNN,1 - CNN.pptx,52,Summary: Convolutional Neural Networks,"Summary: Convolutional Neural Networks
+Key Takeaways
+Convolution = local dot product
+Filters are shared across space
+Depth grows with number of filters
+Padding and stride control output size
+CNNs scale to large image datasets
+Modern vision breakthroughs stem from CNN architectures
+CNNs encode spatial inductive bias for visual data.
+52
+CNN success comes from aligning architectural inductive bias with the structure of visual data."
+2,Metrics,2  - Metrics.pptx,1,Evaluating Classifiers,"Evaluating Classifiers
+Yifeng Zhu
+Electrical and Computer Engineering
+University of Maine
+1"
+2,Metrics,2  - Metrics.pptx,2,Why Evaluation Metrics Matter,"Why Evaluation Metrics Matter
+Different problems require different metrics.
+Accuracy alone can be misleading.
+Metrics must reflect real-world cost of errors.
+A model can look good numerically but fail in practice.
+2"
+2,Metrics,2  - Metrics.pptx,3,Binary Classification,"Binary Classification
+FN: False Negative
+TP: True Positive
+FP: False Positive
+TN: True Negative
+3"
+2,Metrics,2  - Metrics.pptx,4,Score based models for binary classification,"Score based models for binary classification
+Score = 1
+Score = 0
+Positive labelled example
+Negative labelled example
+Binary classification
+20 samples
+score between 0 and 1
+0.5
+Classification Threshold
+4"
+2,Metrics,2  - Metrics.pptx,5,From Scores to Class Decisions,"From Scores to Class Decisions
+Th=0.5
+Predict Positive
+Predict Negative
+Label Positive
+Label Negative
+Positive labelled example
+Negative labelled example
+Confusion Matrix
+5"
+2,Metrics,2  - Metrics.pptx,6,Confusion Matrix at Threshold 0.5,"Confusion Matrix at Threshold 0.5
+Th=0.5
+Predict Positive
+Predict Negative
+Th
+0.5
+TP
+9
+TN
+8
+FP
+2
+FN
+1
+True Positive
+9
+True Negative
+8
+False Negative
+1
+False Positive
+2
+Label Positive
+Label Negative
+Positive labelled example
+Negative labelled example
+Confusion Matrix
+Actual +
+Actual -
+Predicted +
+TP
+FP
+Predicted -
+FN
+TN
+Confusion Matrix
+6"
+2,Metrics,2  - Metrics.pptx,7,Accuracy from the Confusion Matrix,"Accuracy from the Confusion Matrix
+Th=0.5
+Predict Positive
+Predict Negative
+Th
+0.5
+TP
+9
+TN
+8
+FP
+2
+FN
+1
+Acc
+.85
+True Positive
+TP = 9
+True Negative
+TN = 8
+False Negative
+FN = 1
+False Positive
+FP = 2
+Label Positive
+Label Negative
+What percent of samples were correctly identified?
+Positive labelled example
+Negative labelled example
+Confusion Matrix
+7"
+2,Metrics,2  - Metrics.pptx,8,Limitation of Accuracy,"Limitation of Accuracy
+Create a model to identify terrorists boarding flights with > 99% accuracy
+Simple model: predict every single person as not a terrorist
+> 800 million passengers on US flights every year
+19 confirmed terrorists who boarded US flights 2000-2017
+Accuracy = (800,000,000 − 19) / 800,000,000 = 99.9999976%
+High accuracy does NOT mean good model.
+Accuracy does not perform well with imbalanced data sets.
+Terrorist
+vs
+not terrorists
+Detecting rare diseases
+8"
+2,Metrics,2  - Metrics.pptx,9,Imbalanced Data,"Imbalanced Data
+95 dog images and 5 cat images
+Predict all images as dogs
+Actual
+Class
+dog
+cat
+Predicted
+Class
+dog
+95
+5
+cat
+0
+0
+Accuracy does not perform well with imbalanced data sets.
+9"
+2,Metrics,2  - Metrics.pptx,10,Sensitivity vs Specificity,"Recall
+measures the model’s ability to correctly
+identify positive cases
+.
+Example:
+Among all truly sick patients, what proportion are correctly identified as sick?
+Specificity
+measures the model’s ability to correctly
+identify negative cases
+.
+Example:
+Among all legitimate credit card transactions, what proportion are correctly approved as legitimate?
+Focus
+Avoiding false negatives
+Avoiding false positives
+When important
+When missing a positive case is costly, e.g., disease screening
+When false alarms are costly, e.g. airport security
+Goal
+Recall protects
+safety
+.
+Specificity protects system
+efficiency
+.
+Positive Samples
+Predicted as Positive
+10
+Sensitivity vs Specificity"
+2,Metrics,2  - Metrics.pptx,11,Precision,"Focus only on the positive class
+(recall)
+Sensitivity
+Positive Samples
+Predicted as Positive
+Recall measures the model’s ability to correctly identify positive cases.
+Example:
+Among all actual intrusion attempts, what proportion are correctly detected as intrusions?
+When important:
+When acting on a positive prediction is costly, e.g., fraud alert.
+Goal:
+Precision protects decision
+reliability
+11
+Precision"
+2,Metrics,2  - Metrics.pptx,12,Precision and Recall at Threshold 0.5,"Precision and Recall at Threshold 0.5
+Th=0.5
+Predict Positive
+Predict Negative
+Th
+0.5
+TP
+9
+TN
+8
+FP
+2
+FN
+1
+Acc
+.85
+Precision
+.81
+Sensitivity
+.90
+True Positive
+TP = 9
+True Negative
+TN = 8
+False Negative
+FN = 1
+False Positive
+FP = 2
+Label Positive
+Label Negative
+Note that the focus is on the positive class
+(also named
+recall
+)
+What percent of positive samples were correctly identified?
+What percent of samples were correctly identified?
+12"
+2,Metrics,2  - Metrics.pptx,13,Specificity at Threshold 0.5,"Specificity at Threshold 0.5
+Th=0.5
+Predict Positive
+Predict Negative
+Th
+0.5
+TP
+9
+TN
+8
+FP
+2
+FN
+1
+Acc
+.85
+Pr
+.81
+Specificity
+.90
+Spec
+.80
+True Positive
+TP = 9
+True Negative
+TN = 8
+False Negative
+FN = 1
+False Positive
+FP = 2
+Label positive
+Label negative
+13"
+2,Metrics,2  - Metrics.pptx,14,F1 Score at Threshold 0.5,"F1 Score at Threshold 0.5
+Th=0.5
+Predict Positive
+Predict Negative
+Th
+0.5
+TP
+9
+TN
+8
+FP
+2
+FN
+1
+Acc
+.85
+Pr
+.81
+Recall
+.90
+Spec
+.80
+F1
+.857
+True Positive
+TP = 9
+True Negative
+TN = 8
+False Negative
+FN = 1
+False Positive
+FP = 2
+Label positive
+Label negative
+Harmonic mean of precision and recall.
+The harmonic mean penalizes imbalance between precision and recall.
+F1 does not consider true negatives.
+Widely used in the natural language processing.
+14"
+2,Metrics,2  - Metrics.pptx,15,Discussion 1: When Is Accuracy Misleading?,"Discussion 1:
+When Is Accuracy Misleading?
+In which of the following scenarios would a
+high accuracy
+value suggest that the ML model is doing a good job?
+A deadly, but curable, medical condition afflicts .01% of the population. An ML model uses symptoms as features and predicts this affliction with an accuracy of 99.99%.
+An expensive robotic chicken crosses a very busy road a thousand times per day. An ML model evaluates traffic patterns and predicts when this chicken can safely cross the street with an accuracy of 99.99%.
+In the game of roulette, a ball is dropped on a spinning wheel and eventually lands in one of 38 slots. Using visual features (the spin of the ball, the position of the wheel when the ball was dropped, the height of the ball over the wheel), an ML model can predict the slot that the ball will land in with an accuracy of 4%.
+15
+When Is Accuracy Misleading?"
+2,Metrics,2  - Metrics.pptx,16,Discussion 2: What Happens When We Raise the Threshold?,"Discussion 2:
+What Happens When We Raise the Threshold?
+Consider a classification model that separates email into two categories:
+spam
+, if the rating is higher than the classification threshold;
+not spam
+, otherwise
+If you raise the classification threshold, what will happen to
+sensitivity
+(
+recall)
+?
+a) Always decrease or stay the same.
+b) Always increase
+c) Always stay constant
+16
+What Happens When We Raise the Threshold?"
+2,Metrics,2  - Metrics.pptx,17,Discussion 2: Analysis,"Discussion 2: Analysis
+Consider a classification model that separates email into two categories:
+spam
+, if the rating is higher than the classification threshold;
+not spam
+, otherwise
+If you raise the classification threshold, what will happen to recall?
+a) Always decrease or stay the same.
+b) Always increase
+c) Always stay constant
+Threshold ↑
+→ More conservative
+→ More false negatives
+→ Recall ↓
+17"
+2,Metrics,2  - Metrics.pptx,18,"Discussion 3: Precision vs Sensitivity,
+Which One Matters?","Discussion 3:
+Precision vs Sensitivity,
+Which One Matters?
+Consider two models, A and B, that each evaluate the same dataset. Which one of the following statements is true?
+If Model A has better precision than model B, then model A is better.
+If model A has better sensitivity (recall) than model B, then model A is better.
+If Model A has higher precision and higher recall than Model B on the same dataset, then Model A is strictly better with respect to those two metrics.
+18"
+2,Metrics,2  - Metrics.pptx,19,"Discussion 4: Precision vs Sensitivity
+Which one Matters?","Which metrics should be used to evaluate the following two systems?
+Intrusion detection systems
+“Alexa” keyword activation
+Discussion 4:
+Precision
+vs
+Sensitivity
+Which one Matters?
+19"
+2,Metrics,2  - Metrics.pptx,20,Intrusion Follow-up,"Intrusion Follow-up
+False negative = catastrophic
+Recall protects security.
+But Can We Ignore Precision?
+Example: 5 intrusion cases and 95 normal cases
+If we predict
+all cases as intrusion
+:
+Recall = 5 / 5 = 100%
+Precision = 5 / (5 + 95) = 5%
+This creates constant false alarms.
+Key Insight
+High recall is essential for safety.
+Precision cannot be ignored.
+A practical system needs
+very high recall with acceptable precision
+.
+20"
+2,Metrics,2  - Metrics.pptx,21,Alexa: Most Important Metric is Precision,"Alexa: Most Important Metric is Precision
+Possible Errors
+False Positive (FP):
+Activated by background noise or normal conversation
+False Negative (FN):
+Fails to activate when user says “Alexa”
+Which Error Is More Costly?
+False positives
+interrupt conversations and reduce user trust.
+False negatives
+only require the user to repeat the command.
+Most Important Metric:
+Precision
+Among all activations, what proportion were truly correct?
+Goal: Minimize false triggers to protect user experience and trust.
+21"
+2,Metrics,2  - Metrics.pptx,22,Receiver Operating Characteristics (ROC) curve,"Receiver Operating Characteristics (ROC) curve
+Illustrate the diagnostic ability of a binary classifier system as its discrimination threshold is varied.
+True Positive Rate
+(TPR), Sensitivity
+False Positive Rate
+(FPR)
+TPR
+FPR
+Fraction of
+true positives
+predicted as
+positive
+Fraction of
+true negatives
+predicted as
+positive
+22"
+2,Metrics,2  - Metrics.pptx,23,Receiver Operating Characteristics (ROC) curve: Demo,"Receiver Operating Characteristics (ROC) curve: Demo
+Illustrate the diagnostic ability of a binary classifier system as its discrimination threshold is varied.
+Sensitivity, True Positive Rate (TPR)
+False Positive Rate (FPR)
+http://www.navan.name/roc/
+23"
+2,Metrics,2  - Metrics.pptx,24,Threshold Scanning,"Threshold
+TP
+TN
+FP
+FN
+Accuracy
+Precision
+Recall
+Specificity
+F1
+1.00
+0
+10
+0
+10
+0.50
+1
+0
+1
+0
+0.95
+1
+10
+0
+9
+0.55
+1
+0.1
+1
+0.182
+0.90
+2
+10
+0
+8
+0.60
+1
+0.2
+1
+0.333
+0.85
+2
+9
+1
+8
+0.55
+0.667
+0.2
+0.9
+0.308
+0.80
+3
+9
+1
+7
+0.60
+0.750
+0.3
+0.9
+0.429
+0.75
+4
+9
+1
+6
+0.65
+0.800
+0.4
+0.9
+0.533
+0.70
+5
+9
+1
+5
+0.70
+0.833
+0.5
+0.9
+0.625
+0.65
+5
+8
+2
+5
+0.65
+0.714
+0.5
+0.8
+0.588
+0.60
+6
+8
+2
+4
+0.70
+0.750
+0.6
+0.8
+0.667
+0.55
+7
+8
+2
+3
+0.75
+0.778
+0.7
+0.8
+0.737
+0.50
+8
+8
+2
+2
+0.80
+0.800
+0.8
+0.8
+0.800
+0.45
+9
+8
+2
+1
+0.85
+0.818
+0.9
+0.8
+0.857
+0.40
+9
+7
+3
+1
+0.80
+0.750
+0.9
+0.7
+0.818
+0.35
+9
+6
+4
+1
+0.75
+0.692
+0.9
+0.6
+0.783
+0.30
+9
+5
+5
+1
+0.70
+0.643
+0.9
+0.5
+0.750
+0.25
+9
+4
+6
+1
+0.65
+0.600
+0.9
+0.4
+0.720
+0.20
+9
+3
+7
+1
+0.60
+0.562
+0.9
+0.3
+0.692
+0.15
+9
+2
+8
+1
+0.55
+0.529
+0.9
+0.2
+0.667
+0.10
+9
+1
+9
+1
+0.50
+0.500
+0.9
+0.1
+0.643
+0.05
+10
+1
+9
+0
+0.55
+0.526
+1
+0.1
+0.690
+0.00
+10
+0
+10
+0
+0.50
+0.500
+1
+0
+0.667
+Score = 1
+Score = 0
+Threshold = 0.00
+Threshold = 1.00
+Threshold Scanning
+24
+Each row corresponds to a different decision threshold."
+2,Metrics,2  - Metrics.pptx,25,Classification: ROC curve,"Classification: ROC curve
+Area Under Curve (the ROC curve)
+AUC measures how well the model ranks positives higher than negatives.
+AUC = 0.5 → random
+AUC < 0.5 → worse than random
+AUC = 1.0 → perfect ranking
+25
+AUC evaluates ranking ability, not probability calibration."
+2,Metrics,2  - Metrics.pptx,26,AUC interpretation,"AUC interpretation
+Area Under Curve (the ROC curve)
+26
+AUC = P(random positive ranked above random negative)"
+2,Metrics,2  - Metrics.pptx,27,AUC for ROC curves,"True Positive Rate
+0%
+100%
+False Positive Rate
+0%
+100%
+True Positive Rate
+0%
+100%
+False Positive Rate
+0%
+100%
+True Positive Rate
+0%
+100%
+False Positive Rate
+0%
+100%
+AUC = 50%
+AUC = 90%
+AUC = 65%
+AUC = 100%
+True Positive Rate
+0%
+100%
+False Positive Rate
+0%
+100%
+AUC for ROC curves
+27
+Curves above the diagonal indicate performance better than random."
+2,Metrics,2  - Metrics.pptx,28,Discussion: ROC and AUC,"Discussion:
+ROC and AUC
+Which of the following ROC curves produce AUC values greater than 0.5?
+(a)
+(b)
+(c)
+(d)
+(e)
+28"
+2,Metrics,2  - Metrics.pptx,29,Discussion 5: What Does AUC Really Measure?,"Discussion 5:
+What Does AUC Really Measure?
+How would multiplying all of the predictions from a given model by 2.0 change the model's performance as measured by AUC?
+(for example, if the model predicts 0.4, we multiply by 2.0 to get a prediction of 0.8)
+It would make AUC better, because the prediction values are all farther apart.
+No change. AUC only cares about relative prediction scores.
+It would make AUC terrible, since the prediction values are now way off.
+29"
+2,Metrics,2  - Metrics.pptx,30,Discussion 5 solution: What Does AUC Really Measure?,"Discussion 5 solution:
+What Does AUC Really Measure?
+How would multiplying all of the predictions from a given model by 2.0 change the model's performance as measured by AUC?
+(for example, if the model predicts 0.4, we multiply by 2.0 to get a prediction of 0.8)
+It would make AUC better, because the prediction values are all farther apart.
+No change. AUC only cares about relative prediction scores.
+It would make AUC terrible, since the prediction values are now way off.
+AUC depends only on ranking, not absolute values.
+If predictions are multiplied by 2: Relative ordering unchanged → ROC unchanged → AUC unchanged
+30"
+2,Metrics,2  - Metrics.pptx,31,Evaluating Classifiers: Summary,"Evaluating Classifiers: Summary
+Metric
+Formula
+What It Measures
+When to Use
+Typical Example
+Accuracy
+(TP + TN) / Total
+Overall correctness
+Balanced datasets
+General classification with similar class sizes
+Recall
+(Sensitivity)
+TP / (TP + FN)
+Ability to detect positives
+Missing a positive is costly
+Disease screening, intrusion detection
+Precision
+TP / (TP + FP)
+Correctness of positive predictions
+False alarms are costly
+Fraud detection, keyword activation
+Specificity
+TN / (TN + FP)
+Ability to detect negatives
+Avoid unnecessary alarms
+Airport security, medical testing
+F1 Score
+2PR / (P + R)
+Balance of precision & recall
+Need tradeoff between FP and FN
+NLP, imbalanced datasets
+AUC (ROC)
+—
+Ranking quality across thresholds
+Threshold-independent metric
+Model comparison
+31"
+2,Metrics,2  - Metrics.pptx,32,Metric Selection Strategy,"Metric Selection Strategy
+Balanced classes → Accuracy is reasonable.
+Rare positive class → Recall, Precision, F1.
+Ranking problem → ROC-AUC.
+Asymmetric cost → Choose metric aligned with real-world risk.
+32"
+3,Loss Function,3  - Loss Function.pptx,1,"Loss Function for Classification:
+From Linear Scores to Softmax & Cross-Entropy","Loss Function for Classification:
+From Linear Scores to
+Softmax
+& Cross-Entropy
+Yifeng Zhu
+Electrical and Computer Engineering
+University of Maine
+1"
+3,Loss Function,3  - Loss Function.pptx,2,Model = Score Function + Loss Function,"Model = Score Function + Loss Function
+Model outputs scores (logits) for each class
+Loss function measures how wrong predictions are
+Training = minimize average loss over dataset
+2"
+3,Loss Function,3  - Loss Function.pptx,3,Mathematical Model,"Mathematical Model
+3
+We define a model that maps inputs to scores. We then define a loss function to measure how wrong the model is."
+3,Loss Function,3  - Loss Function.pptx,4,Popular activation functions,"4
+Popular activation functions
+Activation functions introduce nonlinearity, enabling the network to model nonlinear decision boundaries."
+3,Loss Function,3  - Loss Function.pptx,5,Training = Optimization via Gradient Descent,"Goal: Minimize the Loss Function
+Training = Optimization via Gradient Descent
+5
+Update Rule:
+Where:
+We move in the opposite direction of gradient to reduce loss."
+3,Loss Function,3  - Loss Function.pptx,6,Gradient Descent: Core Idea,"Gradient Descent: Core Idea
+6"
+3,Loss Function,3  - Loss Function.pptx,7,Gradient Descent: Step 1 Initialization,"Gradient
+Descent: Step 1 Initialization
+Pick random starting point.
+x
+f(x)
+7"
+3,Loss Function,3  - Loss Function.pptx,8,Gradient Descent : Step 2 Compute Gradient,"Gradient
+Descent : Step 2 Compute Gradient
+Compute gradient at point (analytically or by finite differences)
+x
+f(x)
+8"
+3,Loss Function,3  - Loss Function.pptx,9,Gradient Descent : Step 3 Parameter Update,"Gradient
+Descent : Step 3 Parameter Update
+Move along parameter space in direction of negative gradient
+x
+f(x)
+9"
+3,Loss Function,3  - Loss Function.pptx,10,Gradient Descent: Step 4 Iterate,"Gradient
+Descent: Step 4 Iterate
+Move along parameter space in direction of negative gradient.
+x
+f(x)
+10"
+3,Loss Function,3  - Loss Function.pptx,11,Gradient Descent: Convergence Condition,"Gradient
+Descent: Convergence Condition
+Stop when we don’t move any more.
+x
+f(x)
+11"
+3,Loss Function,3  - Loss Function.pptx,12,What Does the Gradient Represent?,"Update Rule:
+Direction of steepest increase in loss
+Magnitude = sensitivity of loss to parameter change
+We move opposite direction to decrease loss
+Gradient
+learning rates
+12
+What Does the Gradient Represent?"
+3,Loss Function,3  - Loss Function.pptx,13,Local vs Global Minima,"Local vs Global Minima
+13
+L
+𝛉
+Deep networks are non-convex, but many local minima have similar performance."
+3,Loss Function,3  - Loss Function.pptx,14,Big vs Small Learning Rate in Optimization,"14
+Big vs Small Learning Rate in Optimization"
+3,Loss Function,3  - Loss Function.pptx,15,Effect of Learning Rates,"https://www.cs.toronto.edu/~frossard/post/linear_regression/
+15
+Effect of Learning Rates"
+3,Loss Function,3  - Loss Function.pptx,16,Comparing Different Optimization Algorithms,"https://www.cs.toronto.edu/~frossard/post/linear_regression/
+16
+Comparing Different Optimization Algorithms"
+3,Loss Function,3  - Loss Function.pptx,17,CIFAR-10 Dataset Overview,"50,000
+training images
+10,000
+test images.
+Image size:
+32 × 32 × 3
+(RGB)
+CIFAR-10 Dataset Overview
+17"
+3,Loss Function,3  - Loss Function.pptx,18,Linear Classifier as a Parametric Model,"Linear Classifier as a Parametric Model
+18
+Image
+10
+numbers giving class scores
+Array of
+32x32x3
+numbers
+(3072 numbers total)
+𝑓
+𝑥
+We define a model with learnable parameters (weights and bias).
+Example: Linear Classifier"
+3,Loss Function,3  - Loss Function.pptx,19,Worked Example: 4-Pixel Image with 3 Classes,"Example with an image with 4 pixels, and 3 classes (
+cat
+/
+dog
+/
+ship
+)
+0.2
+-0.5
+0.1
+2.0
+1.5
+1.3
+2.1
+0.0
+0
+0.25
+0.2
+-0.3
+W
+Input image
+56
+231
+24
+2
+56
+231
+24
+2
+Stretch pixels into column
+1.1
+3.2
+-1.2
++
+-96.8
+437.9
+61.95
+=
+Cat score
+Dog score
+Ship score
+19
+Worked Example: 4-Pixel Image with 3 Classes
+Step 1: Flatten image
+Step 2: Multiply by weight matrix
+Step 3: Add bias
+Step 4: Get class scores
+b"
+3,Loss Function,3  - Loss Function.pptx,20,Interpreting a Linear Classifier,"Each row of W:
+Each row of W acts as a template detector for one class.
+Computes similarity between image and class.
+Interpreting a Linear Classifier
+20
+Score of class j:
+Higher score → more similar."
+3,Loss Function,3  - Loss Function.pptx,21,Evaluating the Linear Classifier,"Cat image
+by
+Nikita
+is licensed under
+CC-BY 2.0
+;
+Car image
+is
+CC0 1.0
+public domain;
+Frog image
+is in the public domain
+Evaluating the Linear Classifier
+Example class scores for 3 images for some W:
+How can we tell whether this W is good or bad?
+21"
+3,Loss Function,3  - Loss Function.pptx,22,From Scores to Model Assessment,"Define a
+loss function
+that quantifies our unhappiness with the scores across the training data.
+Come up with a way of efficiently finding the parameters that minimize the loss function.
+(optimization)
+TODO:
+From Scores to Model Assessment
+Cat image
+by
+Nikita
+is licensed under
+CC-BY 2.0
+;
+Car image
+is
+CC0 1.0
+public domain;
+Frog image
+is in the public domain
+22"
+3,Loss Function,3  - Loss Function.pptx,23,Are These Scores Good?,"cat
+frog
+car
+3.2
+5.1
+-1.7
+4.9
+1.3
+2.0
+-3.1
+2.5
+2.2
+Suppose: 3 training examples, 3 classes.
+With some W the scores are:
+A
+loss function
+tells how good our current classifier is
+Dataset:
+where is image and
+is (integer) label
+Loss over dataset:
+23
+Are These Scores Good?
+We need a quantitative measure of error → Loss Function"
+3,Loss Function,3  - Loss Function.pptx,24,Softmax,"Input
+: raw scores (logits)
+Output
+: probability distribution
+Sum
+= 1
+Softmax
+AlexNet
+24
+Converts arbitrary real-valued scores into probabilities."
+3,Loss Function,3  - Loss Function.pptx,25,Softmax Step 1: Raw Logits,"cat
+frog
+car
+3.2
+5.1
+-1.7
+Raw Scores z (Logits)
+Softmax
+is the most commonly used final activation in classification.
+Softmax
+Step 1: Raw Logits
+25"
+3,Loss Function,3  - Loss Function.pptx,26,Softmax Step 2: Exponentiation,"cat
+frog
+car
+3.2
+5.1
+-1.7
+24.5
+164.0
+0.18
+exp
+unnormalized probabilities
+26
+Raw Scores (Logits)
+Softmax
+Step 2: Exponentiation"
+3,Loss Function,3  - Loss Function.pptx,27,Softmax Step 3: Normalization,"cat
+frog
+car
+3.2
+5.1
+-1.7
+24.5
+164.0
+0.18
+exp
+unnormalized probabilities
+normalize
+0.13
+0.87
+0.00
+probabilities
+27
+Raw Scores (Logits)
+Converts logits into probabilities.
+Sum = 1.
+Softmax
+Step 3: Normalization"
+3,Loss Function,3  - Loss Function.pptx,28,Why Softmax? Probabilistic Interpretation,"Why
+Softmax
+? Probabilistic Interpretation
+28"
+3,Loss Function,3  - Loss Function.pptx,29,Numerical Stability in Softmax Computation,"Numerical Stability in
+Softmax
+Computation
+29"
+3,Loss Function,3  - Loss Function.pptx,30,Softmax + Cross Entropy,"Softmax
++ Cross Entropy
+Widely used in classification
+cat
+frog
+car
+0.13
+0.87
+0.00
+Prediction
+1
+0
+0
+Label:
+one-hot vector
+CrossEntropy
+(Prediction, Label)
+measures the dissimilarity between the true label distribution and the predicted label distribution
+30"
+3,Loss Function,3  - Loss Function.pptx,31,Entropy: Measuring Uncertainty,"Entropy: Measuring Uncertainty
+Concept borrowed from physics
+Measure the
+disorder
+in a dataset
+High entropy → uniform distribution → high uncertainty
+Low entropy → peaked distribution → confident prediction
+Case 1 — Uniform Distribution with 3 classes
+Case 2 — Highly Peaked Distribution (Low Uncertainty)
+31"
+3,Loss Function,3  - Loss Function.pptx,32,Entropy and Information Gain,"Entropy and Information Gain
+Concept borrowed from physics
+Measure the
+disorder
+in a dataset
+Information gain: the decrease in disorder achieved by partitioning the datasets
+49 objects
+25 stars
+24 diamond
+32"
+3,Loss Function,3  - Loss Function.pptx,33,Information Gain Example,"Information Gain Example
+49 objects
+25 stars
+24 diamond
+Partition based on color
+Easer to predict what shape we will get from the box.
+33"
+3,Loss Function,3  - Loss Function.pptx,34,Cross-Entropy Definition (NLL Form),"Cross-Entropy Definition (NLL Form)
+Also called Negative Log-Likelihood (NLL)
+p(x)
+: Ground truth distribution
+q(x)
+: Prediction distribution
+How much q(x) differs from the ground truth p(x)?
+34"
+3,Loss Function,3  - Loss Function.pptx,35,Cross-Entropy for One-Hot Labels,"Cross-Entropy for One-Hot Labels
+cat
+frog
+car
+0.13
+0.87
+0.00
+Prediction
+1
+0
+0
+Label:
+one-hot vector
+𝐻
+𝑝
+,
+𝑞
+=−
+𝑥
+𝑝
+(
+𝑥
+)
+log
+𝑞
+(
+𝑥
+)
+p(x)
+: Ground truth distribution
+q(x)
+: Prediction distribution
+If ground truth are one-hot:
+𝐻
+𝑝
+,
+𝑞
+=−
+𝑙𝑜𝑔
+𝑞
+(
+y
+true
+)
+where
+y
+true
+is the
+true class label
+for the training example.
+35
+Large loss → model is very wrong"
+3,Loss Function,3  - Loss Function.pptx,36,"A Short Introduction to Entropy, Cross-Entropy and KL-Divergence by Aurélien Géron
+11 minutes","https://www.youtube.com/watch?v=ErfnhcEV1O8&t=5s
+A Short Introduction to Entropy, Cross-Entropy and KL-Divergence
+by
+Aurélien
+Géron
+11 minutes
+36"
+3,Loss Function,3  - Loss Function.pptx,37,Cross Entropy v.s. Square Error,"Cross Entropy
+v.s
+. Square Error
+Total
+Loss
+w
+1
+w
+2
+Cross Entropy
+Square
+Error
+http://jmlr.org/proceedings/papers/v9/glorot10a/glorot10a.pdf
+37
+Cross-entropy:
+Strong gradients when wrong
+Faster learning
+Well-suited for classification
+Square error:
+Weak gradients for saturated outputs
+Slower convergence
+Better for regression
+Cross-entropy produces larger gradients when prediction is confidently wrong."
+3,Loss Function,3  - Loss Function.pptx,38,Summary,"Summary
+38"
+4,Overfit & Underfit,4  - Overfit & Underfit.pptx,1,Overfitting & Underfitting,"Overfitting & Underfitting
+Yifeng Zhu
+Electrical and Computer Engineering
+University of Maine"
+4,Overfit & Underfit,4  - Overfit & Underfit.pptx,2,Regression: Underfitting vs. Good Fit vs. Overfitting,"2
+Regression: Underfitting vs. Good Fit vs. Overfitting
+Model too simple to capture the true pattern
+High training error
+High test error
+Fails to learn important structure
+Captures underlying trend
+Low training error
+Low test error
+Generalizes well to unseen data
+Model too complex
+Very low training error
+High test error
+Learns noise instead of signal"
+4,Overfit & Underfit,4  - Overfit & Underfit.pptx,3,Classification: Underfitting vs. Good Fit vs. Overfitting,"3
+Classification: Underfitting vs. Good Fit vs. Overfitting
+Too simple →
+misses structure.
+Balanced complexity → generalizes well.
+Too complex → memorizes noise."
+4,Overfit & Underfit,4  - Overfit & Underfit.pptx,4,Which cases correspond to underfitting or overfitting?,"Which cases correspond to underfitting or overfitting?
+4
+High Bias
+= being consistently wrong.
+High Variance
+= being unpredictably inconsistent."
+4,Overfit & Underfit,4  - Overfit & Underfit.pptx,5,Bias–Variance and Model Behavior,"Bias–Variance and Model Behavior
+Underfitting
+Overfitting
+5
+Low Bias, Low Variance
+Predictions are accurate and consistent.
+Model is both correct on average and stable.
+Low Bias, High Variance
+Predictions are accurate on average but highly unstable.
+Model is sensitive to small changes in data (overfitting risk).
+High Bias, Low Variance
+Predictions are consistently wrong in the same direction.
+Model is too simple (underfitting).
+High Bias, High Variance
+Predictions are inaccurate and inconsistent.
+Model is both wrong and unstable."
+4,Overfit & Underfit,4  - Overfit & Underfit.pptx,6,Managing Overfitting and Underfitting,"Managing Overfitting and Underfitting
+Underfitting
+Solution:
+Train longer
+More layers (deeper network)
+Overfitting
+Solution:
+More data
+Regularization
+Other architecture
+6"
+4,Overfit & Underfit,4  - Overfit & Underfit.pptx,7,Bias–Variance Tradeoff,"7
+Bias–Variance Tradeoff
+As model complexity increases:
+Bias ↓
+Variance ↑
+Simpler models miss patterns; overly complex models chase noise.
+Goal: find the minimum.
+Bias ↓
+Total test error = Bias² + Variance + Noise"
+4,Overfit & Underfit,4  - Overfit & Underfit.pptx,8,Generalization: The Train-Test Split,"Generalization
+:
+The Train-Test Split
+Training Data:
+used to fit model
+Test Data:
+check generalization error
+How to split?
+Randomly, Temporally, Geo
+…
+Depends on application (usually randomly)
+What size? (90%-10%)
+Larger training set
+ more complex models
+Larger test set  better estimate of generalization error
+Typically between 75%-25% and
+90%-10%
+Data
+Train
+Test
+Train - Test
+Split
+8"
+4,Overfit & Underfit,4  - Overfit & Underfit.pptx,9,Generalization: The Train-Validation-Test Split,"Generalization
+:
+The Train-Validation-Test Split
+Data
+Train
+Test
+Train - Test
+Split
+9
+Data
+Train
+Test
+Train – Validation- Test
+Split
+Validation
+Training Set → learn
+Learn model parameters
+Validation Set → choose
+Tune hyperparameters
+Model selection
+Early stopping
+Test Set → evaluate
+Final unbiased evaluation
+Used once, after model is fixed"
+4,Overfit & Underfit,4  - Overfit & Underfit.pptx,10,Training vs Test Error,"Training
+vs
+Test
+Error
+Epochs
+Error
+Training Error
+Test Error
+Best Fit
+Overfitting
+
+
+Underfitting
+Training error
+typically
+under-estimates
+test error
+.
+10"
+4,Overfit & Underfit,4  - Overfit & Underfit.pptx,11,Cross Validation,"Cross Validation
+Why use cross-validation?
+When the dataset is small
+When a single train–test split is unreliable
+When we want a more stable estimate of performance
+11
+k-Fold Cross-Validation
+Split data into k equal folds
+Train on k−1 folds
+Validate on the remaining fold
+Repeat k times
+Average the validation results
+Purpose:
+reduce variance in performance estimation."
+4,Overfit & Underfit,4  - Overfit & Underfit.pptx,12,Generalization: Validation Split,"Generalization:
+Validation Split
+Training Data:
+used to fit model
+Test Data:
+check generalization error
+How to split?
+Randomly, Temporally, Geo
+…
+Depends on application (usually randomly)
+What size? (90%-10%)
+Larger training set
+ more complex models
+Larger test set  better estimate of generalization error
+Typically between 75%-25% and
+90%-10%
+You can only use the test dataset once after deciding on the model.
+Cross validation
+simulates multiple train test-splits
+on the training data.
+Data
+Train
+Test
+Train - Test
+Split
+Validation
+Split
+Train
+V
+5-Fold
+Cross Validation
+V
+Train
+V
+Train
+V
+Train
+V
+Train
+Validate
+Generalization
+12"
+4,Overfit & Underfit,4  - Overfit & Underfit.pptx,13,Regularized Loss Minimization,"Regularized Loss Minimization
+Larger values of
+λ
+⇒ more regularization
+Regularization Parameter
+13"
+4,Overfit & Underfit,4  - Overfit & Underfit.pptx,14,Determining the Optimal 𝜆,"Determining the Optimal 𝜆
+Value of 𝜆 determines bias-variance tradeoff
+Larger values
+ more regularization  more bias  less variance
+Increasing 𝜆
+Error
+Variance
+Test Error
+(Bias)
+2
+Optimal Value
+Validation Error
+How do we determine 𝜆?
+Determined through cross validation
+14"
+4,Overfit & Underfit,4  - Overfit & Underfit.pptx,15,Notation: p-Norm,"Notation: p-Norm
+15"
+4,Overfit & Underfit,4  - Overfit & Underfit.pptx,16,Notation,"Notation
+L0 Norm
+# of non-zero entries
+L1 Norm
+Sum of absolute values
+L2 Norm & Squared L2 Norm
+Sum of squares
+Sqrt
+(sum of squares)
+L-infinity Norm
+Max absolute value
+16"
+4,Overfit & Underfit,4  - Overfit & Underfit.pptx,17,Example,"Example
+Give a vector w = [3, 4]
+What is L0, L1, and L2 norm?
+L0 Norm = 2
+L1 Norm = 7
+L2 Norm = 5
+17"
+4,Overfit & Underfit,4  - Overfit & Underfit.pptx,18,Example: Regularized Least Square,"Example: Regularized Least Square
+L2 Norm:
+L1 Norm:
+L1 + L2 Norm:
+𝐶𝑜𝑠𝑡
+=
+𝑖
+=0
+𝑛
+𝑦
+𝑖
+−
+𝑤
+𝑥
+𝑖
+2
+argmin
+𝑤
+𝐶𝑜𝑠𝑡
+(
+𝑤
+)
+18"
+4,Overfit & Underfit,4  - Overfit & Underfit.pptx,19,Understanding the Contours with L1 Regularization,"Understanding the Contours with L1 Regularization
+19
+The ellipses are contours of equal training loss.
+Moving toward the center → lower loss
+The center → minimum without regularization
+L
+1
+Norm Ball
+diamond
+The diamond shape is the L1 constraint region.
+It represents all parameter values with limited total absolute magnitude.
+Where is the solution?
+The first point where a loss contour touches the L1 boundary.
+Why does L1 create sparsity?
+The L1 ball has sharp corners on the axes.
+Since contours often touch the diamond at a corner, one parameter becomes exactly zero.
+That is why
+L1 produces sparse solutions
+.
+L1 regularization pushes the solution toward the axes, making some weights exactly zero."
+4,Overfit & Underfit,4  - Overfit & Underfit.pptx,20,2D Example with L1 Regularization,"2D Example with L1 Regularization
+Suppose we minimize:
+20
+Without regularization:
+That is the center of the ellipses.
+Add L1 Constraint:
+Penalized Form (what we usually write)
+Constrained Form (used for geometry intuition)
+Same idea. Different perspective.
+Large λ ⟺ Small c
+For every λ, there exists a corresponding C that gives the same solution.
+There is no simple closed-form formula for converting between λ and C?"
+4,Overfit & Underfit,4  - Overfit & Underfit.pptx,21,L1 Regularization: Geometry Without Constraint,"L1 Regularization: Geometry Without Constraint
+Suppose we minimize:
+21
+Without regularization:
+That is the center of the ellipses.
+Add L1 Constraint:
+Penalized Form (what we usually write)
+Constrained Form (used for geometry intuition)
+Same idea. Different perspective.
+Large λ ⟺ Small c
+Suppose c = 2.
+We shrink the loss contours inward until one becomes tangent to the L1 boundary. That tangency point is the optimal solution."
+4,Overfit & Underfit,4  - Overfit & Underfit.pptx,22,Adding the L1 Constraint (Diamond Region),"Adding the L1 Constraint (Diamond Region)
+Suppose we minimize:
+22
+Without regularization:
+That is the center of the ellipses.
+Add L1 Constraint:
+Penalized Form (what we usually write)
+Constrained Form (used for geometry intuition)
+Same idea. Different perspective.
+Large λ ⟺ Small c
+Suppose c = 2."
+4,Overfit & Underfit,4  - Overfit & Underfit.pptx,23,Tangency Principle: Where Is the Optimal Solution?,"Tangency Principle: Where Is the Optimal Solution?
+Suppose we minimize:
+23
+Without regularization:
+That is the center of the ellipses.
+Add L1 Constraint:
+Penalized Form (what we usually write)
+Constrained Form (used for geometry intuition)
+Same idea. Different perspective.
+Large λ ⟺ Small c
+Suppose c = 2.
+In this example, L1 shrinks both parameters but does not set any to zero."
+4,Overfit & Underfit,4  - Overfit & Underfit.pptx,24,When Does L1 Create Sparsity?,"When Does L1 Create Sparsity?
+Suppose we minimize:
+24
+Add L1 Constraint:
+Suppose c = 2.
+The contour hits a corner of the L1 diamond, so one coefficient becomes zero.
+You get exact zeros when:
+One coordinate is much smaller than the others.
+The L1 ball boundary is reached at a corner.
+The soft-thresholding step eliminates a variable.
+Important Clarification
+L1 encourages sparsity.
+It does not guarantee sparsity in every example.
+In higher dimensions, sparsity becomes much more common.
+In 2D, it depends strongly on geometry."
+4,Overfit & Underfit,4  - Overfit & Underfit.pptx,25,Shrinkage vs. Sparsity,"Shrinkage vs. Sparsity
+25
+L1 Constraint (Diamond)
+Has sharp corners.
+Contour often becomes tangent at a corner.
+One coefficient becomes exactly zero.
+Produces sparse solutions.
+L2 Constraint (Circle)
+Has smooth boundary.
+Contour becomes tangent on a curved edge.
+Coefficients shrink smoothly.
+Does not produce sparsity."
+4,Overfit & Underfit,4  - Overfit & Underfit.pptx,26,L,"L
+2
+Norm Ball
+L
+1
+Norm Ball
+L
+0
+Norm Ball
+L
+1
++ L
+2
+Norm
+Elastic Net
+Counts number of nonzero parameters
+Directly controls sparsity
+Leads to feature selection
+Combinatorial and hard to optimize
+Encourages many weights to become zero
+Easier to optimize
+Penalizes large weights
+Shrinks parameters smoothly
+Does not produce sparsity
+Combines sparsity and stability
+Requires tuning two hyperparameters
+Contours of the error
+26
+Effect: strongest sparsity control
+Effect: sparse solutions
+Effect: improves stability
+Effect: compromise between L1 and L2"
+4,Overfit & Underfit,4  - Overfit & Underfit.pptx,27,L2 vs. L1 Regularization,"27
+L1: Weights shrink by a constant amount toward 0.
+L2: Weights shrink by an amount which is proportional to w.
+For a weight that has a large magnitude, L1 regularization shrinks the weight much less than L2 regularization does.
+By contrast, when |w| is small, L1 regularization shrinks the weight much more than L2 regularization.
+Summary
+Sparsity: L1 > L2
+Stability: L2 > L1
+Computational complexity: L2 > L1
+L2 vs. L1 Regularization"
+4,Overfit & Underfit,4  - Overfit & Underfit.pptx,28,What Is Dropout?,"What Is Dropout?
+Dropout Rate = 50%
+Dropout for this layer
+Half of neurons removed each iteration.
+28
+Applied only during training
+Dropout reduces overfitting by making the network robust to missing features."
+4,Overfit & Underfit,4  - Overfit & Underfit.pptx,29,Why Does Dropout Work?,"Why Does Dropout Work?
+Why Dropout Reduces Overfitting
+Prevents neurons from relying on specific other neurons.
+Forces each neuron to learn independently useful features
+Acts like training many smaller subnetworks
+Improves generalization
+29"
+4,Overfit & Underfit,4  - Overfit & Underfit.pptx,30,Dropout: Training vs Test,"Dropout: Training vs Test
+Inference with Dropout
+All neurons are active
+We scale activations (or weights) appropriately
+Equivalent to averaging many subnetworks
+30
+Test-time network approximates averaging many subnetworks."
+4,Overfit & Underfit,4  - Overfit & Underfit.pptx,31,How Dropout Reduces Overfitting,"How Dropout Reduces Overfitting
+Learn from partial features
+More iterations required to converge
+Alleviate overfitting
+31"
+4,Overfit & Underfit,4  - Overfit & Underfit.pptx,32,Data augmentation,"Data augmentation
+Flipping
+Color filter
+32
+Increase effective dataset size by:
+Flipping
+Rotation
+Cropping
+Distortion
+Color jitter
+Goal:
+Improve robustness without changing architecture."
+4,Overfit & Underfit,4  - Overfit & Underfit.pptx,33,Data augmentation: More examples,"Data augmentation: More examples
+Distortion
+Patches
+Zooming
+33"
+4,Overfit & Underfit,4  - Overfit & Underfit.pptx,34,Early Stopping,"Early Stopping
+34
+Monitor validation error
+Stop training when it increases
+Prevent overfitting
+Training error ↓
+Validation error ↓ then ↑
+Stop at minimum validation error."
+4,Overfit & Underfit,4  - Overfit & Underfit.pptx,35,Learning Rate,"Learning Rate
+35"
+4,Overfit & Underfit,4  - Overfit & Underfit.pptx,36,Effect of Learning Rate on Convergence,"Effect of Learning Rate on Convergence
+36"
+4,Overfit & Underfit,4  - Overfit & Underfit.pptx,37,Learning Rate Scheduling,"Learning Rate Scheduling
+37
+Keep learning rate high at the beginning → fast progress
+Reduce learning rate later → fine convergence
+Prevent oscillation and improve final accuracy"
+4,Overfit & Underfit,4  - Overfit & Underfit.pptx,38,Recipe for Learning,"Recipe for Learning
+38"
+4,Overfit & Underfit,4  - Overfit & Underfit.pptx,39,Summary: Generalization and Regularization,"Summary: Generalization and Regularization
+Generalization = Controlling Complexity
+Underfit → High Bias
+Overfit → High Variance
+Tools:
+Regularization
+Dropout
+Data Augmentation
+Early Stopping
+Cross Validation
+Goal: Match model complexity to data complexity.
+39"
+5,Modern CNN,5  - Modern CNN.pptx,1,Modern CNN Architecture,"Modern CNN Architecture
+Yifeng Zhu
+Electrical and Computer Engineering
+University of Maine
+1
+From Representation to Optimization to Efficiency"
+5,Modern CNN,5  - Modern CNN.pptx,2,Overview,"Overview
+Part I: Foundations (LeNet →
+AlexNet
+)
+Part II: Depth Hypothesis (VGG)
+Part III: Optimization Crisis
+Part IV: Residual Learning (
+ResNet
+)
+Part V: The Efficiency and Scaling Era
+2
+CNN evolution = solving new constraints at each stage."
+5,Modern CNN,5  - Modern CNN.pptx,3,Evolution of networks,"Evolution of networks
+3
+Evolution of Deep Learning Architectures"
+5,Modern CNN,5  - Modern CNN.pptx,4,Foundation Era Summary (1998–2014),"Foundation Era Summary (1998–2014)
+LeNet (1998): Convolution Works
+Impact: Established Conv → Pool → FC pipeline
+Local receptive fields
+End-to-end backprop
+AlexNet
+(2012): Deep Learning Scales
+Impact: Deep CNNs outperform classical vision methods
+GPU training
+ReLU
+activation
+Dropout regularization
+Data augmentation
+Large-scale ImageNet training
+VGG (2014): Depth Matters
+Impact: Depth significantly improves representation power
+Small 3×3 filters
+Increased depth (16–19 layers)
+Hierarchical feature learning
+4"
+5,Modern CNN,5  - Modern CNN.pptx,5,LeNet-5 (1998): The First Successful CNN,"LeNet-5 (1998): The First Successful CNN
+Problem: Handwritten digit recognition (MNIST)
+70,000 grayscale images
+60,000 training
+10,000 test
+Image size: 28 × 28 pixels
+10 classes: digits 0–9
+Centered and size-normalized handwritten digits
+Used in the original LeNet-5 (1998)
+Standard benchmark for early neural networks
+Paper: Gradient-Based Learning Applied to Document Recognition Yann LeCun, Léon
+Bottou
+, Yoshua Bengio, Patrick Haffner (1998)
+5"
+5,Modern CNN,5  - Modern CNN.pptx,6,LeNet-5 (1998): Why Convolution Works,"LeNet-5 (1998): Why Convolution Works
+Paper: Gradient-Based Learning Applied to Document Recognition Yann LeCun, Léon
+Bottou
+, Yoshua Bengio, Patrick Haffner (1998)
+First practical demonstration of convolutional networks
+Established the CNN design template: Conv → Pool → Conv → Pool → FC
+Foundation for
+AlexNet
+and all modern CNNs
+Key Ideas Introduced
+Local receptive fields
+Weight sharing
+End-to-end gradient training
+Subsampling (early pooling)
+6"
+5,Modern CNN,5  - Modern CNN.pptx,7,AlexNet (2012): Starting Modern Deep Learning,"AlexNet
+(2012): Starting Modern Deep Learning
+7
+ImageNet Classification with Deep Convolutional Neural Networks - Alex
+Krizhevsky
+, Ilya
+Sutskever
+, Geoffrey E. Hinton; 2012
+Why
+AlexNet
+Changed Everything
+First deep CNN to dominate ImageNet
+10%+ absolute Top-5 improvement
+Demonstrated GPU +
+ReLU
++ data scale synergy
+Marked shift from handcrafted features → learned features
+1.2M ImageNet images."
+5,Modern CNN,5  - Modern CNN.pptx,8,AlexNet Architecture (2012): Large-Scale CNN Design,"AlexNet
+Architecture (2012): Large-Scale CNN Design
+Why It Was a Turning Point
+First deep CNN to win ImageNet
+8 learned layers, 60M parameters
+Trained on GPUs (Two GTX 580 GPUs, each with only 3 GB of memory)
+10× performance improvement over classical CV
+8
+What Changed in 2012?
+ReLU
+enabled faster convergence
+Dropout reduced overfitting
+Data augmentation at scale
+Large labeled dataset (ImageNet)"
+5,Modern CNN,5  - Modern CNN.pptx,9,Inside AlexNet: Layer Configuration and Feature Maps,"Inside
+AlexNet
+: Layer Configuration and Feature Maps
+[
+Krizhevsky
+et al
+.,
+2012
+]
+. . .
+227
+×
+227
+×
+3
+55
+×
+55
+×
+9
+6
+27
+×
+27
+×
+96
+27
+×
+27
+×
+256
+13
+×
+13
+×
+256
+13
+×
+13
+×
+384
+13
+×
+13
+×
+384
+13
+×
+13
+×
+256
+6
+×
+6
+×
+256
+11
+×
+11
+s = 4
+P = 0
+3
+×
+3
+s = 2
+max pool
+5
+×
+5
+S = 1
+P = 2
+3
+×
+3
+s = 2
+max pool
+3
+×
+3
+S = 1
+P = 1
+3
+×
+3
+s = 1
+P = 1
+3
+×
+3
+S = 1
+P = 1
+3
+×
+3
+s = 2
+max pool
+conv
+conv
+conv
+conv
+conv
+. . .
+. . .
+9"
+5,Modern CNN,5  - Modern CNN.pptx,10,AlexNet,"DROPOUT =
+0.5
+N_CATEGORY =
+1000
+model_input
+=
+layers.Input
+(shape = (
+227
+,
+227
+,
+3
+))
+# First convolutional Layer (96x11x11)
+z = layers.Conv2D(filters =
+96
+,
+kernel_size
+= (
+11
+,
+11
+), strides = (
+4
+,
+4
+), activation =
+""
+relu
+""
+)(
+model_input
+)
+z = layers.MaxPooling2D(
+pool_size
+= (
+3
+,
+3
+), strides=(
+2
+,
+2
+))(z)
+z =
+layers.BatchNormalization
+()(z)
+# Second convolutional Layer (256x5x5)
+z = layers.ZeroPadding2D(padding = (
+2
+,
+2
+))(z)
+z = layers.Convolution2D(filters =
+256
+,
+kernel_size
+= (
+5
+,
+5
+), strides = (
+1
+,
+1
+), activation =
+""
+relu
+""
+)(z)
+z = layers.MaxPooling2D(
+pool_size
+= (
+3
+,
+3
+), strides=(
+2
+,
+2
+))(z)
+z =
+layers.BatchNormalization
+()(z)
+# Rest 3 convolutional layers
+z = layers.ZeroPadding2D(padding = (
+1
+,
+1
+))(z)
+z = layers.Convolution2D(filters =
+384
+,
+kernel_size
+= (
+3
+,
+3
+), strides = (
+1
+,
+1
+), activation =
+""
+relu
+""
+)(z)
+z = layers.ZeroPadding2D(padding = (
+1
+,
+1
+))(z)
+z = layers.Convolution2D(filters =
+384
+,
+kernel_size
+= (
+3
+,
+3
+), strides = (
+1
+,
+1
+), activation =
+""
+relu
+""
+)(z)
+z = layers.ZeroPadding2D(padding = (
+1
+,
+1
+))(z)
+z = layers.Convolution2D(filters =
+256
+,
+kernel_size
+= (
+3
+,
+3
+), strides = (
+1
+,
+1
+), activation =
+""
+relu
+""
+)(z)
+z = layers.MaxPooling2D(
+pool_size
+= (
+3
+,
+3
+), strides=(
+2
+,
+2
+))(z)
+z =
+layers.Flatten
+()(z)
+z =
+layers.Dense
+(
+4096
+, activation=
+""
+relu
+""
+)(z)
+z =
+layers.Dropout
+(DROPOUT)(z)
+z =
+layers.Dense
+(
+4096
+, activation=
+""
+relu
+""
+)(z)
+z =
+layers.Dropout
+(DROPOUT)(z)
+final_dim
+=
+1
+if
+N_CATEGORY ==
+2
+else
+N_CATEGORY
+final_act
+=
+""sigmoid""
+if
+N_CATEGORY ==
+2
+else
+""
+softmax
+""
+model_output
+=
+layers.Dense
+(
+final_dim
+, activation=
+final_act
+)(z)
+model =
+keras.Model
+(
+model_input
+,
+model_output
+)
+model.summary
+()
+https://colab.research.google.com/drive/1eNWhgg1NMNLJe4d0B7CzKJ8JS9C7WlV4?usp=sharing
+_________________________________________________________________
+Layer (type) Output Shape Param #
+=================================================================
+input (
+InputLayer
+) [(None, 227, 227, 3)] 0
+_________________________________________________________________
+conv2d_15 (Conv2D) (None, 55, 55, 96) 34944
+_________________________________________________________________
+max_pooling2d_9 (MaxPooling2 (None, 27, 27, 96) 0
+_________________________________________________________________
+batch_normalization_6 (Batch (None, 27, 27, 96) 384
+_________________________________________________________________
+zero_padding2d_12 (
+ZeroPaddi
+(None, 31, 31, 96) 0
+_________________________________________________________________
+conv2d_16 (Conv2D) (None, 27, 27, 256) 614656
+_________________________________________________________________
+max_pooling2d_10 (
+MaxPooling
+(None, 13, 13, 256) 0
+_________________________________________________________________
+batch_normalization_7 (Batch (None, 13, 13, 256) 1024
+_________________________________________________________________
+zero_padding2d_13 (
+ZeroPaddi
+(None, 15, 15, 256) 0
+_________________________________________________________________
+conv2d_17 (Conv2D) (None, 13, 13, 384) 885120 ______________________________________________________________
+zero_padding2d_14 (
+ZeroPaddi
+(None, 15, 15, 384) 0
+_________________________________________________________________
+conv2d_18 (Conv2D) (None, 13, 13, 384) 1327488
+_________________________________________________________________
+zero_padding2d_15 (
+ZeroPaddi
+(None, 15, 15, 384) 0
+_________________________________________________________________
+conv2d_19 (Conv2D) (None, 13, 13, 256) 884992
+_________________________________________________________________
+max_pooling2d_11 (
+MaxPooling
+(None, 6, 6, 256) 0
+_________________________________________________________________
+flatten_3 (Flatten) (None, 9216) 0
+_________________________________________________________________
+dense_8 (Dense) (None, 4096) 37752832
+_________________________________________________________________
+dropout_6 (Dropout) (None, 4096) 0
+_________________________________________________________________
+dense_9 (Dense) (None, 4096) 16781312
+_________________________________________________________________
+dropout_7 (Dropout) (None, 4096) 0
+_________________________________________________________________
+dense_10 (Dense) (None, 1000) 4097000
+=================================================================
+Total params: 62,379,752
+Trainable params: 62,379,048
+Non-trainable params: 704
+AlexNet
+10"
+5,Modern CNN,5  - Modern CNN.pptx,11,Simplified AlexNet in PyTorch (Teaching Version),"Simplified
+AlexNet
+in
+PyTorch
+(Teaching Version)
+class
+AlexNet
+(
+nn.Module
+):
+def __
+init
+__(self,
+num_classes
+=1000):
+super(
+AlexNet
+, self).__
+init
+__()
+self.
+features
+=
+nn.Sequential
+(
+nn.
+Conv2d
+(3, 96,
+kernel_size
+=11, stride=4, padding=0),
+nn.
+ReLU
+(
+inplace
+=True),
+nn.
+MaxPool2d
+(
+kernel_size
+=3, stride=2),
+nn.
+Conv2d
+(96, 256,
+kernel_size
+=5, padding=2),
+nn.
+ReLU
+(
+inplace
+=True),
+nn.
+MaxPool2d
+(
+kernel_size
+=3, stride=2),
+)
+self.
+classifier
+=
+nn.Sequential
+(
+nn.
+Dropout
+(0.5),
+nn.
+Linear
+(256 * 6 * 6, 4096),
+nn.
+ReLU
+(
+inplace
+=True),
+nn.
+Dropout
+(0.5),
+nn.
+Linear
+(4096, 4096),
+nn.
+ReLU
+(
+inplace
+=True),
+nn.
+Linear
+(4096,
+num_classes
+),
+)
+def forward(self, x):
+x =
+self.features
+(x)
+x =
+torch.flatten
+(x, 1)
+x =
+self.classifier
+(x)
+return x
+11
+Input: (3, 227, 227) → (96,55,55) → ...→ Output: (1000 classes)
+AlexNet
+Architecture = Feature Extractor (Conv Stack) + Classifier (FC Layers)
+Key Implementation Details
+ReLU
+replaces tanh (faster convergence)
+Dropout = 0.5 for regularization
+No
+BatchNorm
+in original paper
+Final layer outputs logits (
+Softmax
+applied in loss)
+criterion =
+nn.CrossEntropyLoss
+()
+outputs = model(x) # raw logits
+loss = criterion(outputs, labels)
+But for prediction you don’t even need
+softmax
+:
+pred =
+torch.argmax
+(outputs, dim=1)"
+5,Modern CNN,5  - Modern CNN.pptx,12,Modernized AlexNet-Style CNN (Simplified),"Modernized
+AlexNet
+-Style CNN (Simplified)
+class
+AlexNet
+(
+nn.Module
+):
+def __
+init
+__(self,
+num_classes
+=1000):
+super(
+AlexNet
+, self).__
+init
+__()
+self.features
+=
+nn.Sequential
+(
+# Block 1
+nn.Conv2d(3, 64,
+kernel_size
+=3
+, stride=2, padding=1),
+nn.BatchNorm2d(64),
+nn.ReLU
+(
+inplace
+=True),
+nn.MaxPool2d(2),
+# Block 2
+nn.Conv2d(64, 128,
+kernel_size
+=3,
+padding=1),
+nn.BatchNorm2d(128),
+nn.ReLU
+(
+inplace
+=True),
+nn.MaxPool2d(2),
+)
+# Global Average Pooling
+self.
+global_pool
+= nn.
+AdaptiveAvgPool2d
+((1, 1))
+# Small classifier
+self.classifier
+=
+nn.Linear
+(128,
+num_classes
+)
+def forward(self, x):
+x =
+self.features
+(x)
+x =
+self.global_pool
+(x)
+x =
+torch.flatten
+(x, 1)
+x =
+self.classifier
+(x)
+return x
+12
+AlexNet
+was groundbreaking in 2012, but we would not build it the same way now.
+Improvements:
+Add
+BatchNorm
+Stabilizes training
+Allows higher learning rates
+Stabilizes intermediate activation distributions during training → Makes optimization easier and faster
+Replace FC layers with
+Global Average Pooling (GAP)
+Massive parameter reduction
+Less overfitting
+Better spatial invariance
+Use smaller kernels (VGG style)"
+5,Modern CNN,5  - Modern CNN.pptx,13,Global Average Pooling (GAP),"Global Average Pooling (GAP)
+13
+Intuition:
+Each channel detects something:
+Channel 1 → wheels
+Channel 2 → windows
+Channel 3 → edges
+…
+Global average pooling asks:
+How strongly did this feature appear anywhere in the image?
+Why This Works
+Each channel represents a semantic detector
+GAP measures global presence strength
+Eliminates 100M+ FC parameters (VGG)
+Improves translation robustness"
+5,Modern CNN,5  - Modern CNN.pptx,14,Global Average Pooling Enables Variable Input Size,"Global Average Pooling Enables Variable Input Size
+14
+Why This Matters
+Works with different image resolutions
+Removes fixed 7×7 constraint (unlike VGG)
+Eliminates need for flattening
+Makes the network fully convolutional
+Global Average Pooling decouples classification from spatial resolution."
+5,Modern CNN,5  - Modern CNN.pptx,15,Batch Normalization,"Batch Normalization
+15
+In CNNs, normalization is performed independently per channel, using statistics aggregated over batch and spatial dimensions (B × H × W).
+BatchNorm
+in Fully Connected Layers (B, D)
+BatchNorm
+in Convolutional Layers (B, C, H, W)"
+5,Modern CNN,5  - Modern CNN.pptx,16,Overview,"Overview
+Part I: Foundations (LeNet →
+AlexNet
+)
+Part II: Depth Hypothesis (VGG)
+Part III: Optimization Crisis
+Part IV: Residual Learning (
+ResNet
+)
+Part V: The Efficiency and Scaling Era
+16
+CNN evolution = solving new constraints at each stage."
+5,Modern CNN,5  - Modern CNN.pptx,17,Depth vs. Width in Neural Networks,"Depth vs. Width in Neural Networks
+What Does “
+Deep
+” Mean?
+More layers → More hierarchical feature composition
+Example: Edge → texture → part → object
+Enables
+feature reuse
+Builds
+compositional structure
+Often more parameter-efficient
+Encourages hierarchical abstraction
+17
+What Does “
+Wide
+” Mean?
+More neurons per layer
+→ Larger feature subspace at each stage
+Increases raw capacity
+Captures diverse features at same level
+Less hierarchical structure
+Key Inputs
+Depth builds structure
+Width builds capacity
+Modern architectures combine both
+Larger feature space per layer"
+5,Modern CNN,5  - Modern CNN.pptx,18,Why Depth Matters in Practice,"Why Depth Matters in Practice
+Universal Approximation Theorem:
+A single hidden layer can approximate any continuous function given sufficient width.
+BUT:
+May require exponentially many neurons
+Lacks structured hierarchical representation
+Poor parameter efficiency
+Expressivity ≠ Efficiency.
+Depth = structured efficiency
+18"
+5,Modern CNN,5  - Modern CNN.pptx,19,Real-World Vision Is Hierarchical,"Real-World Vision Is Hierarchical
+Natural images have structure
+Visual recognition builds progressively:
+signals → structure → semantics
+Pixels
+Edges
+Textures
+(Recurring patterns of pixels or edges that convey surface qualities)
+Parts
+(Combinations of edges and textures)
+Objects
+Depth mirrors this compositional structure.
+If vision is hierarchical, increasing depth should improve representation power.
+19"
+5,Modern CNN,5  - Modern CNN.pptx,20,From AlexNet to VGG: Testing the Depth Hypothesis,"From
+AlexNet
+to VGG: Testing the Depth Hypothesis
+In
+2012
+:
+AlexNet
+(8 layers) proved deep CNNs work.
+Key Question:
+If 8 layers work… will 16 or 19 work better?
+VGG (Oxford, 2014):
+Research group name: Visual Geometry Group
+Push depth aggressively
+Keep architecture simple
+Use small filters (3×3 only)
+Systematically test depth
+20
+VGG: Keep It Deep. Keep It Simple."
+5,Modern CNN,5  - Modern CNN.pptx,21,VGG (2014): Depth as a Design Principle,"AlexNet
+VGG16
+VGG19
+Core Philosophy:
+Stack small 3×3 convolutions
+Increase depth systematically (16–19 layers)
+Keep design uniform and simple
+Why 3×3 only?
+Same receptive field as larger filters when stacked
+More nonlinearities
+Fewer parameters
+Stronger hierarchical representation
+Key Result:
+7.3% Top-5 error (ILSVRC 2014)
+Established depth as dominant paradigm
+VGG (2014): Depth as a Design Principle
+8 layers
+16
+layers
+19
+layers
+21"
+5,Modern CNN,5  - Modern CNN.pptx,22,conv,"conv
+conv
+conv
+One 7×7 convolution:
+Large parameter count
+One nonlinear activation
+Receptive Field
+22
+Three 3×3 convolutions:
+Same effective receptive field
+More nonlinearities (
+ReLU
+after each layer)
+Fewer parameters
+Deeper representation
+Key Insight: Depth increases expressive power without exploding parameters."
+5,Modern CNN,5  - Modern CNN.pptx,23,VGG 16,"VGG 16
+[
+Simonyan
+and Zisserman, 2014]
+23"
+5,Modern CNN,5  - Modern CNN.pptx,24,VGG 16,"VGG
+16
+Input
+3x3 conv, 64
+3x3 conv, 64
+Pool 1/2
+3x3 conv, 128
+3x3 conv, 128
+Pool 1/2
+3x3 conv, 256
+3x3 conv, 256
+3x3 conv, 256
+Pool 1/2
+3x3 conv, 512
+3x3 conv, 512
+3x3 conv, 512
+Pool 1/2
+3x3 conv, 512
+3x3 conv, 512
+3x3 conv, 512
+Pool 1/2
+FC 4096
+FC 4096
+FC 1000
+Softmax
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+24"
+5,Modern CNN,5  - Modern CNN.pptx,25,Where Does VGG Spend Memory and Parameters?,"Input memory: 224*224*3=150K
+params
+: 0
+3x3 conv, 64 memory: 224*224*64=3.2M
+params
+: (3*3*3)*64 = 1,728
+3x3 conv, 64 memory: 224*224*64=3.2M
+params
+: (3*3*64)*64 = 36,864
+Pool memory: 112*112*64=800K
+params
+: 0
+3x3 conv, 128 memory: 112*112*128=1.6M
+params
+: (3*3*64)*128 = 73,728
+3x3 conv, 128 memory: 112*112*128=1.6M
+params
+: (3*3*128)*128 = 147,456
+Pool memory: 56*56*128=400K
+params
+: 0
+3x3 conv, 256 memory: 56*56*256=800K
+params
+: (3*3*128)*256 = 294,912
+3x3 conv, 256 memory: 56*56*256=800K
+params
+: (3*3*256)*256 = 589,824
+3x3 conv, 256 memory: 56*56*256=800K
+params
+: (3*3*256)*256 = 589,824
+Pool memory: 28*28*256=200K
+params
+: 0
+3x3 conv, 512 memory: 28*28*512=400K
+params
+: (3*3*256)*512 = 1,179,648
+3x3 conv, 512 memory: 28*28*512=400K
+params
+: (3*3*512)*512 = 2,359,296
+3x3 conv, 512 memory: 28*28*512=400K
+params
+: (3*3*512)*512 = 2,359,296
+Pool memory: 14*14*512=100K
+params
+: 0
+3x3 conv, 512 memory: 14*14*512=100K
+params
+: (3*3*512)*512 = 2,359,296
+3x3 conv, 512 memory: 14*14*512=100K
+params
+: (3*3*512)*512 = 2,359,296
+3x3 conv, 512 memory: 14*14*512=100K
+params
+: (3*3*512)*512 = 2,359,296
+Pool memory: 7*7*512=25K
+params
+: 0
+FC 4096 memory: 4096
+params
+: 7*7*512*4096 = 102,760,448
+FC 4096 memory: 4096
+params
+: 4096*4096 = 16,777,216
+FC 1000 memory: 1000
+params
+: 4096*1000 = 4,096,000
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+TOTAL memory: 24M * 4 bytes ~= 96MB / image, TOTAL
+params
+: 138M parameters
+Where Does VGG Spend Memory and Parameters?
+25
+Early layers:
+Most memory (large spatial maps)
+Most computation
+Late FC layers:
+Account for ~120M of 138M parameters.
+VGG is deep but inefficient
+Fully connected layers dominate parameters
+Motivation for Global Average Pooling"
+5,Modern CNN,5  - Modern CNN.pptx,26,Depth Enables Structured Feature Reuse,"Depth Enables Structured Feature Reuse
+What Happens When We Stack 3×3 Convolutions?
+Each layer builds on previous features:
+Layer 1 → Edges
+Layer 2 → Patterns
+Layer 3 → Parts
+Layer 4 → Objects
+Why This Matters:
+Reuses lower-level representations
+Builds compositional abstractions
+More nonlinear transformations
+Exponential representational efficiency
+Depth is structured reuse, not just stacking layers.
+26
+A deep network does not relearn edges at every layer; it builds increasingly abstract representations from them."
+5,Modern CNN,5  - Modern CNN.pptx,27,Overview,"Overview
+Part I: Foundations (LeNet →
+AlexNet
+)
+Part II: Depth Hypothesis (VGG)
+Part III: Optimization Crisis
+Part IV: Residual Learning (
+ResNet
+)
+Part V: The Efficiency and Scaling Era
+27
+CNN evolution = solving new constraints at each stage."
+5,Modern CNN,5  - Modern CNN.pptx,28,Is Deeper Always Better?,"Is Deeper Always Better?
+28
+VGG showed:
+Increasing depth improves performance.
+But:
+What happens if we keep stacking layers?"
+5,Modern CNN,5  - Modern CNN.pptx,29,Degradation Problem in Deep Networks,"Degradation Problem in Deep Networks
+Empirical Observation:
+56
+-
+layer
+model
+performs worse on both training and test
+error
+.
+29
+Both training and test error increase → Not overfitting"
+5,Modern CNN,5  - Modern CNN.pptx,30,Why Is This Surprising?,"Why Is This Surprising?
+30
+But in practice:
+It fails.
+Root Cause:
+optimization
+, not representation.
+Representation power ↑
+Optimization difficulty ↑
+Deeper networks suffer from:
+Vanishing gradients
+Exploding gradients
+Degradation problem
+Even if a good solution exists, SGD cannot find it.
+Shallow Network
+Identity
+output
+input
+Identity
+Identity"
+5,Modern CNN,5  - Modern CNN.pptx,31,Why Gradients Vanish,"Why Gradients Vanish
+The loss depends on the final layer.
+Consider a deep network:
+h
+(1)
+=
+𝑓
+1
+(
+𝑊
+(1)
+𝑥
+)
+h
+(2)
+=
+𝑓
+2
+(
+𝑊
+(
+2
+)
+h
+(1)
+)
+h
+(3)
+=
+𝑓
+3
+(
+𝑊
+(
+3
+)
+h
+(
+2
+)
+)
+⋯
+h
+(
+𝑛
+)
+=
+𝑓
+𝑛
+(
+𝑊
+(
+𝑛
+)
+h
+(
+𝑛
+−1)
+)
+𝐿
+=
+𝑙
+(
+h
+(
+𝑛
+)
+)
+Apply Chain Rule:
+Deep → gradient disappears → Lower layers stop learning.
+We update weights via:"
+5,Modern CNN,5  - Modern CNN.pptx,32,Gradients Exploding,"Gradients Exploding
+Apply Chain Rule:
+We update weights via:
+Depth increases representational power, but multiplies many gradient terms — making optimization unstable.
+The loss depends on the final layer.
+Consider a deep network:
+h
+(
+1
+)
+=
+𝑓
+1
+(
+𝑊
+(
+1
+)
+𝑥
+)
+h
+(
+2
+)
+=
+𝑓
+2
+(
+𝑊
+(
+2
+)
+h
+(
+1
+)
+)
+h
+(
+3
+)
+=
+𝑓
+3
+(
+𝑊
+(
+3
+)
+h
+(
+2
+)
+)
+⋯
+h
+(
+𝑛
+)
+=
+𝑓
+𝑛
+(
+𝑊
+(
+𝑛
+)
+h
+(
+𝑛
+−
+1
+)
+)
+𝐿
+=
+𝑙
+(
+h
+(
+𝑛
+)
+)"
+5,Modern CNN,5  - Modern CNN.pptx,33,Optimization vs Representation,"Optimization vs Representation
+Representation power increases with depth.
+Optimization difficulty also increases.
+Even if a better solution exists, SGD cannot reach it.
+That’s the key insight.
+33"
+5,Modern CNN,5  - Modern CNN.pptx,34,Overview,"Overview
+Part I: Foundations (LeNet →
+AlexNet
+)
+Part II: Depth Hypothesis (VGG)
+Part III: Optimization Crisis
+Part IV: Residual Learning (
+ResNet
+)
+Part V: The Efficiency and Scaling Era
+34
+CNN evolution = solving new constraints at each stage."
+5,Modern CNN,5  - Modern CNN.pptx,35,Can We Make Deep Networks Easier to Optimize?,"Can We Make Deep Networks Easier to Optimize?
+35
+If identity is optimal → F(x) = 0 is easy
+Plain Block
+Conv
+Conv
+ReLU
+𝑥
+𝐻
+𝑥
+Residual Block
+Conv
+Conv
+ReLU
+𝑥
+𝐻
+𝑥
++
+𝐹
+𝑥
+𝑥
+Learning small residual corrections is easier than learning full transformations.
+Instead of learning:
+Learn:
+Thus:
+Direct gradient highway"
+5,Modern CNN,5  - Modern CNN.pptx,36,ResNet (2015): Making Depth Trainable,"shallow
+8
+layers
+8
+layers
+19
+layers
+22
+layers
+152
+layers
+152
+layers
+152
+layers
+36
+Deep Residual Learning for Image Recognition - Kaiming He, Xiangyu Zhang, Shaoqing Ren, Jian Sun; 2015
+ResNet
+(2015): Making Depth Trainable
+152 layers (ImageNet)
+Introduced residual learning
+Solved degradation problem
+Enabled very deep optimization
+Depth was no longer limited by optimization."
+5,Modern CNN,5  - Modern CNN.pptx,37,ResNet Architecture,"ResNet
+Architecture
+37
+Architecture Pattern
+Initial conv (7×7, stride 2)
+Residual block stacks
+Downsample
+between stages
+Global average pooling
+Final FC layer
+Scaling Depth
+ResNet-18
+ResNet-34
+ResNet-50 (uses bottleneck blocks)
+ResNet-101
+ResNet-152"
+5,Modern CNN,5  - Modern CNN.pptx,38,Why ResNet Works,"Why
+ResNet
+Works
+Li et al. Visualizing the Loss Landscape of Neural Nets, NIPS 2018,
+38
+Skip connection provides direct gradient path
+Mitigates vanishing gradients
+Smooths loss landscape
+Identity mapping is easy to learn
+Enables 100+ layer training"
+5,Modern CNN,5  - Modern CNN.pptx,39,ResNet’s Impact,"ResNet’s
+Impact
+Established residual connections as a core design principle
+Inspired
+DenseNet
+,
+EfficientNet
+, Inception-
+ResNet
+Foundation of modern vision backbones
+39"
+5,Modern CNN,5  - Modern CNN.pptx,40,Summary of CNN Design Principles,"Summary of CNN Design Principles
+40
+Modern CNNs succeed by balancing representation power, optimization stability, and computational efficiency.
+Representation
+Optimization
+Efficiency
+Convolution exploits spatial locality
+Residual connections enable deep training
+Factorized convolutions reduce FLOPs
+Depth builds hierarchical abstraction
+BatchNorm
+stabilizes gradients
+Global Average Pooling removes heavy FC layers
+Small filters improve expressive power
+Identity mappings ease optimization
+Compound scaling balances depth, width, resolution"
+5,Modern CNN,5  - Modern CNN.pptx,41,Overview,"Overview
+Part I: Foundations (LeNet →
+AlexNet
+)
+Part II: Depth Hypothesis (VGG)
+Part III: Optimization Crisis
+Part IV: Residual Learning (
+ResNet
+)
+Part V: The Efficiency and Scaling Era
+41
+CNN evolution = solving new constraints at each stage."
+5,Modern CNN,5  - Modern CNN.pptx,42,CNN Design Evolution Pattern,"CNN Design Evolution Pattern
+LeNet → Feature Learning
+Introduced convolution, weight sharing, and end-to-end gradient learning
+AlexNet
+→ Scale
+Demonstrated deep CNNs succeed with GPUs,
+ReLU
+, and large datasets
+VGG → Depth
+Showed stacking small filters and increasing layers improves representation
+ResNet
+→ Optimization
+Enabled very deep networks using residual connections and stable gradients
+Modern CNNs → Efficiency + Stability
+Design for high accuracy per FLOP with scalable, hardware-aware architectures
+42"
+5,Modern CNN,5  - Modern CNN.pptx,43,Why Optimization Was Not the End,"Why Optimization Was Not the End
+ResNet
+made depth trainable.
+But new constraints emerged:
+Mobile devices
+Real-time inference
+Edge deployment
+Energy limits
+Memory bandwidth limits
+New objective: Max Accuracy per FLOP
+43
+Modern CNN design = Representation + Optimization + Efficiency"
+5,Modern CNN,5  - Modern CNN.pptx,44,Computation in Convolution,"Computation in Convolution
+44
+Parameter counts:
+Total computation cost (FLOPs):
+Key observation:
+Channel mixing is expensive.
+Large spatial kernels are expensive.
+Fully connected layers were already removed (GAP).
+Question:
+Can we separate spatial filtering from channel mixing?
+For a standard convolution:"
+5,Modern CNN,5  - Modern CNN.pptx,45,The Problem: What Kernel Size Should We Use?,"The Problem: What Kernel Size Should We Use?
+Before Inception:
+Large kernel → large receptive field
+Small kernel → lower cost
+No clear answer
+Observation:
+Objects appear at multiple spatial scales.
+Question:
+Can we let the network choose the scale?
+45"
+5,Modern CNN,5  - Modern CNN.pptx,46,Inception: Multi-Scale Parallel Design,"Inception: Multi-Scale Parallel Design
+Instead of choosing one kernel size:
+Run multiple branches in parallel:
+1×1
+3×3
+5×5
+Pooling
+Then concatenate outputs along channels.
+Key insight:
+Multi-scale feature extraction within a single layer.
+This increases representational diversity without increasing depth.
+46"
+5,Modern CNN,5  - Modern CNN.pptx,47,1×1 Convolution as a Bottleneck,"1×1 Convolution as a Bottleneck
+Problem:
+5×5 convolution is expensive:
+Solution:
+Reduce channels first using 1×1:
+Then apply 5×5:
+47
+Interpretation:
+1×1 convolution performs channel compression before expensive spatial filtering.
+This is the real efficiency trick.
+If
+Computation drops dramatically."
+5,Modern CNN,5  - Modern CNN.pptx,48,Inception = Parallel Branches + Channel Concatenation,"Inception = Parallel Branches + Channel Concatenation
+48
+We compute multiple transformations in parallel:
+1×1
+3×3
+5×5
+Pooling
+Then concatenate along the channel dimension
+Why Concatenation?
+Preserves information from all scales
+Increases feature diversity
+Expands width without increasing depth
+Key idea:
+Inception increases representational capacity by widening the network intelligently."
+5,Modern CNN,5  - Modern CNN.pptx,49,Inception V2: Factorizing Large Kernels,"Inception V2: Factorizing Large Kernels
+Replace 5×5 with Two 3×3
+Original Inception Module
+Additional benefits:
+Two nonlinearities instead of one
+Deeper representation
+Better regularization
+Key insight: Large receptive fields can be built from smaller kernels more efficiently."
+5,Modern CNN,5  - Modern CNN.pptx,50,Inception V2: Asymmetric Factorization,"Inception V2: Asymmetric Factorization
+factorize
+convolutions of filter size
+nxn
+to a
+combination
+of
+1xn and nx1
+convolutions.
+Interpretation:
+Separate horizontal and vertical filtering.
+Architectural principle:
+Spatial filtering can be decomposed without losing receptive field size.
+Efficiency comes from structural factorization, not just making networks smaller."
+5,Modern CNN,5  - Modern CNN.pptx,51,MobileNet (2017): Accuracy Under Constraint,"MobileNet
+(2017): Accuracy Under Constraint
+ResNet
+solved optimization.
+New question: How do we maximize accuracy per FLOP?
+Target environments:
+Mobile devices
+Edge computing
+Real-time inference
+Low-power hardware
+Core idea: Use
+depthwise
+separable convolution everywhere
+51"
+5,Modern CNN,5  - Modern CNN.pptx,52,Depthwise Separable Convolution,"Depthwise
+Separable Convolution
+Standard convolution:
+52
+Depthwise
+separable convolution:
+MobileNet
+= Efficiency through structural factorization.
+Not:
+Deeper
+Wider
+Bigger
+But: Smarter convolution."
+5,Modern CNN,5  - Modern CNN.pptx,53,DenseNet (2017): Every Layer Connects to All Previous Layers,"DenseNet
+(2017): Every Layer Connects to All Previous Layers
+53
+Concatenate output of a layer to all successive layers
+ResNet
+:
+DenseNet
+:
+Key difference:
+ResNet
+→ additive reuse
+DenseNet
+→ concatenative reuse
+[⋅] = channel-wise concatenation
++ = element-wise addition
+Same number of channels
+Element-wise addition
+Features are blended (combined by summation)
+Earlier representations are modified, not explicitly preserved
+Number of channels increases
+Channel-wise concatenation
+All previous features are explicitly preserved
+Representation grows over depth
+ResNet
+= refinement
+DenseNet
+= accumulation"
+5,Modern CNN,5  - Modern CNN.pptx,54,DenseNet: Why Concatenation?,"DenseNet
+: Why Concatenation?
+Each layer receives:
+Raw input
+Low-level edges
+Mid-level textures
+High-level parts
+All previous representations are preserved.
+Benefits:
+Strong gradient flow
+No feature overwriting
+Encourages feature reuse
+Improves parameter efficiency
+Interpretation:
+DenseNet
+eliminates redundant relearning.
+54"
+5,Modern CNN,5  - Modern CNN.pptx,55,DenseNet: Growth Rate Concept,"DenseNet
+: Growth Rate Concept
+55"
+5,Modern CNN,5  - Modern CNN.pptx,56,Why DenseNet Improves Gradient Flow,"Why
+DenseNet
+Improves Gradient Flow
+Because:
+Path length from layer
+L
+to output is 1 via concatenation.
+There are short paths from:
+Any early layer → output.
+This mitigates vanishing gradients even more strongly than
+ResNet
+.
+ResNet
+: Gradient flows through addition.
+DenseNet
+: Gradient flows through direct concatenation paths.
+56"
+5,Modern CNN,5  - Modern CNN.pptx,57,Why DenseNet Can Use Fewer Parameters,"Why
+DenseNet
+Can Use Fewer Parameters
+Intuition:
+In
+ResNet
+:
+Features may be re-learned
+Information gets overwritten
+In
+DenseNet
+:
+Earlier features are preserved
+Later layers reuse instead of recompute
+This reduces redundancy.
+Even though channel count grows,
+each layer has small width (growth rate k).
+57"
+5,Modern CNN,5  - Modern CNN.pptx,58,DenseNet: Summary,"DenseNet
+: Summary
+VGG: No explicit
+reuse
+ResNet
+: Additive
+reuse
+DenseNet
+:
+Concatenative
+reuse
+Maximizes feature reuse.
+58
+DenseNet
+contributes:
+Direct layer-to-layer connections
+Linear feature growth (growth rate k)
+Strong gradient flow
+Reduced redundancy
+Improved parameter efficiency
+DenseNet
+extends the idea of residual learning into full feature preservation."
+5,Modern CNN,5  - Modern CNN.pptx,59,How Should We Scale CNNs?,"How Should We Scale CNNs?
+After
+MobileNet
+, we can make networks:
+Deeper
+Wider
+Higher resolution
+But how should we scale?
+59
+Naive strategies:
+Only increase depth
+Only increase width
+Only increase input resolution
+Empirical observation: Unbalanced scaling wastes computation
+Depth
+= number of layers
+Width
+= number of channels per layer.
+Resolution
+= input image size."
+5,Modern CNN,5  - Modern CNN.pptx,60,Why Naive Scaling Fails,"Why Naive Scaling Fails
+If we increase:
+Depth only:
+More abstraction
+But bottlenecked by narrow layers
+Width only:
+More capacity
+But shallow feature hierarchy
+Resolution only:
+More spatial detail
+But insufficient representational power
+Scaling one dimension alone leads to diminishing returns.
+60"
+5,Modern CNN,5  - Modern CNN.pptx,61,"Compound Scaling: Scaling Depth, Width, and Resolution Together","Compound Scaling: Scaling Depth, Width, and Resolution Together
+EfficientNet
+proposes:
+Scale all dimensions together:
+61
+Subject to:
+Why squared terms?
+Depth → linear
+Width → quadratic (affects input & output channels)
+Resolution → quadratic (affects spatial area)
+Balanced growth prevents representational bottlenecks.
+Balanced growth prevents representational bottlenecks."
+5,Modern CNN,5  - Modern CNN.pptx,62,EfficientNet Backbone: MBConv Blocks with SE and Swish,"EfficientNet
+Backbone:
+MBConv
+Blocks with SE and Swish
+62
+EfficientNet
+is not a new convolution.
+It is a carefully engineered combination of expansion, attention, and smooth activation.
+MBConv
+Blocks
+1×1 expansion
+Depthwise
+convolution
+1×1 projection
+Residual connection (if shape matches)
+Squeeze-and-Excitation (SE) Blocks
+Channel attention
+Lightweight
+Adaptive feature recalibration
+Three Core Components:
+EfficientNet
+= architectural synergy, not a single innovation."
+5,Modern CNN,5  - Modern CNN.pptx,63,Swish Activation,"Swish Activation
+Swish is non-monotonic and smooth, unlike
+ReLU’s
+hard threshold, which can improve gradient flow.
+For trivial tasks with simple networks, the benefit of richer activation modeling is limited.
+63"
+5,Modern CNN,5  - Modern CNN.pptx,64,MBConv: Mobile Inverted Bottleneck Convolution,"MBConv
+: Mobile Inverted Bottleneck Convolution
+64
+Why “Inverted”?
+Traditional bottleneck (
+ResNet
+):
+Compress → Conv → Expand
+MBConv
+:
+Expand →
+Depthwise
+→ Compress"
+5,Modern CNN,5  - Modern CNN.pptx,65,Squeeze-and-Excitation (SE): Channel Attention Mechanism,"Squeeze-and-Excitation (SE): Channel Attention Mechanism
+65
+Step 1: Squeeze (Global Context)
+Produces one scalar per channel.
+Step 2: Excitation (Learn Channel Importance)
+Small MLP:
+Outputs channel weights in (0,1).
+Step 3 — Reweight
+Important channels amplified.
+Less useful channels suppressed.
+Why SE Matters
+Adds adaptive feature selection
+Minimal computational overhead
+Improves accuracy significantly"
+5,Modern CNN,5  - Modern CNN.pptx,66,EfficientNet Family,"EfficientNet
+Family
+EfficientNet-B0 → B7
+Same architecture pattern
+Scaled using compound coefficient 𝜙
+Example trend:
+B0 → baseline
+B1 → slightly deeper/wider/higher resolution
+...
+B7 → much larger but balanced
+66"
+5,Modern CNN,5  - Modern CNN.pptx,67,Modern CNN Design Principles,"Modern CNN Design Principles
+From 1998 → Now:
+Convolution exploits structure
+Depth builds hierarchy
+Residual connections enable optimization
+BatchNorm
+stabilizes training
+Global pooling reduces parameters
+Factorization reduces computation
+Compound scaling balances capacity
+67
+Modern CNNs are optimized computational systems balancing representation, optimization, and hardware efficiency."
+5,Modern CNN,5  - Modern CNN.pptx,68,CNN Evolution,"CNN Evolution
+LeNet → Feature Learning
+AlexNet
+→ Scale
+VGG → Depth
+ResNet
+→ Optimization
+MobileNet
+→ Efficiency
+EfficientNet
+→ Scalable Efficiency
+Modern networks optimize:
+Representation
+Optimization
+Computation
+Deployment
+68"
+5,Modern CNN,5  - Modern CNN.pptx,69,Modern Objective Function,"Modern Objective Function
+Old goal:
+Modern goal:
+Deep learning moved from pure theory
+to
+Systems engineering.
+69"
+6,Segmentation,6  - Segmentation.pptx,1,"Semantic Segmentation
+From Classification to Pixel-Level Prediction","Semantic Segmentation
+From Classification to Pixel-Level Prediction
+Yifeng Zhu
+Electrical and Computer Engineering
+University of Maine
+1"
+6,Segmentation,6  - Segmentation.pptx,2,What is Semantic Segmentation?,"What is Semantic Segmentation?
+2
+Pixel-wise Multi-Class Classification
+For each pixel:
+Loss:
+Input: H × W × 3
+Output: H × W × K"
+6,Segmentation,6  - Segmentation.pptx,3,Why Sliding Windows Fail?,"Why Sliding Windows Fail?
+Problems with Sliding Window
+Massive redundant computation
+Overlapping regions recomputed
+Extremely inefficient in backpropagation
+3"
+6,Segmentation,6  - Segmentation.pptx,4,Better Approach,"Better Approach
+4
+Run one network on the whole image and predict all pixels in a single forward pass."
+6,Segmentation,6  - Segmentation.pptx,5,Fully Convolutional Inference,"Fully Convolutional Inference
+Fully Convolutional Inference
+Entire image processed at once
+Shared computation
+Dense output K × H × W
+K x H x W
+5"
+6,Segmentation,6  - Segmentation.pptx,6,From Image Classification to Semantic Segmentation,"“tabby cat”
+6
+From Image Classification to Semantic Segmentation
+use pooling layers to
+downsample
+input images"
+6,Segmentation,6  - Segmentation.pptx,7,Becoming fully convolutional,"7
+Becoming fully convolutional
+Turn the FC layers into 1×1 convolutional layers"
+6,Segmentation,6  - Segmentation.pptx,8,Becoming fully convolutional,"8
+Becoming fully convolutional
+Keep a coarse spatial grid in the output."
+6,Segmentation,6  - Segmentation.pptx,9,Upsampling output,"9
+Upsampling output
+Upsample
+back toward the input resolution."
+6,Segmentation,6  - Segmentation.pptx,10,"End-to-end, pixels-to-pixels network","10
+End-to-end, pixels-to-pixels network"
+6,Segmentation,6  - Segmentation.pptx,11,"end-to-end, pixels-to-pixels network","conv, pool,
+nonlinearity
+upsampling
+pixelwise
+output + loss
+end-to-end, pixels-to-pixels network
+11"
+6,Segmentation,6  - Segmentation.pptx,12,Fully Convolutional Network,"Fully Convolutional Network
+H x W x K
+12
+An
+encoder
+compresses the image into semantic features.
+A
+decoder
+upsamples those features back to pixel resolution.
+The loss is applied directly to the output segmentation map.
+This turns segmentation into one trainable network instead of a pipeline of separate stages."
+6,Segmentation,6  - Segmentation.pptx,13,Downsampling in CNNs,"Downsampling
+in CNNs
+padding = 1, strides = 2
+Max pooling
+13
+4×4 → 2×2"
+6,Segmentation,6  - Segmentation.pptx,14,"end-to-end, pixels-to-pixels network","end-to-end, pixels-to-pixels network
+14"
+6,Segmentation,6  - Segmentation.pptx,15,U-NET Architecture,"Input
+image
+U-NET Architecture
+http://deeplearning.net/software/theano/tutorial/conv_arithmetic.html
+Output segmentation map
+(here 2 classes)
+background and foreground
+15"
+6,Segmentation,6  - Segmentation.pptx,16,U-NET Architecture,"Input
+image
+U-NET Architecture
+http://deeplearning.net/software/theano/tutorial/conv_arithmetic.html
+16
+Why U-Net works
+Contracting path: capture context and semantics.
+Skip connections: pass high-resolution detail forward.
+Expanding path: recover pixel-level localization.
+Typical use
+Especially effective when boundaries matter and training data is limited, including biomedical imaging."
+6,Segmentation,6  - Segmentation.pptx,17,Downsampling: Reducing Spatial Resolution,"Downsampling
+: Reducing Spatial Resolution
+Strided
+Convolution
+Pooling
+17
+Non-learnable
+Aggregation
+Learnable
+Feature extraction + reduction"
+6,Segmentation,6  - Segmentation.pptx,18,Three Ways to Up-sample,"Three Ways to Up-sample
+18
+Method
+How it works
+Learnable
+Typical Effect
+Main Issue
+Nearest
+Copy pixels
+No
+Blocky edges
+Staircase artifacts
+Bilinear
+Interpolate neighbors
+No
+Smooth edges
+Blur boundaries
+Transposed Conv
+Insert zeros + convolve
+Yes
+Sharp details
+Checkerboard artifacts
+Goal: Recover spatial resolution after down-sampling
+Input: H/2 × W/2 × C → Output: H × W × C
+Fixed interpolation methods restore size.
+Transposed convolution learns how to restore structure.
+Nearest
+Copies pixels directly. Fast and simple, but edges can look blocky.
+Bilinear
+Interpolates neighboring values. Smoother than nearest, but may blur boundaries.
+Transposed conv
+Inserts zeros and learns how to convolve. Sharp and flexible, but can create checkerboard artifacts."
+6,Segmentation,6  - Segmentation.pptx,19,Unpooling Methods: Nearest Neighbor vs. Bed of Nails,"Unpooling
+Methods: Nearest Neighbor vs. Bed of Nails
+19
+Replicate each pixel into a
+k×k
+block
+Dense output
+No zeros inserted
+Not learnable
+Produces blocky edges
+Insert zeros between pixels
+Sparse output
+Creates space for convolution
+Not learnable by itself
+Used before transposed convolution
+Nearest copies values
+Bed of nails inserts space for learning"
+6,Segmentation,6  - Segmentation.pptx,20,Unpooling Using Pooling Indices,"Unpooling
+Using Pooling Indices
+20
+Use the positions (argmax indices) from the pooling layer to restore spatial structure"
+6,Segmentation,6  - Segmentation.pptx,21,Up-Sampling in Practice (PyTorch),"Up-Sampling in Practice (
+PyTorch
+)
+21
+import
+torch.nn.functional
+as F
+# Nearest
+y =
+F.
+interpolate
+(x,
+scale_factor
+=2,
+mode=
+'nearest'
+)
+# Bilinear
+y =
+F.
+interpolate
+(x,
+scale_factor
+=2,
+mode=
+'bilinear’
+,
+align_corners
+=False)
+Interpolation-Based Up-sampling (Non-Learnable)
+Characteristics
+No learnable parameters
+Fast
+Often followed by Conv layer"
+6,Segmentation,6  - Segmentation.pptx,22,Up-Sampling in Practice (PyTorch),"Up-Sampling in Practice (
+PyTorch
+)
+22
+import
+torch.nn
+as
+nn
+upsample
+= nn.
+ConvTranspose2d
+(
+in_channels
+=64,
+out_channels
+=32,
+kernel_size
+=3,
+stride=2,
+padding=1,
+output_padding
+=1
+)
+y =
+upsample
+(x)
+Learnable
+Upsampling
+Characteristics
+Learnable
+Integrated into model
+May cause checkerboard artifacts
+In modern architectures, interpolation + convolution is often preferred over pure transposed convolution."
+6,Segmentation,6  - Segmentation.pptx,23,Interpolation-Based Upsampling,"Interpolation-Based
+Upsampling
+23
+Each new pixel is a weighted average of the four surrounding pixels.
+Nearest neighbor repeats nearby values and keeps edges crisp but blocky.
+Bilinear uses a weighted combination of neighbors and smooths the result.
+Bicubic uses a larger neighborhood and can produce smoother curves.
+Bilinear rule"
+6,Segmentation,6  - Segmentation.pptx,24,Bilinear interpolation Formula,"Bilinear interpolation Formula
+24"
+6,Segmentation,6  - Segmentation.pptx,25,Overlapping Contributions in Transposed Convolution,"A Conv2DTranspose with 3x3 kernel (not seen explicitly) applied to a 4x4 input to give a 6x6 output.
+25
+In transposed convolution,
+each input pixel contributes to
+multiple output locations
+.
+When those contributions overlap,
+we
+sum them
+.
+Each input pixel generates a weighted footprint. Overlapping footprints are summed.
+Overlapping Contributions in Transposed Convolution"
+6,Segmentation,6  - Segmentation.pptx,26,A Conv2DTranspose with 3x3 kernel (seen explicitly) applied to a 4x4 input to give a 6x6 output.,"A Conv2DTranspose with 3x3 kernel (seen explicitly) applied to a 4x4 input to give a 6x6 output.
+26
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+Inputs
+Kernel
+1
+1
+1
+1
+1
+1
+1
+1
+1
+Outputs
+Simple Example Transposed Convolution (Stride = 1)
+Each input pixel writes a weighted footprint into the output.
+When footprints overlap, their contributions are summed.
+This is why transposed convolution can both enlarge and learn structure."
+6,Segmentation,6  - Segmentation.pptx,27,A Conv2DTranspose with 3x3 kernel (seen explicitly) applied to a 4x4 input to give a 6x6 output.,"A Conv2DTranspose with 3x3 kernel (seen explicitly) applied to a 4x4 input to give a 6x6 output.
+27
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+Inputs
+Kernel
+1
+1,
+1
+1,
+1
+1
+1
+1,
+1
+1,
+1
+1
+1
+1,
+1
+1,
+1
+1
+Outputs
+Simple Example Transposed Convolution (Stride = 1)
+Each input pixel writes a weighted footprint into the output.
+When footprints overlap, their contributions are summed.
+This is why transposed convolution can both enlarge and learn structure."
+6,Segmentation,6  - Segmentation.pptx,28,A Conv2DTranspose with 3x3 kernel (seen explicitly) applied to a 4x4 input to give a 6x6 output.,"A Conv2DTranspose with 3x3 kernel (seen explicitly) applied to a 4x4 input to give a 6x6 output.
+28
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+Inputs
+Kernel
+1
+1,
+1
+1,
+1
+,1
+1
+,1
+1
+1
+1,
+1
+1,
+1
+,1
+1
+,1
+1
+1
+1,
+1
+1,
+1
+,1
+1
+,1
+1
+Outputs
+Simple Example Transposed Convolution (Stride = 1)
+Each input pixel writes a weighted footprint into the output.
+When footprints overlap, their contributions are summed.
+This is why transposed convolution can both enlarge and learn structure."
+6,Segmentation,6  - Segmentation.pptx,29,A Conv2DTranspose with 3x3 kernel (seen explicitly) applied to a 4x4 input to give a 6x6 output.,"A Conv2DTranspose with 3x3 kernel (seen explicitly) applied to a 4x4 input to give a 6x6 output.
+29
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+Inputs
+Kernel
+1
+2
+3
+3
+2
+1
+2
+4
+6
+6
+4
+2
+3
+6
+9
+9
+6
+3
+3
+6
+9
+9
+6
+3
+2
+4
+6
+6
+4
+2
+1
+2
+3
+3
+2
+1
+Outputs
+Simple Example Transposed Convolution (Stride = 1)
+Each input pixel writes a weighted footprint into the output.
+When footprints overlap, their contributions are summed.
+This is why transposed convolution can both enlarge and learn structure."
+6,Segmentation,6  - Segmentation.pptx,30,Transposed Convolution (Stride = 1),"stride = 1
+30
+Transposed Convolution (Stride = 1)"
+6,Segmentation,6  - Segmentation.pptx,31,Stride = 2 vs. Stride = 1,"stride = 2
+31
+Stride = 2 vs. Stride = 1"
+6,Segmentation,6  - Segmentation.pptx,32,Matrix View of Convolution,"Matrix View of Convolution
+Output
+32"
+6,Segmentation,6  - Segmentation.pptx,33,Convolution: Flatten the input and output,"Convolution: Flatten the input and output
+Flatten the input
+Flatten the output
+33"
+6,Segmentation,6  - Segmentation.pptx,34,Matrix View of Convolution,"Matrix View of Convolution
+34"
+6,Segmentation,6  - Segmentation.pptx,35,Expanding the Grid by Inserting Zeros,"Expanding the Grid by Inserting Zeros
+35"
+6,Segmentation,6  - Segmentation.pptx,36,Transposed Convolution as a Transpose Operation,"Transposed Convolution as a Transpose Operation
+Transpose
+36"
+6,Segmentation,6  - Segmentation.pptx,37,Transpose convolution: Flatten the input,"Transpose convolution: Flatten the input
+Flatten the input
+37"
+6,Segmentation,6  - Segmentation.pptx,38,Matrix View of Transposed Convolution,"Matrix View of Transposed Convolution
+38"
+6,Segmentation,6  - Segmentation.pptx,39,Worked Example: Stride-2 Transposed Convolution,"[[1 2]
+[3 4]]
+[[1 1 1]
+[1 1 1]
+[1 1 1]]
+Image
+Filter
+padding = 0, stride = 2
+[[1 1 3 2
+2
+]
+[1 1 3 2
+2
+]
+[4 4 10 6
+6
+]
+[3 3 7 4
+4
+]
+[
+3 3 7 4 4
+]
+[[
+0 0 0 0 0 0 0
+]
+[
+0 0 0 0 0 0 0
+]
+[
+0 0
+1
+0
+2
+0 0
+]
+[
+0 0 0 0 0 0 0
+]
+[
+0 0
+3
+0
+4
+0 0
+]
+[
+0 0 0 0 0 0 0
+]
+[
+0 0 0 0 0 0 0
+]]
+padding = 0, stride = 2
+Convolution result
+Transposed Convolution
+No padding, stride = 2, Kernel = 3x3
+39
+Worked Example: Stride-2 Transposed Convolution
+Insert zeros according to the stride.
+Apply a standard convolutional kernel on the expanded grid.
+Sum the overlapping responses to form the final output.
+Practical implication
+Kernel size, stride, and padding jointly determine the final output size and the overlap pattern."
+6,Segmentation,6  - Segmentation.pptx,40,Limitations of Transposed Convolution: Checkerboard Artifacts,"Limitations of Transposed Convolution: Checkerboard Artifacts
+https://
+towardsdatascience.com
+/transposed-convolution-demystified-84ca81b4baba
+Chequered
+board Artifacts
+40
+Uneven overlap can create periodic texture patterns in the output.
+The problem is most visible when stride and kernel size interact poorly.
+A reliable mitigation is interpolation or resize followed by a regular convolution."
+6,Segmentation,6  - Segmentation.pptx,41,Summary,"Summary
+41
+Transposed Convolution (Core Idea)
+Zero insertion
+Standard convolution
+Overlapping summation
+Matrix interpretation: transpose of convolution operator.
+Practical Insight
+Interpolation + Conv is often stable and effective
+Transposed Conv may cause checkerboard artifacts
+Design choice depends on task and architecture
+Segmentation is structured prediction: preserve spatial reasoning while learning semantic meaning."
+7,LSTM,7 - LSTM.pptx,1,"Recurrent Neural Networks
+LSTM Fundamentals and Sequence Modeling with PyTorch","Recurrent Neural Networks
+LSTM Fundamentals and Sequence Modeling with
+PyTorch
+Yifeng Zhu
+Electrical and Computer Engineering
+University of Maine
+1"
+7,LSTM,7 - LSTM.pptx,2,Image → Sequence,"Image → Sequence
+2
+e.g.
+Image Captioning
+image -> sequence of words
+Different tasks, same sequence-modeling idea."
+7,LSTM,7 - LSTM.pptx,3,Sequence → Label,"Sequence → Label
+3
+e.g.
+Sentiment Classification
+sequence of words -> sentiment
+Different tasks, same sequence-modeling idea."
+7,LSTM,7 - LSTM.pptx,4,Sequence → Sequence,"Sequence → Sequence
+4
+e.g.
+Machine Translation
+seq
+of words ->
+seq
+of words
+Different tasks, same sequence-modeling idea."
+7,LSTM,7 - LSTM.pptx,5,Frame Sequence → Label,"Frame Sequence → Label
+5
+e.g.
+Video classification from a frame sequence
+Different tasks, same sequence-modeling idea."
+7,LSTM,7 - LSTM.pptx,6,Recurrent Neural Network (RNN),"Recurrent Neural Network (RNN)
+Long sequences are difficult to model with standard RNNs
+Vanishing gradients make long-range dependencies hard to learn
+Exploding gradients can often be controlled with gradient clipping
+RNN: Computational Graph
+An unrolled recurrent neural network
+The same weight and bias shared across all the steps"
+7,LSTM,7 - LSTM.pptx,7,RNN Parameter Sharing Across Time,"7
+Recurrent Neural Networks
+The same function and the same set of parameters are reused at every time step.
+RNN Parameter Sharing Across Time"
+7,LSTM,7 - LSTM.pptx,8,Why Standard RNNs Struggle with Long-Term Dependencies,"Why Standard RNNs Struggle with Long-Term Dependencies
+Short-Term Dependencies
+Relevant information is nearby.
+Standard RNNs can often learn it
+Example: Predict the last word in
+“the clouds are in the
+sky
+,”
+8
+Long-Term Dependencies
+Relevant information is far away
+Gradients may vanish over many time steps
+Learning becomes difficult
+Example: Understanding a word or event much earlier in a sentence or document
+Standard RNNs often struggle when useful information must travel across many time steps. Long Short-Term Memory (LSTM) was designed to address this problem.
+Relevant information is far away"
+7,LSTM,7 - LSTM.pptx,9,LSTM Cell Overview,"LSTM Cell Overview
+Xt
+Memory
+Cell
+Input Gate
+Output Gate
+Forget Gate
+Output
+ht
+Cell state
+: stores long-term memory
+Input gate
+: controls what new information is added
+Forget gate
+: controls what old information is removed
+Output gate
+: controls what information becomes the output"
+7,LSTM,7 - LSTM.pptx,10,LSTM,"10
+LSTM
+Sepp
+Hochreiter
+; Jürgen
+Schmidhuber
+(1997). ""Long short-term memory"".
+Neural Computation
+. 9 (8): 1735–1780.
+The cell is responsible for keeping track of the dependencies between the elements in the input sequence.
+The cell state carries long-term memory across time steps."
+7,LSTM,7 - LSTM.pptx,11,LSTM,"11
+LSTM
+Sepp
+Hochreiter
+; Jürgen
+Schmidhuber
+(1997). ""Long short-term memory"".
+Neural Computation
+. 9 (8): 1735–1780.
+The cell is responsible for keeping track of the dependencies between the elements in the input sequence.
+Hidden state vector also known as output vector of the LSTM unit
+input vector to the LSTM unit"
+7,LSTM,7 - LSTM.pptx,12,Forget Gate,"12
+Forget Gate
+Vector
+f
+t
+Used in element-wise multiplication with the previous cell state C
+t-1
+The forget gate determines how much of the previous cell state C
+t-1
+is kept
+𝒇
+𝒕
+∘
+𝑪
+𝒕
+−
+𝟏
+W
+f
+: Weights of the forget gate
+input vector
+hidden state vector also known as output vector
+cell state vector
+Forget gate's activation vector
+f
+t"
+7,LSTM,7 - LSTM.pptx,13,Activation Functions in LSTM: Sigmoid and Tanh,"13
+Activation Functions in LSTM: Sigmoid and Tanh
+Sigmoid
+Tanh
+Output range: (0,1)
+Often used for gates because it acts like a soft on/off control
+Output range: (-1,1)
+Often used for candidate memory and hidden state values
+Sigmoid controls how much information passes through; tanh creates bounded content values for the cell and hidden state."
+7,LSTM,7 - LSTM.pptx,14,Input Gate,"14
+Input Gate
+Input Gate
+i
+The input gate controls how much new information is written into the cell state
+Input gate's activation vector
+i
+t
+W
+i
+: Weights of the input gate
+W
+C
+: Weights of the memory cell"
+7,LSTM,7 - LSTM.pptx,15,Cell State Update,"15
+Cell State Update
+Internal cell state
+C
+*: element-wise multiplication
++: element-wise addition
+Cell state vector C
+t
+Forget gate:
+decides how much old memory to keep
+Input gate:
+decides how much new information to write
+Together, they update the cell state Ct"
+7,LSTM,7 - LSTM.pptx,16,Output gate,"16
+Output gate
+Output Gate
+o
+controls how much of the cell state is exposed in the output
+Output gate activation vector
+o
+t
+W
+o
+: Weights of the output gate"
+7,LSTM,7 - LSTM.pptx,17,Parameter count = 4 h(h + x + 1),"17
+Parameter count = 4 h(h + x + 1)
+Notice
+：
+c, x, and h
+are vectors
+，
+c and h usually have the same size.
+The output of the LSTM cell is h, not c
+Number of parameters = 4 *
+output_dimension
+* (
+input_dimension
++
+output_dimension
++ bias)"
+7,LSTM,7 - LSTM.pptx,18,Affine Transformation,"Affine Transformation
+18
+𝒛
+𝒕
+𝒉
+𝒕
+−
+𝟏
+𝒃
+𝑾
+h
+h
++
+𝑥
+h
+h
+×
+(
+h
++
+𝑥
+)
+Each LSTM Gate Starts with an Affine Transformation"
+7,LSTM,7 - LSTM.pptx,19,Multi-Layer LSTM,"19
+Multi-Layer LSTM
+One LSTM layer processes the original input sequence
+The next LSTM layer processes the hidden outputs from the previous layer
+This creates a deeper sequence model
+hidden size = number of units in one LSTM layer
+num_layers
+= number of stacked LSTM layers
+nn.LSTM
+(
+input_size
+=10,
+hidden_size
+=32,
+num_layers
+=2,
+batch_first
+=True)
+The output sequence from one LSTM layer becomes the input sequence to the next layer."
+7,LSTM,7 - LSTM.pptx,20,PyTorch API: nn.LSTM,"PyTorch
+API:
+nn.LSTM
+import torch
+import
+torch.nn
+as
+nn
+x =
+torch.randn
+(8, 20, 10)
+# 8 samples,
+# 20 time steps,
+# 10 features each
+lstm
+=
+nn.LSTM
+(
+input_size
+=10,
+# features per time step
+hidden_size
+=32,
+# hidden units
+batch_first
+=True
+)
+out, (
+h_n
+,
+c_n
+) =
+lstm
+(x)
+# h0 = 0, c0 = 0
+print(
+out.shape
+) # (8, 20, 32)
+print(
+h_n.shape
+) # (1, 8, 32)
+print(
+c_n.shape
+) # (1, 8, 32)
+20
+out
+: hidden output at every time step
+h_n
+: hidden state at the final time step
+c_n
+: cell state at the final time step
+Setting
+Input Shape
+Output Shape
+batch_first
+=True
+(batch, seq, feature)
+(batch, seq, hidden)
+batch_first
+=False
+(seq, batch, feature)
+(seq, batch, hidden)"
+7,LSTM,7 - LSTM.pptx,21,nn.LSTM: Initial States,"nn.LSTM
+: Initial States
+import torch
+import
+torch.nn
+as
+nn
+x =
+torch.randn
+(8, 20, 10)
+# 8 samples,
+# 20 time steps,
+# 10 features each
+lstm
+=
+nn.LSTM
+(
+input_size
+=10,
+# features per time step
+hidden_size
+=32,
+# hidden units
+batch_first
+=True
+)
+h0 = torch.zeros(1, 8, 32)
+c0 = torch.zeros(1, 8, 32)
+out, (h_n, c_n) =
+lstm
+(x, (
+h0
+,
+c0
+))
+print(
+out.shape
+) # (8, 20, 32)
+print(
+h_n.shape
+) # (1, 8, 32)
+print(
+c_n.shape
+) # (1, 8, 32)
+21
+Custom initial states
+lstm
+(x, (h0, c0))
+use this when you want to control or continue memory
+Setting
+Input Shape
+Output Shape
+batch_first
+=True
+(batch, seq, feature)
+(batch, seq, hidden)
+batch_first
+=False
+(seq, batch, feature)
+(seq, batch, hidden)"
+7,LSTM,7 - LSTM.pptx,22,LSTM Workflow in PyTorch: Define the Model,"22
+class
+MyLSTMModel
+(
+nn.Module
+):
+def
+__
+init
+__(
+self,
+input_size
+,
+hidden_size
+,
+output_size
+):
+super().__
+init
+__()
+self.lstm
+=
+nn.LSTM
+(
+input_size
+,
+hidden_size
+,
+batch_first
+=True)
+self.fc
+=
+nn.Linear
+(
+hidden_size
+,
+output_size
+)
+def
+forward
+(self, x):
+out, _ =
+self.lstm
+(x)
+return
+self.fc
+(out[:,
+-1
+, :])
+#
+use the last time step only
+LSTM Workflow in
+PyTorch
+: Define the Model"
+7,LSTM,7 - LSTM.pptx,23,LSTM Workflow in PyTorch: Train and Inference,"23
+LSTM Workflow in
+PyTorch
+: Train and Inference
+model =
+MyLSTMModel
+(
+input_size
+=8,
+hidden_size
+=25,
+output_size
+=1)
+criterion =
+nn.MSELoss
+()
+optimizer =
+optim.Adam
+(
+model.parameters
+(),
+lr
+=1e-3)
+for
+xb
+,
+yb
+in
+train_loader
+:
+optimizer.zero_grad
+()
+yhat
+= model(
+xb
+)
+loss = criterion(
+yhat
+,
+yb
+)
+loss.backward
+()
+optimizer.step
+()
+torch.save
+(
+model.state_dict
+(), ""lstm_model.pt"")
+model.load_state_dict
+(
+torch.load
+(""lstm_model.pt""))
+model.eval
+()
+with
+torch.no_grad
+():
+yhat
+= model(X)
+print(
+yhat
+)
+For classification tasks, replace
+MSELoss
+()
+with an appropriate classification loss."
+7,LSTM,7 - LSTM.pptx,24,One-to-Many Sequence Model,"One-to-Many Sequence Model
+24
+class
+OneToMany
+(
+nn.Module
+):
+def
+__
+init
+__(
+self,
+in_dim
+,
+hid_dim
+,
+out_dim
+, steps):
+super().__
+init
+__()
+self.steps
+= steps
+self.h0 =
+nn.Linear
+(
+in_dim
+,
+hid_dim
+)
+self.c0 =
+nn.Linear
+(
+in_dim
+,
+hid_dim
+)
+self.lstm
+=
+nn.LSTM
+(
+hid_dim
+,
+hid_dim
+,
+batch_first
+=True)
+self.fc
+=
+nn.Linear
+(
+hid_dim
+,
+out_dim
+)
+def
+forward
+(self, x):
+# x: (B,
+in_dim
+)
+B =
+x.size
+(0)
+# get the batch size
+# # zero inputs; the information comes from (h0, c0)
+decoder_inputs
+=
+torch.zeros
+(B,
+self.steps
+, self.h0.out_features, device=
+x.device
+)
+h0 = self.h0(x).
+unsqueeze
+(0)
+# map input to initial hidden state and add layer dimension
+c0 = self.c0(x).
+unsqueeze
+(0)
+# map input to initial cell state and add layer dimension
+out, _ =
+self.lstm
+(
+decoder_inputs
+, (h0, c0))
+# run the LSTM for several steps starting from (h0, c0)
+return
+self.fc
+(out)
+# map each hidden state to an output at each time step
+x =
+torch.randn
+(4, 10)
+model =
+OneToMany
+(
+in_dim
+=10,
+hid_dim
+=32,
+out_dim
+=6, steps=5)
+y = model(x)
+print(
+y.shape
+) # (4, 5, 6)
+unsqueeze
+(0
+) adds the layer dimension required by
+PyTorch
+LSTM: (B,
+hid_dim
+) -> (1, B,
+hid_dim
+)
+h0 = f(x)
+c0 = g(x)
+(h1, c1) = LSTM(z1, (h0, c0))
+(h2, c2) = LSTM(z2, (h1, c1))
+(h3, c3) = LSTM(z3, (h2, c2))
+...
+x
+y
+1
+y
+2
+y
+3
+The input x is NOT copied into every time step.
+Main idea:
+one input initializes the sequence
+Shape:
+(
+B,d
+) → (1,B,h),(1,B,h) → (
+B,T,o
+)
+Key point:
+the decoder inputs are dummy inputs; the real information comes from (h0,c0)"
+7,LSTM,7 - LSTM.pptx,25,Many-to-One Sequence Model,"Many-to-One Sequence Model
+25
+class
+ManyToOne
+(
+nn.Module
+):
+def
+__
+init
+__
+(self,
+in_dim
+,
+hid_dim
+,
+out_dim
+):
+super().__
+init
+__()
+self.lstm
+=
+nn.LSTM
+(
+in_dim
+,
+hid_dim
+,
+batch_first
+=True
+)
+self.fc
+=
+nn.Linear
+(
+hid_dim
+,
+out_dim
+)
+def
+forward
+(self, x):
+# x: (B, steps,
+in_dim
+)
+out, _ =
+self.lstm
+(x)
+# out: (B, steps,
+hid_dim
+)
+return
+self.fc
+(out[:, -1, :])
+# use the last time step only
+x =
+torch.randn
+(4, 3, 10)
+# batch=4, 3 time steps, 10 features
+model =
+ManyToOne
+(
+in_dim
+=10,
+hid_dim
+=32,
+out_dim
+=1)
+y = model(x)
+print(
+y.shape
+)
+# (4, 1)
+x
+1
+x
+2
+x
+3
+y
+Many inputs enter over time, but only one final output is produced.
+Main idea:
+Read a sequence, produce one output
+Shape:
+(
+B,T,d
+) → (
+B,T,h
+) → (
+B,o
+)
+Key point:
+Use the last hidden output for prediction"
+7,LSTM,7 - LSTM.pptx,26,Many-to-Many Sequence Model,"Many-to-Many Sequence Model
+26
+class
+ManyToMany
+(
+nn.Module
+):
+def
+__
+init
+__
+(self,
+in_dim
+,
+hid_dim
+,
+out_dim
+):
+super().__
+init
+__()
+self.lstm
+=
+nn.LSTM
+(
+in_dim
+,
+hid_dim
+,
+batch_first
+=True)
+self.fc
+=
+nn.Linear
+(
+hid_dim
+,
+out_dim
+)
+def
+forward
+(self, x):
+# x: (B, steps,
+in_dim
+)
+out, _ =
+self.lstm
+(x)
+# out: (B, steps,
+hid_dim
+)
+return
+self.fc
+(out)
+# y: (B, steps,
+out_dim
+)
+y
+1
+y
+2
+y
+3
+x
+1
+x
+2
+x
+3
+x =
+torch.randn
+(4, 3, 10)
+# 4 samples, 3 time steps, 10 features
+model =
+ManyToMany
+(
+in_dim
+=10,
+hid_dim
+=32,
+out_dim
+=6)
+y = model(x)
+print(
+y.shape
+)
+# (4, 3, 6)
+self.fc
+(out) applies the same linear layer to every time step."
+7,LSTM,7 - LSTM.pptx,27,Seq-to-Seq Sequence Model,"27
+Seq-to-Seq Sequence Model
+class
+Seq2Seq
+(
+nn.Module
+):
+def
+__
+init
+__
+(self,
+in_dim
+,
+hid_dim
+,
+out_dim
+,
+out_steps
+):
+super().__
+init
+__()
+self.out_steps
+=
+out_steps
+self.
+encoder
+=
+nn.LSTM
+(
+in_dim
+,
+hid_dim
+,
+batch_first
+=True)
+self.
+decoder
+=
+nn.LSTM
+(
+hid_dim
+,
+hid_dim
+,
+batch_first
+=True)
+self.fc
+=
+nn.Linear
+(
+hid_dim
+,
+out_dim
+)
+def
+forward
+(self, x):
+# x: (B,
+in_steps
+,
+in_dim
+)
+B =
+x.size
+(0)
+_, (
+h_n
+,
+c_n
+) =
+self.encoder
+(x)
+# encode x1, x2, x3
+decoder_inputs
+=
+torch.zeros
+(B,
+self.out_steps
+,
+h_n.size
+(-1), device=
+x.device
+)
+out, _ =
+self.decoder
+(
+decoder_inputs
+, (
+h_n
+,
+c_n
+))
+# decode y1, y2, y3
+return
+self.fc
+(out)
+# (B,
+out_steps
+,
+out_dim
+)
+x =
+torch.randn
+(4, 3, 10)
+# batch=4, 3 input steps, 10 features each
+model =
+Seq2Seq
+(
+in_dim
+=10,
+hid_dim
+=32,
+out_dim
+=6,
+out_steps
+=3)
+y = model(x)
+print(
+y.shape
+)
+# (4, 3, 6)
+x
+1
+x
+2
+x
+3
+y
+1
+y
+2
+y
+3
+Seq-to-Seq"
+7,LSTM,7 - LSTM.pptx,28,Bidirectional LSTM,"28
+Bidirectional LSTM
+x
+1
+x
+2
+x
+3
+x
+4
+x
+5
+x
+6
+y
+1
+y
+2
+y
+3
+y
+4
+y
+5
+y
+6
+import torch
+import
+torch.nn
+as
+nn
+x =
+torch.randn
+(4, 6, 10) # (batch, time,
+input_size
+)
+lstm
+=
+nn.
+LSTM
+(
+input_size
+=10,
+hidden_size
+=32,
+batch_first
+=True,
+bidirectional=True
+)
+out, (
+h_n
+,
+c_n
+) =
+lstm
+(x)
+print(
+out.shape
+)
+# (4, 6, 64)
+print(
+h_n.shape
+)
+# (2, 4, 32)
+print(
+c_n.shape
+)
+# (2, 4, 32)
+A bidirectional LSTM reads the sequence in both forward and backward directions, then combines both hidden representations."
+7,LSTM,7 - LSTM.pptx,29,Seq2Seq Models for Response Generation,"Seq2Seq Models for Response Generation
+how
+are
+you
+?"
+7,LSTM,7 - LSTM.pptx,30,Seq2Seq Models for Response Generation,"Seq2Seq Models for Response Generation
+how
+are
+you
+?
+Encoding"
+7,LSTM,7 - LSTM.pptx,31,Seq2Seq Models for Response Generation,"Seq2Seq Models for Response Generation
+how
+are
+you
+?
+Encoding"
+7,LSTM,7 - LSTM.pptx,32,Seq2Seq Models for Response Generation,"Seq2Seq Models for Response Generation
+how
+are
+you
+?
+Encoding"
+7,LSTM,7 - LSTM.pptx,33,Seq2Seq Models for Response Generation,"Seq2Seq Models for Response Generation
+how
+are
+you
+?
+Encoding"
+7,LSTM,7 - LSTM.pptx,34,Seq2Seq Models for Response Generation,"Seq2Seq Models for Response Generation
+how
+are
+you
+?
+Encoding
+Decoding"
+7,LSTM,7 - LSTM.pptx,35,Seq2Seq Models for Response Generation,"Seq2Seq Models for Response Generation
+how
+are
+you
+?
+I’m
+Encoding
+Decoding
+eos"
+7,LSTM,7 - LSTM.pptx,36,Seq2Seq Models for Response Generation,"Seq2Seq Models for Response Generation
+how
+are
+you
+?
+I’m
+fine
+Encoding
+Decoding
+eos
+I’m"
+7,LSTM,7 - LSTM.pptx,37,Seq2Seq Models for Response Generation,"Seq2Seq Models for Response Generation
+how
+are
+you
+?
+I’m
+fine
+.
+Encoding
+Decoding
+eos
+I’m
+fine"
+7,LSTM,7 - LSTM.pptx,38,Seq2Seq Models for Response Generation,"Seq2Seq Models for Response Generation
+how
+are
+you
+?
+I’m
+fine
+.
+EOS
+Encoding
+Decoding
+eos
+I’m
+fine
+."
+7,LSTM,7 - LSTM.pptx,39,Generating Text Descriptions for Images,"39
+Generating Text Descriptions for Images"
+7,LSTM,7 - LSTM.pptx,40,Generating Text Descriptions for Images,"40
+Generating Text Descriptions for Images"
+7,LSTM,7 - LSTM.pptx,41,Generating Text Descriptions for Images,"41
+Generating Text Descriptions for Images"
+7,LSTM,7 - LSTM.pptx,42,Generating Text Descriptions for Images,"42
+Generating Text Descriptions for Images"
+7,LSTM,7 - LSTM.pptx,43,Generating Text Descriptions for Images,"43
+Generating Text Descriptions for Images"
+7,LSTM,7 - LSTM.pptx,44,Generating Text Descriptions for Images,"44
+Generating Text Descriptions for Images"
+7,LSTM,7 - LSTM.pptx,45,Generating Text Descriptions for Images,"45
+Generating Text Descriptions for Images"
+7,LSTM,7 - LSTM.pptx,46,Generating Text Descriptions for Images,"46
+Generating Text Descriptions for Images"
+7,LSTM,7 - LSTM.pptx,47,LSTM Summary,"LSTM Summary
+RNNs process data one time step at a time.
+Standard RNNs struggle with long-term dependencies.
+LSTM uses cell
+state + gates
+to manage memory.
+nn.LSTM
+supports flexible sequence modeling in
+PyTorch
+.
+Common patterns: one-to-many, many-to-one, many-to-many, seq-to-seq, bidirectional.
+47
+LSTM improves sequence learning by preserving useful information over time."
+8,Transformer,8 -Transformer.pptx,1,"Transformers
+From Seq2Seq Bottlenecks to Attention and Transformers","Transformers
+From Seq2Seq Bottlenecks to Attention and Transformers
+Yifeng Zhu
+Electrical and Computer Engineering
+University of Maine
+1"
+8,Transformer,8 -Transformer.pptx,2,Roadmap: From Seq2Seq to Transformers,"Roadmap: From Seq2Seq to Transformers
+2
+Why
+vanilla seq2seq
+struggles with long sequences
+How
+attention
+addresses the encoder–decoder bottleneck
+What
+self-attention
+is and why it matters
+How
+query, key, and value
+produce attention weights
+How
+multi-head attention
+and
+positional encoding
+enable Transformers"
+8,Transformer,8 -Transformer.pptx,3,Sequence-to-Sequence (seq2seq): Basic Idea,"Sequence-to-Sequence (seq2seq): Basic Idea
+Maps an
+input sequence
+to an
+output sequence
+Input and output may have
+different lengths
+Uses two RNNs:
+Encoder
+: reads the source sequence
+Decoder
+: generates the target sequence
+Example:
+Translate “The brown dog ran” to French.
+3"
+8,Transformer,8 -Transformer.pptx,4,Seq2Seq: Encoder Reads the Input,"Hidden layer
+Input layer
+h
+1
+𝐸
+h
+2
+𝐸
+h
+3
+𝐸
+h
+4
+𝐸
+The
+brown
+dog
+ran
+ENCODER RNN
+Seq2Seq: Encoder Reads the Input
+4"
+8,Transformer,8 -Transformer.pptx,5,Seq2Seq: Final Encoder State,"Input layer
+Hidden layer
+h
+1
+𝐸
+h
+2
+𝐸
+h
+3
+𝐸
+h
+4
+𝐸
+The
+brown
+dog
+ran
+The final hidden state of the encoder RNN is the initial state of the decoder RNN
+ENCODER RNN
+Seq2Seq: Final Encoder State
+5"
+8,Transformer,8 -Transformer.pptx,6,Seq2Seq: Decoder Initialization,"ENCODER RNN
+DECODER RNN
+Input layer
+Hidden layer
+h
+1
+𝐸
+h
+2
+𝐸
+h
+3
+𝐸
+h
+4
+𝐸
+The
+brown
+dog
+ran
+h
+1
+𝐷
+<s>
+The final hidden state of the encoder RNN is the initial state of the decoder RNN
+Seq2Seq: Decoder Initialization
+6"
+8,Transformer,8 -Transformer.pptx,7,Seq2Seq: Predicting the First Token,"Hidden layer
+ENCODER RNN
+DECODER RNN
+The final hidden state of the encoder RNN is the initial state of the decoder RNN
+Input layer
+h
+1
+𝐸
+h
+2
+𝐸
+h
+3
+𝐸
+h
+4
+𝐸
+The
+brown
+dog
+ran
+h
+1
+𝐷
+<s>
+Le
+Seq2Seq: Predicting the First Token
+7"
+8,Transformer,8 -Transformer.pptx,8,Seq2Seq: Completing the Decoding Process,"ENCODER RNN
+DECODER RNN
+Decoding happens step by step.
+Seq2Seq: Completing the Decoding Process
+8
+Input layer
+Hidden layer
+h
+1
+𝐸
+h
+2
+𝐸
+h
+3
+𝐸
+h
+4
+𝐸
+The
+brown
+dog
+ran
+h
+1
+𝐷
+h
+2
+𝐷
+<s>
+chien
+a
+couru
+h
+3
+𝐷
+h
+4
+𝐷
+h
+5
+𝐷
+Le
+h
+6
+𝐷
+Le
+chien
+a
+couru
+</s>
+marron
+marron"
+8,Transformer,8 -Transformer.pptx,9,Seq2Seq: Training with Teacher Forcing,"ENCODER RNN
+DECODER RNN
+Training: decoder loss updates both encoder and decoder weights.
+Seq2Seq: Training with Teacher Forcing
+9
+Input layer
+Hidden layer
+h
+1
+𝐸
+h
+2
+𝐸
+h
+3
+𝐸
+h
+4
+𝐸
+The
+brown
+dog
+ran
+h
+1
+𝐷
+h
+2
+𝐷
+h
+3
+𝐷
+Le
+chien
+a
+h
+4
+𝐷
+h
+5
+𝐷
+couru
+𝑦
+1
+𝑦
+2
+𝑦
+3
+𝑦
+4
+𝑦
+5
+marron"
+8,Transformer,8 -Transformer.pptx,10,Seq2Seq: Information Bottleneck,"Seq2Seq: Information Bottleneck
+The entire source sequence is compressed into
+one fixed context vector
+The decoder cannot directly revisit earlier encoder states
+This becomes more problematic for
+longer sequences
+This bottleneck motivates attention.
+ENCODER RNN
+DECODER RNN
+10
+Input layer
+Hidden layer
+h
+1
+𝐸
+h
+2
+𝐸
+h
+3
+𝐸
+h
+4
+𝐸
+The
+brown
+dog
+ran
+h
+1
+𝐷
+h
+2
+𝐷
+h
+3
+𝐷
+Le
+chien
+a
+h
+4
+𝐷
+h
+5
+𝐷
+couru
+𝑦
+1
+𝑦
+2
+𝑦
+3
+𝑦
+4
+𝑦
+5
+marron"
+8,Transformer,8 -Transformer.pptx,11,Replacing Recurrence with Self-Attention,"Replacing Recurrence with Self-Attention
+11
+LSTM
+𝑥
+1
+𝑦
+4
+𝑦
+3
+𝑦
+2
+𝑦
+1
+Self-Attention Layer
+LSTM
+𝑥
+2
+LSTM
+𝑥
+3
+LSTM
+𝑥
+4
+𝑐
+𝑥
+1
+𝑥
+2
+𝑥
+3
+𝑥
+4
+Why did Transformers replace recurrence?
+RNN/LSTM → sequential, harder to parallelize
+Self-attention → global access, parallelizable."
+8,Transformer,8 -Transformer.pptx,12,Attention: The Decoder Looks Back at the Whole Input,"Attention: The Decoder Looks Back at the Whole Input
+Seq2Seq compresses the whole input into one vector.
+Attention removes this restriction.
+At each decoding step, the decoder can use all encoder states.
+12
+Attention lets the decoder dynamically choose where to look in the input."
+8,Transformer,8 -Transformer.pptx,13,Attention: Forming a Context Vector,"Attention: Forming a Context Vector
+ENCODER RNN
+DECODER RNN
+Input layer
+Hidden layer
+The
+brown
+dog
+ran
+[
+𝒄
+𝟏
+𝑫
+,
+h
+4
+𝐸
+]
+𝑦
+1
+Le
+𝒄
+𝟏
+𝑫
+𝑎
+1
+1
+𝑎
+2
+1
+𝑎
+3
+1
+𝑎
+4
+1
+13
+At each decoding step, the decoder computes attention over all encoder states."
+8,Transformer,8 -Transformer.pptx,14,Attention: Measuring Relevance,"Attention: Measuring Relevance
+ENCODER RNN
+DECODER RNN
+Input layer
+Hidden layer
+The
+brown
+dog
+ran
+𝒄
+𝟐
+𝑫
+𝑎
+1
+2
+𝑎
+2
+2
+𝑎
+3
+2
+𝑎
+4
+2
+[
+𝑐
+1
+𝐷
+,
+h
+4
+𝐸
+]
+𝑦
+1
+[
+𝒄
+𝟐
+𝑫
+,
+𝑦
+1
+]
+𝑦
+2
+Le
+chien
+14
+At each decoding step, the decoder computes attention over all encoder states."
+8,Transformer,8 -Transformer.pptx,15,Attention: Normalized Attention Weights,"Attention: Normalized Attention Weights
+ENCODER RNN
+DECODER RNN
+Input layer
+Hidden layer
+The
+brown
+dog
+ran
+𝒄
+𝟑
+𝑫
+𝑎
+1
+3
+𝑎
+2
+3
+𝑎
+3
+3
+𝑎
+4
+3
+[
+𝑐
+1
+𝐷
+,
+h
+4
+𝐸
+]
+𝑦
+1
+[
+𝑐
+2
+𝐷
+,
+𝑦
+1
+]
+[
+𝒄
+𝟑
+𝑫
+,
+𝑦
+2
+]
+𝑦
+2
+𝑦
+3
+Le
+chien
+brun
+15
+At each decoding step, the decoder computes attention over all encoder states."
+8,Transformer,8 -Transformer.pptx,16,Attention: Interpreting Alignment,"Attention: Interpreting Alignment
+ENCODER RNN
+DECODER RNN
+Input layer
+Hidden layer
+The
+brown
+dog
+ran
+𝒄
+𝟒
+𝑫
+𝑎
+1
+4
+𝑎
+2
+4
+𝑎
+3
+4
+𝑎
+4
+4
+[
+𝑐
+1
+𝐷
+,
+h
+4
+𝐸
+]
+𝑦
+1
+[
+𝑐
+2
+𝐷
+,
+𝑦
+1
+]
+[
+𝑐
+3
+𝐷
+,
+𝑦
+2
+]
+[
+𝒄
+𝟒
+𝑫
+,
+𝑦
+3
+]
+𝑦
+2
+𝑦
+3
+𝑦
+4
+Le
+chien
+brun
+a
+16
+At each decoding step, the decoder computes attention over all encoder states."
+8,Transformer,8 -Transformer.pptx,17,Self-Attention: Tokens Attend to One Another,"Self-Attention: Tokens Attend to One Another
+ran
+ENCODER RNN
+DECODER RNN
+Input layer
+Hidden layer
+The
+brown
+dog
+𝒄
+𝟓
+𝑫
+𝑎
+1
+5
+𝑎
+2
+5
+𝑎
+3
+5
+𝑎
+4
+5
+[
+𝑐
+1
+𝐷
+,
+h
+4
+𝐸
+]
+𝑦
+1
+[
+𝑐
+2
+𝐷
+,
+𝑦
+1
+]
+[
+𝑐
+3
+𝐷
+,
+𝑦
+2
+]
+[
+𝑐
+4
+𝐷
+,
+𝑦
+3
+]
+[
+𝒄
+𝟓
+𝑫
+,
+𝑦
+4
+]
+𝑦
+2
+𝑦
+3
+𝑦
+4
+𝑦
+5
+Le
+chien
+brun
+a
+couru
+17
+At each decoding step, the decoder computes attention over all encoder states."
+8,Transformer,8 -Transformer.pptx,18,Attention: Alignment Improves Seq2Seq,"Attention: Alignment Improves Seq2Seq
+Attention:
+greatly improves seq2seq results
+makes source–target alignment interpretable
+Image source: Fig 3 in
+Bahdanau et al., 2015
+18
+Attention removes the single-vector bottleneck by letting the decoder revisit the whole source sentence."
+8,Transformer,8 -Transformer.pptx,19,Self-Attention: Basic Idea,"Self-Attention: Basic Idea
+Models relationships among tokens in the same sequence
+Each token attends to other tokens in that sequence
+Produces a contextualized representation for each token
+19"
+8,Transformer,8 -Transformer.pptx,20,Self-Attention Layer: Basic Structure,"Self-Attention Layer: Basic Structure
+𝑦
+3
+𝑥
+4
+𝑥
+3
+𝑥
+2
+𝑥
+1
+𝑦
+1
+𝑦
+2
+𝑦
+4
+20
+each input vector 𝑥
+𝑖
+​ is projected into 𝑞
+𝑖
+, 𝑘
+𝑖
+, and 𝑣
+𝑖
+​
+these learned projections let the model compare tokens in different ways"
+8,Transformer,8 -Transformer.pptx,21,Self-Attention: From Scores to Weights,"Self-Attention: From Scores to Weights
+Query
+(Q): what the current token is looking for
+Key
+(K): how each token can be matched
+Value
+(V): the information contributed by each token
+21
+Step 1: Compute similarity scores between the query and all keys
+Step 2: Apply
+softmax
+to convert the scores into attention weights
+Step 3: Take the weighted sum of the values"
+8,Transformer,8 -Transformer.pptx,22,22,"22
+Without scaling, dot products grow with dimension, making
+softmax
+too sharp."
+8,Transformer,8 -Transformer.pptx,23,𝑎,"𝑎
+1
+,1
+𝑎
+1
+,
+2
+𝑎
+1
+,
+3
+𝑎
+1
+,
+4
+Softmax
+over
+𝛼
+1
+,1
+,
+𝛼
+1
+,2
+,
+𝛼
+1
+,3
+,
+𝛼
+1
+,4
+𝑣
+1
+𝑘
+1
+𝑞
+1
+𝑣
+2
+𝑘
+2
+𝑞
+2
+𝑣
+3
+𝑘
+3
+𝑞
+3
+𝑣
+4
+𝑘
+4
+𝑞
+4
+𝑦
+1
+23
+https://arxiv.org/abs/1706.03762"
+8,Transformer,8 -Transformer.pptx,24,𝑎,"𝑎
+2
+,1
+𝑎
+2
+,
+2
+𝑎
+2
+,
+3
+𝑎
+2
+,
+4
+Softmax
+over
+𝛼
+2
+,1
+,
+𝛼
+2
+,2
+,
+𝛼
+2
+,3
+,
+𝛼
+2
+,4
+𝑣
+1
+𝑘
+1
+𝑞
+1
+𝑣
+2
+𝑘
+2
+𝑞
+2
+𝑣
+3
+𝑘
+3
+𝑞
+3
+𝑣
+4
+𝑘
+4
+𝑞
+4
+𝑦
+1
+24
+𝑦
+2
+https://arxiv.org/abs/1706.03762"
+8,Transformer,8 -Transformer.pptx,25,𝑣,"𝑣
+1
+𝑘
+1
+𝑞
+1
+𝑣
+2
+𝑘
+2
+𝑞
+2
+𝑣
+3
+𝑘
+3
+𝑞
+3
+𝑣
+4
+𝑘
+4
+𝑞
+4
+𝑦
+1
+25
+𝑦
+2
+𝑦
+3
+https://arxiv.org/abs/1706.03762
+𝑎
+3
+,1
+𝑎
+3
+,
+2
+𝑎
+3
+,
+3
+𝑎
+3
+,
+4
+Softmax
+over
+𝛼
+3
+,1
+,
+𝛼
+3
+,2
+,
+𝛼
+3
+,3
+,
+𝛼
+3
+,4"
+8,Transformer,8 -Transformer.pptx,26,26,"26
+https://arxiv.org/abs/1706.03762
+𝑣
+1
+𝑘
+1
+𝑞
+1
+𝛼
+4
+,1
+𝛼
+4
+,2
+𝛼
+4
+,3
+𝛼
+4
+,4
+𝑥
+4
+𝑥
+3
+𝑥
+2
+𝑥
+1
+𝑣
+2
+𝑘
+2
+𝑞
+2
+𝑣
+3
+𝑘
+3
+𝑞
+3
+𝑣
+4
+𝑘
+4
+𝑞
+4
+𝑦
+1
+𝑦
+2
+𝑦
+3
+𝑦
+4
+𝑎
+4
+,1
+𝑎
+4
+,
+2
+𝑎
+4
+,
+3
+𝑎
+4
+,
+4"
+8,Transformer,8 -Transformer.pptx,27,27,"27
+Scaled
+Dot-Product Attention: Matrix Dimensions"
+8,Transformer,8 -Transformer.pptx,28,Dot Product is a Similarity Score,"Dot Product is a Similarity Score
+If two vectors are identical → Cosine similarity = 1.0
+If two vectors are unrelated (perpendicular) → Cosine similarity = 0.0
+If two vectors are opposite → Cosine similarity = -1.0
+28
+𝑎
+𝑏
+𝜃
+Geometric interpretation of the dot product
+In attention, the dot product between a query and a key measures how strongly they match."
+8,Transformer,8 -Transformer.pptx,29,Self-Attention: Example,"Represents what a word is trying to understand.
+Represents how each word describes itself.
+compute similarity.
+Dot product of Query ( 𝑄 ) and Key ( 𝐾 ) to determine how much each token should focus on others.
+Step 1:
+Apply
+softmax
+Step 2:
+Converts the similarity scores into probabilities (weights).
+29
+Self-Attention: Example"
+8,Transformer,8 -Transformer.pptx,30,Self-Attention: Example with Dimensions,"Represents the actual meaning that is passed forward
+Compute similarity.
+Dot product of Query ( 𝑄 ) and Key ( 𝐾 ) to determine how much each token should focus on others.
+Step 1:
+Apply
+softmax
+Step 2:
+Converts the similarity scores into probabilities (weights).
+Multiply by Value
+Step 3:
+Extracts relevant information based on attention weights.
+30
+Self-Attention: Example with Dimensions"
+8,Transformer,8 -Transformer.pptx,31,"Self-Attention: Roles of Query, Key, and Value","Term
+Meaning
+Role in Self-Attention
+Query (Q)
+The search request
+What information does this token need?
+Key (K)
+The available knowledge
+How important is this token to others?
+Value (V)
+The actual content
+What information is passed forward?
+Physical Interpretation: Self-attention is like searching a knowledge base.
+Query (Q): what information this token needs
+Key (K): how this token can be matched
+Value (V): the information this token contributes
+31
+Self-Attention: Roles of Query, Key, and Value"
+8,Transformer,8 -Transformer.pptx,32,Attention Visualization,"Attention Visualization
+https://jalammar.github.io/illustrated-transformer/
+32
+“The animal didn't cross the street because
+it
+was too tired”
+when processing “it,” the model assigns more weight to “animal”
+attention maps help visualize which earlier tokens most influence the current token
+What does “it” in this sentence refer to?
+Attention weights show which earlier tokens most influence the current token."
+8,Transformer,8 -Transformer.pptx,33,Self-Attention: Why Positional Information Is Needed,"𝑤
+1
+Dog
+𝑞
+1
+𝑘
+1
+𝑣
+1
+𝑤
+2
+bites
+𝑞
+2
+𝑤
+3
+a
+𝑤
+𝑇
+man
+𝑘
+𝑇
+𝑞
+𝑇
+𝑣
+𝑇
+…
+𝑞
+1
+𝑘
+1
+𝑣
+1
+𝑘
+2
+𝑞
+2
+𝑞
+3
+𝑣
+2
+𝑘
+3
+𝑣
+3
+𝑘
+𝑇
+𝑞
+𝑇
+𝑣
+𝑇
+…
+self-attention
+𝑘
+2
+𝑣
+2
+𝑘
+3
+𝑞
+3
+𝑣
+3
+s
+el
+f
+-
+att
+e
+n
+tion
+Self-attention
+doesn’t know
+the order
+of
+its
+inputs.
+33
+Self-Attention: Why Positional Information Is Needed
+Example:
+“dog bites a man” vs
+“man bites a dog”"
+8,Transformer,8 -Transformer.pptx,34,Positional Encoding in the Transformer,"Positional Encoding in the Transformer
+34
+Next question: What makes a good positional encoding?
+The Transformer sees each token through both what it is and where it is."
+8,Transformer,8 -Transformer.pptx,35,Intuition for Positional Encoding,"Intuition for Positional Encoding
+35
+𝒙
+𝑨
+𝒙
+𝑩
+𝒌
+𝑩
+𝒒
+𝑩
+𝒗
+𝑩
+𝒌
+𝑨
+𝒒
+𝑨
+𝒗
+𝑨
+𝒑
+𝒏
+𝒑
+𝒎
++
++
+𝑎
+Attention depends on both the
+token embedding
+, which encodes meaning, and the
+positional encoding
+, which encodes where the token appears."
+8,Transformer,8 -Transformer.pptx,36,What makes a good positional encoding?,"What makes a good positional encoding?
+A good positional encoding should preserve order information without depending on a fixed sequence length.
+provide a
+unique encoding
+for each position
+reflect
+relative
+position relationships
+avoid depending on the
+total sequence length
+work for positions not seen during training
+integrate naturally with
+token embeddings
+36
+Self-attention
+𝒙
+A
+𝒙
+B
+𝒙
+C
+𝒙
+D
+𝒐
+D
+𝒑
+𝟏
+𝒑
+𝟐
+𝒑
+𝟑
+𝒑
+𝟒
++
++
++
++
+The model now sees both what a word is and where it appears."
+8,Transformer,8 -Transformer.pptx,37,Sinusoidal Positional Encoding: Basic Idea,"Sinusoidal Positional Encoding: Basic Idea
+Each token position is represented by a deterministic vector built from sine and cosine functions at different frequencies.
+37
+https://arxiv.org/abs/1706.03762
+……"
+8,Transformer,8 -Transformer.pptx,38,Sinusoidal Positional Encoding: Results,"Sinusoidal Positional Encoding: Results
+Each token position is represented by a deterministic vector built from sine and cosine functions at different frequencies.
+38
+Low-frequency dimensions capture coarse position; high-frequency dimensions capture fine position."
+8,Transformer,8 -Transformer.pptx,39,Intuition for Sinusoidal Positional Encoding,"Intuition for Sinusoidal Positional Encoding
+Different dimensions use sine and cosine waves with different frequencies, so each position gets a distinct pattern.
+Nearby positions have similar encodings
+Different frequencies capture both local and global position patterns
+The encoding extends naturally to unseen positions
+Sinusoidal encoding gives each position a unique, multi-scale signature.
+39"
+8,Transformer,8 -Transformer.pptx,40,Sinusoidal Positional Encoding: Visualization,"Sinusoidal Positional Encoding: Visualization
+How Sinusoidal Encoding Represents Relative Position
+Nearby positions have similar encodings
+Different frequencies capture both small and large offsets
+Relative distance is reflected in how the encoding changes across positions
+Attention can use these patterns to reason about token order
+Relative position is reflected by how the sinusoidal pattern changes from one token to the next.
+40
+Dimension
+Position"
+8,Transformer,8 -Transformer.pptx,41,Multi-Head Attention: Multiple Views of the Same Sequence,"http://jalammar.github.io/illustrated-transformer/
+41
+Multi-Head Attention: Multiple Views of the Same Sequence"
+8,Transformer,8 -Transformer.pptx,42,Attention vs. Self-Attention,"Attention
+: relates tokens in one sequence to tokens in another sequence
+Self-attention
+: relates tokens within the same sequence
+In the original Transformer, the encoder and decoder use self-attention, and the decoder also uses encoder–decoder attention
+Attention vs. Self-Attention
+42"
+8,Transformer,8 -Transformer.pptx,43,Cross-Attention: Another Example with Dimensions,"43
+Cross-Attention: Another Example with Dimensions
+Queries (Q) come from one sequence
+Keys (K) and Values (V) come from another sequence
+The output is a weighted combination of the values, based on query–key similarity
+Cross-attention lets one sequence retrieve relevant information from another sequence.
+W
+V
+W
+K
+W
+Q
+V
+K
+Q
+Encoder vectors
+Decoder vectors"
+8,Transformer,8 -Transformer.pptx,44,Multi-Head Attention: Why Use Multiple Heads?,"44
+Multi-Head Attention: Why Use Multiple Heads?
+Head 1
+Head 2
+Head 3
+A single attention head captures only one type of relationship at a time
+Multiple heads allow the model to attend to different patterns in parallel
+Different heads may focus on different tokens or different types of dependencies
+Multiple heads provide multiple views of the same sequence."
+8,Transformer,8 -Transformer.pptx,45,Multi-Head Attention: Concatenate and Project,"Multi-Head Attention: Concatenate and Project
+Each head works in a lower-dimensional subspace.
+45"
+8,Transformer,8 -Transformer.pptx,46,Transformer: Summary,"Transformer: Summary
+The Transformer models a sequence by combining content, context, and position.
+46
+input embeddings + positional encodings
+→ Q/K/V projections
+→ self-attention
+→ multi-head combination
+→ feed-forward layer
+→ contextualized token representations."
+8,Transformer,8 -Transformer.pptx,47,References,"Vaswani et al. Attention is all you need,
+https://arxiv.org/abs/1706.03762
+Abigail See’s lectures: http://web.stanford.edu/class/cs224n/index.html
+Illustrated BERT:
+http://jalammar.github.io/illustrated-bert/
+Andrew Ng (Attention):
+https://www.youtube.com/watch?v=quoGRI-1l0A
+Illustrated Transformer:
+https://jalammar.github.io/illustrated-transformer/
+Google (Transformers):
+https://ai.googleblog.com/2017/08/transformer-novel-neural-network.html
+ELMo paper:
+https://arxiv.org/pdf/1802.05365.pdf
+Key recommended resource:
+http://nlp.seas.harvard.edu/2018/04/03/attention.html
+The Annotated Transformer by Sasha Rush
+Jupyter
+Notebook using
+PyTorch
+that explains everything!
+The Illustrated Transformer:
+http://jalammar.github.io/illustrated-transformer/
+Attention visualizer:
+https://github.com/jessevig/bertviz
+47
+References"
+9,LLM,9 - LLM.pptx,1,"Large Language Models (LLM)
+From Pre-Training to Alignment in Large-Scale Language Models","Large Language Models (LLM)
+From Pre-Training to Alignment in Large-Scale Language Models
+Yifeng Zhu
+Electrical and Computer Engineering
+University of Maine"
+9,LLM,9 - LLM.pptx,2,How Large Language Models Work (Big Picture),"How Large Language Models Work (Big Picture)
+LLMs predict the next token, append it, and repeat to generate text
+2"
+9,LLM,9 - LLM.pptx,3,From Text to Tokens: What the Model Actually Sees,"From Text to Tokens: What the Model Actually Sees
+Example 1:
+The weather is nice today.
+→ Six tokens:
+Token IDs: [791, 9282, 374, 6555, 3432, 627]
+Example 2:
+unbelievable
+→ Three tokens
+Token IDs: [359, 32898, 24694]
+Example 3:
+.
+DefaultCellStyle
+→ One token
+Token ID: [98518]
+3
+https://huggingface.co/spaces/Xenova/the-tokenizer-playground
+Tokens are compression artifacts, not words.
+Text is converted into
+tokens
+Tokens are
+learned chunks
+, not necessarily words
+Exact characters matter (including spaces)
+Each token is mapped to a unique ID
+https://platform.openai.com/tokenizer"
+9,LLM,9 - LLM.pptx,4,From Token to Vector: Embeddings,"From Token to Vector: Embeddings
+Example:
+“The weather is”
+Three Token:
+Token IDs: [
+791
+,
+9282
+,
+374
+]
+Embedding:
+791
+→
+[ 0.2, -1.1, 0.7, ... ]
+9282
+→
+[ -0.3, 0.8, 1.2, ... ]
+374
+→
+[ 0.5, -0.6, 0.1, ... ]
+4
+Embedding space encodes semantics through distances and directions."
+9,LLM,9 - LLM.pptx,5,Challenge: Long-Distance Dependency,"Challenge: Long-Distance Dependency
+The
+dog
+that the cat chased
+ran
+away.
+Stephen King
+, a famous author of horror and fantasy novels,
+lives
+in Bangor, Maine.
+5
+LSTMs struggle to preserve information across long sequences."
+9,LLM,9 - LLM.pptx,6,LSTM,"LSTM
+Sequential processing (no parallelism)
+Hard to capture long dependencies
+Gradient issues
+6
+Sepp
+Hochreiter
+; Jürgen
+Schmidhuber
+(1997). ""
+Long short-term memory
+"".
+Neural Computation
+. 9 (8): 1735–1780.
+𝒇
+𝒕
+∘
+𝑪
+𝒕
+−
+𝟏
+Forget Gate
+cell
+state
+C
+t-1
+cell
+state
+C
+t
+hidden
+state
+H
+t-1
+hidden
+state
+H
+t
+Output Gate
+Input Gate"
+9,LLM,9 - LLM.pptx,7,Transformer vs LSTM,"Transformer vs LSTM
+7
+LSTM
+𝑥
+1
+𝑦
+4
+𝑦
+3
+𝑦
+2
+𝑦
+1
+Self-Attention Layer
+LSTM
+𝑥
+2
+LSTM
+𝑥
+3
+LSTM
+𝑥
+4
+𝑐
+𝑥
+1
+𝑥
+2
+𝑥
+3
+𝑥
+4
+Transformers replace recurrence with self-attention and enable parallel computation
+Feature
+LSTM
+Transformer
+Processing
+Sequential
+Parallel
+Memory
+Hidden state
+Attention
+Long-range
+Weak
+Strong"
+9,LLM,9 - LLM.pptx,8,Attention Visualization,"Attention Visualization
+https://jalammar.github.io/illustrated-transformer/
+8
+“The animal didn't cross the street because
+it
+was too tired”
+What does “it” refer to?
+Attention identifies which words matter most for interpretation."
+9,LLM,9 - LLM.pptx,9,Modern LLM Training: From Knowledge to Behavior,"Modern LLM Training: From Knowledge to Behavior
+Pre-Training
+(Self-Supervised Learning)
+Trained on large-scale datasets
+Objective: predict tokens
+Learns general knowledge
+Requires massive compute and data
+Fine-Tuning
+(Alignment & Adaptation)
+Smaller, curated datasets
+Supervised + human feedback
+Shapes behavior and style
+Task-specific performance
+9
+Scaling
+unsupervised
+learning
+on
+the
+internet scale
+From general language knowledge to task-specific behavior
+Pre-training learns knowledge; fine-tuning shapes behavior."
+9,LLM,9 - LLM.pptx,10,Bidirectional Encoder Representation from Transformer (BERT),"B
+idirectional
+E
+ncoder
+R
+epresentation from
+T
+ransformer (BERT)
+Two models were released:
+BERT-Base
+:
+12-layer, 768-dim hidden states, 12-head,
+Total Parameters = 110M
+BERT-Large
+:
+24-layer, 1024-dim hidden states, 16-head
+Total Parameters = 340M
+Pretrained
+on
+64
+TPU
+chips
+for
+four
+days.
+Fine-tuning
+is
+practical
+and
+commonly done
+on
+a
+single
+GPU
+https://
+jalammar.github.io
+/illustrated-transformer/
+10
+[
+Devlin
+et
+al.,
+2018
+]
+BERT is an encoder-only transformer designed for language understanding."
+9,LLM,9 - LLM.pptx,11,BERT Input Representation,"BERT Input Representation
+BERT takes two text segments as input and was originally trained to predict whether the second segment follows the first.
+Later work suggested that next sentence prediction is not essential.
+[
+Devlin
+et
+al., 2018
+,
+Liu et
+al.,
+2019
+]
+11"
+9,LLM,9 - LLM.pptx,12,How BERT is Pre-Trained,"How BERT is Pre-Trained
+Masked Language Model (MLM)
+Mask 15% tokens; predict missing words
+My dog is hairy. → my dog is [MASK].
+Next Sentence Prediction (NSP)
+Input = [CLS] the man went to [MASK] store [SEP] he bought a gallon [MASK] milk [SEP]
+Label =
+IsNext
+Input = [CLS] the man [MASK] to the store [SEP] penguin [MASK] are flightless birds
+Label =
+NotNext
+50% of the inputs use a sentence B that follows sentence A in the original document.
+50% of the inputs are random sentences from the corpus as sentence B.
+E
+i
+= Embedding of input token
+i
+T
+i
+= Contextual representation of token
+i
+[CLS] = Special symbol for classification output
+[SEP] = Special symbol to separate non-consecutive token sequences
+12"
+9,LLM,9 - LLM.pptx,13,Fine-Tuning Example: Quora Question Pairs,"Fine-Tuning Example: Quora Question Pairs
+13
+https://
+arxiv.org
+/abs/1810.04805
+Task: determine whether two questions have the same meaning.
+Example:
+Q1: Should I learn Python or Java first?
+Q2: If I had to choose between learning Java and Python, what should I choose to learn first?
+Same model, different heads"
+9,LLM,9 - LLM.pptx,14,Fine-Tuning Example: Sentiment Analysis,"Fine-Tuning Example: Sentiment Analysis
+14
+https://
+arxiv.org
+/abs/1810.04805
+11,855 single sentences extracted from movie reviews
+Single-sentence binary classification
+This film doesn’t care about clearness, wit, or any other kind of intelligent humor. (
+Negative
+)
+The gorgeously elaborated continuation of The Lord of the Rings trilogy is so huge that a column of words can not adequately describe co-writer/director Peter Jackson’s expanded vision of J.R.R. Tolkien’s Middle-earth. (
+Positive
+)
+Same model, different heads"
+9,LLM,9 - LLM.pptx,15,Fine-Tuning Example: Question Answering,"Fine-Tuning Example: Question Answering
+15
+https://
+arxiv.org
+/abs/1810.04805
+Stanford Question Answering Dataset (
+SQuAD
+)
+Given a question and a passage from Wikipedia containing the answer, the task is to predict the answer text span in the passage.
+The model predicts the start and end positions of the answer span."
+9,LLM,9 - LLM.pptx,16,Fine-Tuning Example: Named Entity Recognition,"Fine-Tuning Example: Named Entity Recognition
+16
+https://
+arxiv.org
+/abs/1810.04805
+Named Entity Recognition (NER)
+NER identifies entities such as people, organizations, locations, times, and quantities.
+Example:
+Input: U.N official Smith heads for Baghdad.
+[
+ORG
+U.N.
+] official [
+PER
+Smith
+] heads for [
+LOC
+Baghdad
+] .
+Same model, different heads"
+9,LLM,9 - LLM.pptx,17,"GPT vs BERT
+Encoder-only vs. Decoder-only","GPT vs BERT
+Encoder-only vs. Decoder-only
+http://
+jalammar.github.io
+/illustrated-gpt2/
+17
+Model
+Architecture
+Typical Use
+BERT
+Encoder-only
+Understanding
+GPT
+Decoder-only
+Generation
+BERT reads → GPT writes"
+9,LLM,9 - LLM.pptx,18,BERT,"BERT
+http://
+jalammar.github.io
+/illustrated-gpt2/
+GPT
+18
+Causal Masking in GPT
+At position 4, GPT can attend only to the current token and earlier tokens. This masking prevents access to future tokens."
+9,LLM,9 - LLM.pptx,19,GPT Uses the Transformer Decoder,"GPT Uses the Transformer Decoder
+GPT is a decoder-only transformer for autoregressive text generation.
+Full transformer
+19
+Uses only the decoder stack
+Keys and values come form the same sequence as queries.
+Uses
+causal self-attention
+Generates one token at a time
+Causal self-attention = each token cannot see future tokens."
+9,LLM,9 - LLM.pptx,20,Autoregressive Language Models,"Autoregressive Language Models
+20
+S =
+What
+are
+you
+reading
+?
+Modeling the probability of the next token:
+GPT predicts each next token from the tokens before it.
+LLMs are transformers trained to predict the next token given context"
+9,LLM,9 - LLM.pptx,21,Next-Token Prediction Example,"Next-Token Prediction Example
+Given the text so far, predict the next token.
+Different from Seq-to-Seq models
+21
+The weekend will be lovely with
+Input to the model
+sunny
+3.3%
+warm
+3.1%
+cool
+2.8%
+seasonable
+2.5%
+dry
+1.2%
+Output of the model (top 5)
+The model outputs a probability distribution over possible next tokens."
+9,LLM,9 - LLM.pptx,22,Few-Shot Learning,"22
+https://arxiv.org/abs/2005.14165v4
+Large language models can often perform new tasks directly from prompts and examples.
+Few-Shot Learning"
+9,LLM,9 - LLM.pptx,23,In-Context Learning,"23
+In-Context Learning
+Instead of updating model weights, we provide examples directly in the prompt."
+9,LLM,9 - LLM.pptx,24,Scaling Laws,"Scaling Laws
+Validation loss follows a power-law trend as model size, data, and compute increase.
+24
+https://arxiv.org/abs/2005.14165v4
+GPT (2018)
+117M Parameters
+1GB Data
+GPT-2 (2019)
+1542M Parameters
+40GB Data
+GPT-3 (2020)
+175B Parameters
+570GB Data filtered from 45TB
+Bigger models + more data → better performance"
+9,LLM,9 - LLM.pptx,25,"InstructGPT, a sibling to ChatGPT","Published in 2022
+InstructGPT
+, a sibling to ChatGPT
+25
+InstructGPT
+fine-tunes GPT-3 to better follow user instructions."
+9,LLM,9 - LLM.pptx,26,Why Alignment Matters,"Why Alignment Matters
+Misaligned models may be:
+Unhelpful
+Inaccurate
+Toxic or harmful
+Aligned models should be:
+Helpful
+Truthful
+Harmless
+26
+Example harmful outputs: hate speech, spam, biased or unsafe content"
+9,LLM,9 - LLM.pptx,27,Survey Interface,"27
+Survey Interface"
+9,LLM,9 - LLM.pptx,28,Step 1: Supervised Fine-Tuning,"40 labelers
+1.5k training, 1.5k validation
+Step 1: Supervised Fine-Tuning
+28"
+9,LLM,9 - LLM.pptx,29,Step 2: Train a Reward Model,"29
+40 labelers
+1.5k training, 1.5k validation
+150k training, 80k validation
+Train a reward model from human preference comparisons
+Step 2: Train a Reward Model"
+9,LLM,9 - LLM.pptx,30,Step 3: Optimize with RLHF,"30
+40 labelers
+1.5k training, 1.5k validation
+150k training, 80k validation
+32k training, 16k validation
+Step 3: Optimize with RLHF
+RLHF = Reinforcement Learning from Human Feedback"
+9,LLM,9 - LLM.pptx,31,Main Result: InstructGPT,"Main Result:
+InstructGPT
+Labelers significantly prefer
+InstructGPT
+outputs over outputs from GPT-3
+A smaller aligned model can outperform a larger unaligned model
+A 1.3B aligned model outperformed unaligned 175B model.
+Data quality matters.
+https://
+arxiv.org
+/abs/2203.02155
+31"
+9,LLM,9 - LLM.pptx,32,Summary,"Summary
+Pre-training → learn language
+Fine-tuning → learn tasks
+Alignment → learn behavior
+32"
+10,VIT,10 - VIT.pptx,1,"Transformers for Vision
+From ViT to Multimodal Vision Models","Transformers for Vision
+From
+ViT
+to Multimodal Vision Models
+Yifeng Zhu
+Electrical and Computer Engineering
+University of Maine"
+10,VIT,10 - VIT.pptx,2,Transformers for Vision,"Transformers for Vision
+2
+How can we reduce the number of visual tokens while keeping useful information?"
+10,VIT,10 - VIT.pptx,3,First Vision Transformer Paper,"First Vision Transformer Paper
+3
+Demonstrated for the first time that transformers alone (without CNNs) can achieve top-tier performance on image classification tasks.
+https://arxiv.org/abs/2010.11929"
+10,VIT,10 - VIT.pptx,4,Core Idea of ViT: Turn an Image into a Sequence of Tokens,"4
+Core Idea of
+ViT
+: Turn an Image into a Sequence of Tokens
+An Image is Worth 16x16 Words: Transformers for Image Recognition at Scale,
+Dosovitskiy
+et al., ICLR 2021
+https://arxiv.org/abs/2010.11929
+ViT
+treats image patches as tokens, similar to words in NLP."
+10,VIT,10 - VIT.pptx,5,"VIT Architecture
+Overview","VIT Architecture
+Overview
+5
+Split an image into fixed-size patches
+Treat patches as tokens and feed them to a Transformer encoder
+Global self-attention captures long-range relationships across the image
+ViT
+shows that pure Transformers can work for vision."
+10,VIT,10 - VIT.pptx,6,Inductive Bias,"Inductive Bias
+Inductive bias
+is the built-in assumption a model uses to generalize beyond the training data
+It helps the model decide
+what patterns are likely to matter
+before seeing enough data
+Without inductive bias, learning would require much more data and computation
+6
+Stronger inductive bias can make learning easier; weaker inductive bias can make the model more general but more data-hungry.
+CNN:
+strong inductive bias
+locality
+translation equivariance
+hierarchical feature extraction
+ViT
+: weaker inductive bias
+fewer built-in assumptions about images
+more flexible, but often needs more data or stronger pretraining"
+10,VIT,10 - VIT.pptx,7,Vision Transformer Architecture Overview,"Vision Transformer Architecture Overview
+Cat
+image
+is
+free
+for
+commercial
+use
+under
+a
+Pixabay
+license
+Dosovitskiy
+et
+al,
+“An
+Image
+is
+Worth
+16x16
+Words:
+Transformers
+for
+Image
+Recognition
+at
+Scale”,
+ICLR
+2021"
+10,VIT,10 - VIT.pptx,8,Standard Transformer on Patches,"Standard
+Transformer
+on
+Patches
+Cat
+image
+is
+free
+for
+commercial
+use
+under
+a
+Pixabay
+license
+Dosovitskiy
+et
+al,
+“An
+Image
+is
+Worth
+16x16
+Words:
+Transformers
+for
+Image
+Recognition
+at
+Scale”,
+ICLR
+2021"
+10,VIT,10 - VIT.pptx,9,Patch Tokens as the Input Sequence,"Patch Tokens as the Input Sequence
+N
+input
+patches,
+each
+of
+shape
+3x16x16
+Cat
+image
+is
+free
+for
+commercial
+use
+under
+a
+Pixabay
+license
+Dosovitskiy
+et
+al,
+“An
+Image
+is
+Worth
+16x16
+Words:
+Transformers
+for
+Image
+Recognition
+at
+Scale”,
+ICLR
+2021"
+10,VIT,10 - VIT.pptx,10,Patch Embedding via Linear Projection,"Patch Embedding via Linear Projection
+Linear
+projection
+to
+D-
+dimensional
+vector
+N
+input
+patches,
+each
+of
+shape
+3x16x16
+Cat
+image
+is
+free
+for
+commercial
+use
+under
+a
+Pixabay
+license
+Dosovitskiy
+et
+al,
+“An
+Image
+is
+Worth
+16x16
+Words:
+Transformers
+for
+Image
+Recognition
+at
+Scale”,
+ICLR
+2021"
+10,VIT,10 - VIT.pptx,11,Adding Positional Embeddings to Patch Tokens,"Adding Positional Embeddings to Patch Tokens
++
++
++
++
++
++
++
++
++
+Linear
+projection
+to
+D-
+dimensional
+vector
+N
+input
+patches,
+each
+of
+shape
+3x16x16
+Cat
+image
+is
+free
+for
+commercial
+use
+under
+a
+Pixabay
+license
+Dosovitskiy
+et
+al,
+“An
+Image
+is
+Worth
+16x16
+Words:
+Transformers
+for
+Image
+Recognition
+at
+Scale”,
+ICLR
+2021
+Add
+positional
+embedding:
+learned
+D-
+dim
+vector
+per
+position"
+10,VIT,10 - VIT.pptx,12,Applying a Standard Transformer Encoder,"Applying a Standard Transformer Encoder
+Add
+positional
+embedding:
+learned
+D-
+dim
+vector
+per
+position
+Linear
+projection
+to
+Transformer
+Output
+vectors
+Exact
+same
+as
+NLP
+Transformer!
++
++
++
++
++
++
++
++
++
+D-
+dimensional
+vector
+N
+input
+patches,
+each
+of
+shape
+3x16x16
+Cat
+image
+is
+free
+for
+commercial
+use
+under
+a
+Pixabay
+license
+Dosovitskiy
+et
+al,
+“An
+Image
+is
+Worth
+16x16
+Words:
+Transformers
+for
+Image
+Recognition
+at
+Scale”,
+ICLR
+2021"
+10,VIT,10 - VIT.pptx,13,Adding the Classification Token [CLS],"Adding the Classification Token [CLS]
+Add
+positional
+embedding:
+learned
+D-
+dim
+vector
+per
+position
+Linear
+projection
+to
+Output
+vectors
+Exact
+same
+as
+NLP
+Transformer!
+Special
+extra
+input:
+classification
+token
+(D
+dims,
+learned)
++
++
++
++
++
++
++
++
++
+Transformer
+D-
+dimensional
+vector
+N
+input
+patches,
+each
+of
+shape
+3x16x16
+Cat
+image
+is
+free
+for
+commercial
+use
+under
+a
+Pixabay
+license
+Dosovitskiy
+et
+al,
+“An
+Image
+is
+Worth
+16x16
+Words:
+Transformers
+for
+Image
+Recognition
+at
+Scale”,
+ICLR
+2021"
+10,VIT,10 - VIT.pptx,14,From Transformer Outputs to Class Prediction,"From Transformer Outputs to Class Prediction
+Dosovitskiy
+et
+al,
+“An
+Image
+is
+Worth
+16x16
+Words:
+Transformers
+for
+Image
+Recognition
+at
+Scale”,
+ICLR
+2021
+Cat
+image
+is
+free
+for
+commercial
+use
+under
+a
+Pixabay
+license
+Add
+positional
+embedding:
+learned
+D-
+dim
+vector
+per
+position
+Linear
+projection
+to
+D-
+dimensional
+vector
+N
+input
+patches,
+each
+of
+shape
+3x16x16
+Output
+vectors
+Exact
+same
+as
+NLP
+Transformer!
+Special
+extra
+input:
+classification
+token
+(D
+dims,
+learned)
++
++
++
++
++
++
++
++
++
+Linear
+projection
+to
+C-
+dim
+vector
+of
+predicted
+class
+scores
+Transformer"
+10,VIT,10 - VIT.pptx,15,ViT as a Pure Transformer for Vision,"ViT
+as a Pure Transformer for Vision
+Dosovitskiy
+et
+al,
+“An
+Image
+is
+Worth
+16x16
+Words:
+Transformers
+for
+Image
+Recognition
+at
+Scale”,
+ICLR
+2021
+Cat
+image
+is
+free
+for
+commercial
+use
+under
+a
+Pixabay
+license
+Add
+positional
+embedding:
+learned
+D-
+dim
+vector
+per
+position
+Linear
+projection
+to
+D-
+dimensional
+vector
+N
+input
+patches,
+each
+of
+shape
+3x16x16
+Output
+vectors
+Exact
+same
+as
+NLP
+Transformer!
+Special
+extra
+input:
+classification
+token
+(D
+dims,
+learned)
+Linear
+projection
+to
+C-
+dim
+vector
+of
+predicted
+class
+scores
++
++
++
++
++
++
++
++
++
+Transformer
+Computer
+vision
+model
+with
+no
+convolutions!"
+10,VIT,10 - VIT.pptx,16,ViT Is Not Completely Convolution-Free,"ViT
+Is Not Completely Convolution-Free
+Dosovitskiy
+et
+al,
+“An
+Image
+is
+Worth
+16x16
+Words:
+Transformers
+for
+Image
+Recognition
+at
+Scale”,
+ICLR
+2021
+Cat
+image
+is
+free
+for
+commercial
+use
+under
+a
+Pixabay
+license
+Add
+positional
+embedding:
+learned
+D-
+dim
+vector
+per
+position
+Linear
+projection
+to
+D-
+dimensional
+vector
+N
+input
+patches,
+each
+of
+shape
+3x16x16
+Output
+vectors
+Exact
+same
+as
+NLP
+Transformer!
+Special
+extra
+input:
+classification
+token
+(D
+dims,
+learned)
+Linear
+projection
+to
+C-
+dim
+vector
+of
+predicted
+class
+scores
+Computer
+vision
+model
+with
+no
+convolutions!
+Not
+quite:
+With
+patch
+size
+p,
+first
+layer
+is
+Conv2D(pxp
+x
+3-
+>
+1
+D,
+stride=p)
++
++
++
++
++
++
++
++
++
+Transformer"
+10,VIT,10 - VIT.pptx,17,ViT Is Not Completely Convolution-Free,"ViT
+Is Not Completely Convolution-Free
+Dosovitskiy
+et
+al,
+“An
+Image
+is
+Worth
+16x16
+Words:
+Transformers
+for
+Image
+Recognition
+at
+Scale”,
+ICLR
+2021
+Cat
+image
+is
+free
+for
+commercial
+use
+under
+a
+Pixabay
+license
+Add
+positional
+embedding:
+learned
+D-
+dim
+vector
+per
+position
+Linear
+projection
+to
+D-
+dimensional
+vector
+N
+input
+patches,
+each
+of
+shape
+3x16x16
+Output
+vectors
+Exact
+same
+as
+NLP
+Transformer!
+Special
+extra
+input:
+classification
+token
+(D
+dims,
+learned)
+Linear
+projection
+to
+C-
+dim
+vector
+of
+predicted
+class
+scores
+Computer
+vision
+model
+with
+no
+convolutions!
++
++
++
++
++
++
++
++
++
+Transformer
+Not
+quite:
+MLPs
+in
+Transformer
+are
+stacks
+of
+1x1
+convolution"
+10,VIT,10 - VIT.pptx,18,Token Count and Attention Cost in ViT,"Dosovitskiy
+et
+al,
+“An
+Image
+is
+Worth
+16x16
+Words:
+Transformers
+for
+Image
+Recognition
+at
+Scale”,
+ICLR
+2021
+Cat
+image
+is
+free
+for
+commercial
+use
+under
+a
+Pixabay
+license
+Add
+positional
+embedding:
+learned
+D-
+dim
+vector
+per
+position
+Linear
+projection
+to
+D-
+dimensional
+vector
+N
+input
+patches,
+each
+of
+shape
+3x16x16
+Output
+vectors
+Exact
+same
+as
+NLP
+Transformer!
+Special
+extra
+input:
+classification
+token
+(D
+dims,
+learned)
+Linear
+projection
+to
+C-
+dim
+vector
+of
+predicted
+class
+scores
+In
+practice:
+take
+224x224
+input
+image,
+divide
+into
+14x14
+grid
+of
+16x16
+pixel
+patches
+(or
+16x16
+grid
+of
+14x14
+patches)
++
++
++
++
++
++
++
++
++
+Transformer
+Each
+attention
+matrix
+has
+14
+4
+=
+38,416
+entries,
+takes
+150
+KB
+(or
+65,536
+entries,
+takes
+256
+KB)
+Token Count and Attention Cost in
+ViT"
+10,VIT,10 - VIT.pptx,19,Memory Cost of Full Attention in ViT,"Dosovitskiy
+et
+al,
+“An
+Image
+is
+Worth
+16x16
+Words:
+Transformers
+for
+Image
+Recognition
+at
+Scale”,
+ICLR
+2021
+Cat
+image
+is
+free
+for
+commercial
+use
+under
+a
+Pixabay
+license
+Add
+positional
+embedding:
+learned
+D-
+dim
+vector
+per
+position
+Linear
+projection
+to
+D-
+dimensional
+vector
+N
+input
+patches,
+each
+of
+shape
+3x16x16
+Output
+vectors
+Exact
+same
+as
+NLP
+Transformer!
+Special
+extra
+input:
+classification
+token
+(D
+dims,
+learned)
+Linear
+projection
+to
+C-
+dim
+vector
+of
+predicted
+class
+scores
+In
+practice:
+take
+224x224
+input
+image,
+divide
+into
+14x14
+grid
+of
+16x16
+pixel
+patches
+(or
+16x16
+grid
+of
+14x14
+patches)
++
++
++
++
++
++
++
++
++
+Transformer
+With
+48
+layers,
+16
+heads
+per
+layer,
+all
+attention
+matrices take
+112
+MB
+(or
+192MB)
+Memory Cost of Full Attention in
+ViT"
+10,VIT,10 - VIT.pptx,20,Pre-train ViT on large datasets and Fine-tuning on downstream tasks,"Pre-train
+ViT
+on large datasets and
+Fine-tuning on downstream tasks
+Pretrained
+Fine-
+tuned
+Test
+Accuracy
+Training
+Set
+of
+Dataset
+B
+Test
+Set
+of
+Dataset
+B
+Large Labeled
+Dataset
+A
+Un
+trained
+20"
+10,VIT,10 - VIT.pptx,21,ViT: Fine-tuning and Higher Resolution,"ViT
+: Fine-tuning and Higher Resolution
+21"
+10,VIT,10 - VIT.pptx,22,Labeled Classification Datasets,"Labeled Classification
+Datasets
+#
+of
+Images
+#
+of
+Classes
+ImageNet (
+Small
+)
+1.3
+Million
+1
+,000
+ImageNet-
+21K
+(
+Medium
+)
+14
+Million
+21
+,000
+JFT
+(
+Big
+)
+300
+Million
+1
+8,000
+22"
+10,VIT,10 - VIT.pptx,23,Image Classification Accuracies,"Experimental Setup
+Pre-train the model on Dataset A
+Fine-tune it on Dataset B
+Evaluate performance on Dataset B
+Results
+When pre-trained on ImageNet (small),
+ViT
+performs slightly worse than
+ResNet
+When pre-trained on ImageNet-21K (medium),
+ViT
+performs comparably to
+ResNet
+When pre-trained on JFT (large),
+ViT
+performs slightly better than
+ResNet
+Image
+Classification
+Accuracies
+23
+ViT
+benefits much more from large-scale pretraining than
+ResNet
+."
+10,VIT,10 - VIT.pptx,24,Data-efficient Image Transformer (DeiT),"Data-efficient Image Transformer (
+DeiT
+)
+ViT
+works well, but usually needs large-scale pretraining
+DeiT
+shows that
+ViTs
+can be trained on ImageNet-1K only
+A distillation token lets the model learn from a CNN teacher
+24
+Touvron
+et al., Training Data-efficient Image Transformers & Distillation through Attention, ICML 2021
+https://arxiv.org/abs/2012.12877
+DeiT
+made Vision Transformers practical without huge private datasets."
+10,VIT,10 - VIT.pptx,25,Improving ViT: Distillation,"Improving
+ViT:
+Distillation
+Step
+1:
+Train
+a
+t
+eacher
+model
+on
+images
+and
+ground-
+truth
+labels
+Hinton
+et
+al,
+“Distilling
+the
+knowledge
+in
+a
+neural
+network”,
+NeurIPS
+Deep
+Learning
+and
+Representation
+Learning
+Workshop,
+2015
+P(cat)
+=
+0.9
+P(dog)
+=
+0.1
+GT
+label:
+Cat
+Cross
+Entropy
+Loss"
+10,VIT,10 - VIT.pptx,26,Knowledge Distillation: Teacher–Student Training,"Step
+1:
+Train
+a
+t
+eacher
+model
+on
+images
+and
+ground-
+truth
+labels
+Step
+2:
+Train
+a
+student
+model
+to
+match
+predictions
+from
+the
+teacher
+P(cat)
+=
+0.9
+P(dog)
+=
+0.1
+GT
+label:
+Cat
+Cross
+Entropy
+Loss
+P(cat)
+=
+0.1
+P(dog)
+=
+0.9
+P(cat)
+=
+0.2
+P(dog)
+=
+0.8
+KL
+Divergence
+Loss
+Hinton
+et
+al,
+“Distilling
+the
+knowledge
+in
+a
+neural
+network”,
+NeurIPS
+Deep
+Learning
+and
+Representation
+Learning
+Workshop,
+2015
+Knowledge Distillation: Teacher–Student Training"
+10,VIT,10 - VIT.pptx,27,Distillation with Ground Truth and Teacher Targets,"Distillation with Ground Truth and Teacher Targets
+Step
+1:
+Train
+a
+teacher
+model
+on
+images
+and
+ground-
+truth
+labels
+Step
+2:
+Train
+a
+student
+model
+to
+match
+predictions
+from
+the
+teacher
+(sometimes
+also
+to
+match
+GT
+labels)
+P(cat)
+=
+0.9
+P(dog)
+=
+0.1
+GT
+label:
+Cat
+Cross
+Entropy
+Loss
+P(cat)
+=
+0.1
+P(dog)
+=
+0.9
+P(cat)
+=
+0.2
+P(dog)
+=
+0.8
+KL
+Divergence
+Loss
+Cross
+Entropy
+Loss
+GT
+label:
+Dog
+Hinton
+et
+al,
+“Distilling
+the
+knowledge
+in
+a
+neural
+network”,
+NeurIPS
+Deep
+Learning
+and
+Representation
+Learning
+Workshop,
+2015"
+10,VIT,10 - VIT.pptx,28,Why Distillation Helps the Student Model,"Why Distillation Helps the Student Model
+Step
+1:
+Train
+a
+teacher
+model
+on
+images
+and
+ground-
+truth
+labels
+Step
+2:
+Train
+a
+student
+model
+to
+match
+predictions
+from
+the
+teacher
+(sometimes
+also
+to
+match
+GT
+labels)
+P(cat)
+=
+0.9
+P(dog)
+=
+0.1
+GT
+label:
+Cat
+Entropy
+Loss
+Often
+works
+better
+than
+training
+student
+from
+scratch
+(especially
+if
+teacher
+is
+bigger
+than
+student)
+Cross
+P(cat)
+=
+0.1
+P(dog)
+=
+0.9
+P(cat)
+=
+0.2
+P(dog)
+=
+0.8
+KL
+Divergence
+Loss
+Cross
+Entropy
+Loss
+GT
+label:
+Dog
+Hinton
+et
+al,
+“Distilling
+the
+knowledge
+in
+a
+neural
+network”,
+NeurIPS
+Deep
+Learning
+and
+Representation
+Learning
+Workshop,
+2015"
+10,VIT,10 - VIT.pptx,29,DeiT: Distilling a CNN Teacher into a ViT,"DeiT
+: Distilling a CNN Teacher into a
+ViT
+Step
+1:
+Train
+a
+CNN teacher
+model
+on
+images
+and
+ground-
+truth
+labels
+Step
+2:
+Train
+a
+student
+ViT
+to
+match
+ImageNet
+predictions
+from
+the
+teacher
+CNN
+(and
+match
+GT
+labels)
+P(cat)
+=
+0.9
+P(dog)
+=
+0.1
+GT
+label:
+Cat
+Cross
+Entropy
+Loss
+Touvrom
+et
+al,
+“Training
+data-
+efficient
+image
+transformers
+&
+distillation
+through
+attention”,
+ICML
+2021
+P(cat)
+=
+0.1
+P(dog)
+=
+0.9
+P(cat)
+=
+0.2
+P(dog)
+=
+0.8
+KL
+Divergence
+Loss
+Cross
+Entropy
+Loss
+GT
+label:
+Dog"
+10,VIT,10 - VIT.pptx,30,DeiT Architecture: Adding a Distillation Token,"DeiT
+Architecture: Adding a Distillation Token
+Touvrom
+et
+al,
+“Training
+data-
+efficient
+image
+transformers
+&
+distillation
+through
+attention”,
+ICML
+2021
+Input
+patches
+Linear
+projection
+Output
+vectors
+Classification token
++
++
++
++
++
++
++
++
++
+Positional
+Embedding
+Predicted
+class
+scores;
+should
+match ground-truth
+Transformer
+Distillation
+token
+Predicted
+class
+scores;
+should
+match
+teacher"
+10,VIT,10 - VIT.pptx,31,DeiT Improves ImageNet Accuracy,"DeiT
+Improves ImageNet Accuracy
+86
+84
+82
+80
+78
+76
+74
+Original
+ViT-
+B/16
++Distillation
++Longer
+training
++Higher
+resolution
+(300 to
+1000
+epochs)
+(224x224
+to
+384x384)
+Top1
+Accuracy
+ViT-
+B/16
+on
+ImageNet
+Touvrom
+et
+al,
+“Training
+data-
+efficient
+image
+transformers
+&
+distillation
+through
+attention”,
+ICML
+2021"
+10,VIT,10 - VIT.pptx,32,Longer Training and Higher Resolution Improve DeiT,"Longer Training and Higher Resolution Improve
+DeiT
+86
+84
+82
+80
+78
+76
+74
+Touvrom
+et
+al,
+“Training
+data-
+efficient
+image
+transformers
+&
+distillation
+through
+attention”,
+ICML
+2021
+Original
+ViT-
+B/16
++Distillation
++Longer
+training
+(300 to
+1000
+epochs)
++Higher
+resolution
+(224x224
+to
+384x384)
+Top1
+Accuracy
+ViT-
+B/16
+on
+ImageNet"
+10,VIT,10 - VIT.pptx,33,Why Vanilla ViT Tokenization Is Too Crude,"Why Vanilla
+ViT
+Tokenization Is Too Crude
+ViT
+splits an image into
+fixed-size patches
+in one step
+This hard split is simple, but it weakens local continuity across patch boundaries.
+As a result, vanilla
+ViT
+has:
+weaker inductive bias
+than CNNs
+Inductive bias
+= the built-in assumptions that guide how a model learns and generalizes.
+lower sample efficiency
+Sample efficiency
+means how well a model learns from a limited amount of training data.
+stronger dependence on
+very large pretraining datasets
+33
+Yuan et al.,
+Tokens-to-Token
+ViT
+: Training Vision Transformers from Scratch on ImageNet
+, ICCV 2021
+https://arxiv.org/abs/2101.11986
+Vanilla
+ViT
+sees image patches, but does not naturally build local visual structure."
+10,VIT,10 - VIT.pptx,34,T2T-ViT: Progressive Tokenization,"T2T-ViT: Progressive Tokenization
+T2T-ViT does not keep the initial tokens fixed.
+It progressively re-forms tokens from neighboring tokens.
+This adds local structure while shortening the token sequence over stages.
+34
+T2T-ViT makes
+ViTs
+more data-efficient and more vision-friendly by injecting local structure into tokenization."
+10,VIT,10 - VIT.pptx,35,Soft Split = Overlapping Tokenization,"Soft Split = Overlapping Tokenization
+T2T-ViT: progressive tokenization with overlap
+Benefit: better local structure and better sample efficiency
+35
+T2T-ViT makes
+ViTs
+more data-efficient and more vision-friendly by injecting local structure into tokenization.
+How Soft Split Works (Step-by-Step)
+Start with an image (or reconstructed feature map)
+Slide a
+k × k window
+across the image
+Use
+stride < k
+→ creates overlap
+For each window:
+Flatten it → becomes a token
+Output = a new sequence of tokens"
+10,VIT,10 - VIT.pptx,36,Pyramid Vision Transformer (PVT),"Pyramid Vision Transformer (PVT)
+Vanilla
+ViT
+keeps the same token resolution throughout the network.
+PVT instead builds a hierarchical pyramid of features, like a CNN.
+This design is better matched to vision tasks that need multi-scale representations.
+36
+Wang et al., Pyramid Vision Transformer: A Versatile Backbone for Dense Prediction without Convolutions, ICCV 2021
+https://arxiv.org/abs/2102.12122"
+10,VIT,10 - VIT.pptx,37,Pyramid Vision Transformer (PVT): Achitecture,"Pyramid Vision Transformer (PVT):
+Achitecture
+Builds a multi-scale pyramid of features (like a CNN).
+37
+Wang et al., Pyramid Vision Transformer: A Versatile Backbone for Dense Prediction without Convolutions, ICCV 2021
+https://arxiv.org/abs/2102.12122
+PVT =
+ViT
++ CNN-style feature pyramid for dense vision tasks.
+Spatial-Reduction Attention"
+10,VIT,10 - VIT.pptx,38,"Spatial-Reduction Attention (SRA): Keep Q, Reduce K and V","Spatial-Reduction Attention (SRA): Keep Q, Reduce K and V
+Standard attention is expensive at high resolution
+SRA reduces cost by compressing K and V only
+SRA produces the same output shape as standard attention (H × W × C).
+38
+Key Ides:
+Q: full resolution (fine-grained)
+K, V:
+downsampled
+(coarse summary)
+implemented via
+strided
+conv or patch grouping
+Each query attends to a compressed global context
+Example:
+56×56 → 3136 tokens
+R=4 → K,V = 14×14 = 196 tokens
+SRA keeps full-resolution outputs while reducing computation by compressing K and V.
+Standard Attention
+SRA
+Q, K, V: H × W
+Q: H × W
+K, V: H/R × W/R"
+10,VIT,10 - VIT.pptx,39,Swin Transformer: Hierarchical ViT,"Swin Transformer: Hierarchical
+ViT
+Starts with small 4×4 patches
+Computes self-attention within local windows
+Shifts the windows in the next layer to connect neighboring regions
+Builds a hierarchical representation by merging patches across stages
+Liu et al, Swin Transformer: Hierarchical Vision Transformer using Shifted Windows, CVPR 2021
+https://arxiv.org/abs/2103.14030
+Swin adds locality and hierarchy while keeping Transformer flexibility.
+39"
+10,VIT,10 - VIT.pptx,40,CNNs Use Hierarchical Feature Maps,"CNNs Use Hierarchical Feature Maps
+Input:
+3
+x
+224
+x
+224
+7x7
+conv,
+64,
+/
+2
+Pool
+3x3
+conv,
+64
+3x3
+conv,
+64
+3x3
+conv,
+64
+3x3
+conv,
+64
+3x3
+conv,
+64
+3x3
+conv,
+64
+3x3
+conv,
+128
+3x3
+conv,
+128,
+/
+2
+3x3
+conv,
+128
+3x3
+conv,
+128
+3x3
+conv,
+128
+3x3
+conv,
+128
+3x3
+conv,
+512
+3x3
+conv,
+512,
+/2
+3x3
+conv,
+512
+3x3
+conv,
+512
+3x3
+conv,
+512
+3x3
+conv,
+512
+Input
+Stage
+1:
+64
+x
+56
+x
+56
+Stage
+2:
+128
+x
+28
+x
+28
+Stage
+3:
+256
+x
+14
+x
+14
+In
+most
+CNNs
+(including ResNets),
+decrease
+resolution
+and
+increase
+channels
+as
+you
+go
+deeper
+in
+the
+network (Hierarchical
+architecture)
+Useful
+since
+objects
+in
+images
+can
+occur
+at
+various
+scales
+40"
+10,VIT,10 - VIT.pptx,41,ViT Uses an Isotropic Architecture,"ViT
+Uses an Isotropic Architecture
+Input
+3x3
+conv,
+64
+7x7
+conv,
+64,
+/
+2
+Pool
+3x3
+conv,
+64
+3x3
+conv,
+64
+3x3
+conv,
+64
+3x3
+conv,
+64
+3x3
+conv,
+64
+3x3
+conv,
+128
+3x3
+conv,
+128,
+/
+2
+3x3
+conv,
+128
+3x3
+conv,
+128
+3x3
+conv,
+128
+3x3
+conv,
+128
+3x3
+conv,
+512
+3x3
+conv,
+512,
+/2
+3x3
+conv,
+512
+3x3
+conv,
+512
+3x3
+conv,
+512
+3x3
+conv,
+512
+Input:
+3
+x
+224
+x
+224
+Stage
+1:
+64
+x
+56
+x
+56
+Stage
+2:
+128
+x
+28
+x
+28
+Stage
+3:
+256
+x
+14
+x
+14
+In
+most
+CNNs
+(including ResNets),
+decrease
+resolution
+and
+increase
+channels
+as
+you
+go
+deeper
+in
+the
+network (Hierarchical
+architecture)
+Useful
+since
+objects
+in
+images
+can
+occur
+at
+various
+scales
+Layer
+Normalization
++
+MLP
+MLP
+MLP
+MLP
+Layer
+Normalization
++
+Self-
+Attention
+Layer
+Normalization
++
+MLP
+MLP
+MLP
+MLP
+Layer
+Normalization
++
+Self-
+Attention
+Layer
+Normalization
++
+MLP
+MLP
+MLP
+MLP
+Layer
+Normalization
++
+Self-
+Attention
+Input:
+3
+x
+224
+x
+224
+1
+st
+block:
+768
+x
+14
+x
+14
+2
+nd
+block:
+768
+x
+14
+x
+14
+3
+rd
+block:
+768
+x
+14
+x
+14
+In
+a
+ViT,
+all
+blocks
+have
+same
+resolution
+and
+number
+of
+channels
+(Isotropic
+architecture)
+41"
+10,VIT,10 - VIT.pptx,42,Can We Build a Hierarchical Vision Transformer?,"Can We Build a Hierarchical Vision Transformer?
+Input
+3x3
+conv,
+64
+7x7
+conv,
+64,
+/
+2
+Pool
+3x3
+conv,
+64
+3x3
+conv,
+64
+3x3
+conv,
+64
+3x3
+conv,
+64
+3x3
+conv,
+64
+3x3
+conv,
+128
+3x3
+conv,
+128,
+/
+2
+3x3
+conv,
+128
+3x3
+conv,
+128
+3x3
+conv,
+128
+3x3
+conv,
+128
+3x3
+conv,
+512
+3x3
+conv,
+512,
+/2
+3x3
+conv,
+512
+3x3
+conv,
+512
+3x3
+conv,
+512
+3x3
+conv,
+512
+Input:
+3
+x
+224
+x
+224
+Stage
+1:
+64
+x
+56
+x
+56
+Stage
+2:
+128
+x
+28
+x
+28
+Stage
+3:
+256
+x
+14
+x
+14
+In
+most
+CNNs
+(including ResNets),
+decrease
+resolution
+and
+increase
+channels
+as
+you
+go
+deeper
+in
+the
+network (Hierarchical
+architecture)
+Useful
+since
+objects
+in
+images
+can
+occur
+at
+various
+scales
+Layer
+Normalization
++
+MLP
+MLP
+MLP
+MLP
+Layer
+Normalization
++
+Self-
+Attention
+Layer
+Normalization
++
+MLP
+MLP
+MLP
+MLP
+Layer
+Normalization
++
+Self-
+Attention
+Layer
+Normalization
++
+MLP
+MLP
+MLP
+MLP
+Layer
+Normalization
++
+Self-
+Attention
+Input:
+3
+x
+224
+x
+224
+1
+st
+block:
+768
+x
+14
+x
+14
+2
+nd
+block:
+768
+x
+14
+x
+14
+3
+rd
+block:
+768
+x
+14
+x
+14
+In
+a
+ViT,
+all
+blocks
+have
+same
+resolution
+and
+number
+of
+channels
+(Isotropic
+architecture)
+Can
+we
+build
+a
+hierarchical
+ViT
+model?
+42"
+10,VIT,10 - VIT.pptx,43,Swin Stage 1: Patch Partition and Embedding,"Swin Stage 1: Patch Partition and Embedding
+C
+×
+𝐻
+×
+𝑊
+4
+4
+3
+×
+𝐻
+×
+𝑊
+Liu
+et
+al,
+“Swin
+Transformer:
+Hierarchical
+Vision
+Transformer
+using
+Shifted
+Windows”,
+CVPR
+2021
+Divide
+image
+into
+4x4
+patches
+and
+project
+to
+C
+dimensions
+43"
+10,VIT,10 - VIT.pptx,44,Swin Stage 2: First Patch Merging Step,"Swin Stage 2: First Patch Merging Step
+C
+×
+𝐻
+×
+𝑊
+4
+4
+3
+×
+𝐻
+×
+𝑊
+2𝐶
+×
+𝐻
+×
+𝑊
+8
+8
+Liu
+et
+al,
+“Swin
+Transformer:
+Hierarchical
+Vision
+Transformer
+using
+Shifted
+Windows”,
+CVPR
+2021
+Divide
+image
+into
+4x4
+patches
+and
+project
+to
+C
+dimensions
+Merge
+2x2
+neighborhoods;
+now
+patches
+are
+(effectively)
+8x8
+44"
+10,VIT,10 - VIT.pptx,45,Feature Map Layout After Patch Embedding,"Feature Map Layout After Patch Embedding
+3
+×
+𝐻
+×
+𝑊
+C
+×
+𝐻
+𝑊
+2𝐶
+×
+𝐻
+×
+𝑊
+4
+×
+4
+8
+8
+Divide
+image
+into
+4x4
+patches
+and
+project
+to
+C
+dimensions
+Merge
+2x2
+neighborhoods;
+now
+patches
+are
+(effectively)
+8x8
+H/4
+Liu
+et
+al,
+“Swin
+Transformer:
+Hierarchical
+Vision
+Transformer
+using
+Shifted
+Windows”,
+CVPR
+2021
+W/4
+C
+45"
+10,VIT,10 - VIT.pptx,46,Patch Merging by Concatenating Neighboring Tokens,"Patch Merging by Concatenating Neighboring Tokens
+3
+×
+𝐻
+×
+𝑊
+C
+×
+𝐻
+𝑊
+2𝐶
+×
+𝐻
+×
+𝑊
+4
+×
+4
+8
+8
+Divide
+image
+into
+4x4
+patches
+and
+project
+to
+C
+dimensions
+Merge
+2x2
+neighborhoods;
+now
+patches
+are
+(effectively)
+8x8
+H/4
+W/4
+C
+4C
+H/8
+W/8
+Concatenate
+groups
+of
+2x2
+features
+Liu
+et
+al,
+“Swin
+Transformer:
+Hierarchical
+Vision
+Transformer
+using
+Shifted
+Windows”,
+CVPR
+2021
+46"
+10,VIT,10 - VIT.pptx,47,Projecting Merged Tokens to Fewer Channels,"Projecting Merged Tokens to Fewer Channels
+3
+×
+𝐻
+×
+𝑊
+C
+×
+𝐻
+𝑊
+2𝐶
+×
+𝐻
+×
+𝑊
+4
+×
+4
+8
+8
+Divide
+image
+into
+4x4
+patches
+and
+project
+to
+C
+dimensions
+Merge
+2x2
+neighborhoods;
+now
+patches
+are
+(effectively)
+8x8
+H/4
+W/4
+C
+4C
+H/8
+W/8
+H/8
+W/8
+2C
+Concatenate
+groups
+of
+2x2
+features
+Linear projection
+from
+4C
+to
+2C
+channels
+(1x1
+conv)
+Liu
+et
+al,
+“Swin
+Transformer:
+Hierarchical
+Vision
+Transformer
+using
+Shifted
+Windows”,
+CVPR
+2021
+47"
+10,VIT,10 - VIT.pptx,48,Building a Multi-Stage Hierarchy in Swin,"Building a Multi-Stage Hierarchy in Swin
+C
+×
+𝐻
+×
+𝑊
+4
+4
+3
+×
+𝐻
+×
+𝑊
+2𝐶
+×
+𝐻
+×
+𝑊
+8
+8
+4𝐶
+×
+𝐻
+×
+𝑊
+16
+16
+Liu
+et
+al,
+“Swin
+Transformer:
+Hierarchical
+Vision
+Transformer
+using
+Shifted
+Windows”,
+CVPR
+2021
+Divide
+image
+into
+4x4
+patches
+and
+project
+to
+C
+dimensions
+Merge
+2x2
+neighborhoods;
+now
+patches
+are
+(effectively)
+8x8
+Merge
+2x2
+neighborhoods;
+now
+patches
+are
+(effectively)
+16x16
+48"
+10,VIT,10 - VIT.pptx,49,From Fine Patches to Coarser Visual Tokens,"From Fine Patches to Coarser Visual Tokens
+C
+×
+𝐻
+×
+𝑊
+4
+4
+3
+×
+𝐻
+×
+𝑊
+2𝐶
+×
+𝐻
+×
+𝑊
+8
+8
+4𝐶
+×
+𝐻
+×
+𝑊
+16
+16
+8𝐶
+×
+𝐻
+×
+𝑊
+32
+32
+Liu
+et
+al,
+“Swin
+Transformer:
+Hierarchical
+Vision
+Transformer
+using
+Shifted
+Windows”,
+CVPR
+2021
+Divide
+image
+into
+4x4
+patches
+and
+project
+to
+C
+dimensions
+Merge
+2x2
+neighborhoods;
+now
+patches
+are
+(effectively)
+8x8
+Merge
+2x2
+neighborhoods;
+now
+patches
+are
+(effectively)
+16x16
+Merge
+2x2
+neighborhoods;
+now
+patches
+are
+(effectively)
+32x32
+49"
+10,VIT,10 - VIT.pptx,50,Why Full Attention Is Too Expensive in Swin,"Why Full Attention Is Too Expensive in Swin
+C
+×
+Liu
+et
+al,
+“Swin
+Transformer:
+Hierarchical
+Vision
+Transformer
+using
+Shifted
+Windows”,
+CVPR
+2021
+3
+×
+𝐻
+×
+𝑊
+×
+8𝐶
+×
+×
+𝐻
+×
+𝑊
+2𝐶
+×
+𝐻
+×
+𝑊
+4𝐶
+×
+𝐻
+𝑊
+𝐻
+𝑊
+4
+4
+8
+8
+16
+16
+32
+32
+Divide
+image
+into
+4x4
+patches
+and
+project
+to
+C
+dimensions
+Merge
+2x2
+neighborhoods;
+now
+patches
+are
+(effectively)
+8x8
+Merge
+2x2
+neighborhoods;
+now
+patches
+are
+(effectively)
+16x16
+Merge
+2x2
+neighborhoods;
+now
+patches
+are
+(effectively)
+32x32
+Problem
+:
+224x224
+image
+with
+56x56
+grid
+of
+4x4
+patches:
+attention
+matrix
+has
+56
+4
+=
+9.8M
+entries
+50"
+10,VIT,10 - VIT.pptx,51,Window-Based Attention as the Efficient Alternative,"Window-Based Attention as the Efficient Alternative
+C
+×
+Liu
+et
+al,
+“Swin
+Transformer:
+Hierarchical
+Vision
+Transformer
+using
+Shifted
+Windows”,
+CVPR
+2021
+3
+×
+𝐻
+×
+𝑊
+×
+8𝐶
+×
+×
+𝐻
+×
+𝑊
+2𝐶
+×
+𝐻
+×
+𝑊
+4𝐶
+×
+𝐻
+𝑊
+𝐻
+𝑊
+4
+4
+8
+8
+16
+16
+32
+32
+Divide
+image
+into
+4x4
+patches
+and
+project
+to
+C
+dimensions
+Merge
+2x2
+neighborhoods;
+now
+patches
+are
+(effectively)
+8x8
+Merge
+2x2
+neighborhoods;
+now
+patches
+are
+(effectively)
+16x16
+Merge
+2x2
+neighborhoods;
+now
+patches
+are
+(effectively)
+32x32
+Problem
+:
+224x224
+image
+with
+56x56
+grid
+of
+4x4
+patches:
+attention
+matrix
+has
+56
+4
+=
+9.8M
+entries
+Solution:
+don’t
+use
+full
+attention,
+instead
+use
+attention
+over
+patches
+51"
+10,VIT,10 - VIT.pptx,52,Restricting Attention to Local Windows,"Restricting Attention to Local Windows
+With
+H
+x
+W
+grid
+of
+tokens
+,
+each
+attention
+matrix
+is
+H
+2
+W
+2
+–
+quadratic
+in
+image
+size
+Rather
+than
+allowing
+each
+token
+to
+attend
+to
+all
+other
+tokens,
+instead
+divide
+into
+windows
+of
+M
+x
+M
+tokens
+(here
+M=4);
+only
+compute
+attention
+within
+each
+window
+Liu
+et
+al,
+“Swin
+Transformer:
+Hierarchical
+Vision
+Transformer
+using
+Shifted
+Windows”,
+CVPR
+2021
+52"
+10,VIT,10 - VIT.pptx,53,Why Window Attention Scales Better,"Why Window Attention Scales Better
+With
+H
+x
+W
+grid
+of
+tokens
+,
+each
+attention
+matrix
+is
+H
+2
+W
+2
+–
+quadratic
+in
+image
+size
+Rather
+than
+allowing
+each
+token
+to
+attend
+to
+all
+other
+tokens,
+instead
+divide
+into
+windows
+of
+M
+x
+M
+tokens
+(here
+M=4);
+only
+compute
+attention
+within
+each
+window
+Total
+size
+of
+all
+attention
+matrices
+is
+now:
+M
+4
+(H/M)(W/M)
+=
+M
+2
+HW
+Linear
+in
+image
+size
+for
+fixed
+M!
+Swin
+uses
+M=7
+throughout
+the
+network
+Liu
+et
+al,
+“Swin
+Transformer:
+Hierarchical
+Vision
+Transformer
+using
+Shifted
+Windows”,
+CVPR
+2021
+53"
+10,VIT,10 - VIT.pptx,54,"Limitation of Window Attention
+Problem: tokens only interact with other tokens within the same window; no communication across windows","Limitation of Window Attention
+Problem
+:
+tokens
+only
+interact
+with
+other
+tokens
+within
+the
+same
+window;
+no
+communication
+across
+windows
+Liu
+et
+al,
+“Swin
+Transformer:
+Hierarchical
+Vision
+Transformer
+using
+Shifted
+Windows”,
+CVPR
+2021
+54"
+10,VIT,10 - VIT.pptx,55,"Swin Transformer: Shifted Window Attention
+Solution: Alternate between normal windows and shifted windows in successive Transformer blocks","Swin
+Transformer:
+S
+hifted
+Win
+dow
+Attention
+Solution
+:
+Alternate
+between
+normal
+windows
+and
+shifted
+windows
+in
+successive
+Transformer
+blocks
+Block
+L:
+Normal
+windows
+Liu
+et
+al,
+“Swin
+Transformer:
+Hierarchical
+Vision
+Transformer
+using
+Shifted
+Windows”,
+CVPR
+2021
+Block
+L+1:
+Shifted
+Windows
+Ugly
+detail: Non-square
+windows
+at
+edges
+and
+corners
+55"
+10,VIT,10 - VIT.pptx,56,Swin Transformer: Shifted Window Attention,"Swin
+Transformer:
+S
+hifted
+Win
+dow
+Attention
+Solution
+:
+Alternate
+between
+normal
+windows
+and
+shifted
+windows
+in
+successive
+Transformer
+blocks
+Liu
+et
+al,
+“Swin
+Transformer:
+Hierarchical
+Vision
+Transformer
+using
+Shifted
+Windows”,
+CVPR
+2021
+Block
+L:
+Normal
+windows
+Block
+L+1:
+Shifted
+Windows
+Detail:
+Relative
+Positional
+Bias
+ViT
+adds
+positional
+embedding
+to
+input
+tokens,
+encodes
+absolute
+position
+of
+each
+token
+in
+the
+image
+56"
+10,VIT,10 - VIT.pptx,57,Swin Transformer: Shifted Window Attention,"Swin
+Transformer:
+S
+hifted
+Win
+dow
+Attention
+Solution
+:
+Alternate
+between
+normal
+windows
+and
+shifted
+windows
+in
+successive
+Transformer
+blocks
+Detail:
+Relative
+Positional
+Bias
+ViT
+adds
+positional
+embedding
+to
+input
+tokens,
+encodes
+absolute
+position
+of
+each
+token
+in
+the
+image
+Swin
+does
+not
+use
+positional
+embeddings,
+instead
+encodes
+relative
+position
+between
+patches
+when
+computing
+attention:
+Standard
+Attention:
+𝐴
+=
+𝑆𝑜𝑓𝑡𝑚𝑎𝑥
+𝑄𝐾
+""
+𝐷
+𝑄,
+𝐾,
+𝑉:
+𝑀
+#
+×
+𝐷
+(Query,
+Key,
+Value)
+Block
+L:
+Normal
+windows
+Block
+L+1:
+Shifted
+Windows
+Liu
+et
+al,
+“Swin
+Transformer:
+Hierarchical
+Vision
+Transformer
+using
+Shifted
+Windows”,
+CVPR
+2021
+𝑉
+57"
+10,VIT,10 - VIT.pptx,58,Swin Transformer: Shifted Window Attention,"Swin
+Transformer:
+S
+hifted
+Win
+dow
+Attention
+Solution
+:
+Alternate
+between
+normal
+windows
+and
+shifted
+windows
+in
+successive
+Transformer
+blocks
+Detail:
+Relative
+Positional
+Bias
+ViT
+adds
+positional
+embedding
+to
+input
+tokens,
+encodes
+absolute
+position
+of
+each
+token
+in
+the
+image
+Swin
+does
+not
+use
+positional
+embeddings,
+instead
+encodes
+relative
+position
+between
+patches
+when
+computing
+attention:
+Attention
+with
+relative
+bias:
+𝐴
+=
+𝑆𝑜𝑓𝑡𝑚𝑎𝑥
+𝑄𝐾
+""
+𝐷
+Block
+L:
+Normal
+windows
+Block
+L+1:
+Shifted
+Windows
+𝐵:
+𝑀
+#
+×
+𝑀
+#
+(learned
+biases)
+Liu
+et
+al,
+“Swin
+Transformer:
+Hierarchical
+Vision
+Transformer
+using
+Shifted
+Windows”,
+CVPR
+2021
++
+𝐵
+𝑉
+𝑄,
+𝐾,
+𝑉:
+𝑀
+#
+×
+𝐷
+(Query,
+Key,
+Value)
+58"
+10,VIT,10 - VIT.pptx,59,Comparing Early Vision Transformer Variants,"Comparing Early Vision Transformer Variants
+ViT
+: pure global attention
+DeiT
+: better training with limited data
+T2T-ViT
+: better tokenization and local structure
+PVT / Swin
+: hierarchical design for dense prediction
+59
+Most improvements target one of three issues: data efficiency, locality, or scalability."
+10,VIT,10 - VIT.pptx,60,Where Did Vision Transformers Improve Most?,"Where Did Vision Transformers Improve Most?
+Training with less labeled data
+Better tokenization
+Better locality and hierarchy
+Better self-supervised learning
+60
+The field evolved by addressing
+ViT’s
+weaknesses step by step."
+10,VIT,10 - VIT.pptx,61,Twins: Spatial Attention Design,"Twins: Spatial Attention Design
+Revisit how spatial attention should be designed in vision
+Combine local attention with efficient global information exchange
+Achieves strong performance with a relatively simple design
+61
+Chu et al.,
+Twins: Revisiting the Design of Spatial Attention in Vision Transformers
+,
+NeurIPS
+2021
+https://arxiv.org/abs/2104.13840
+Good attention design can be both simple and effective."
+10,VIT,10 - VIT.pptx,62,Segmenter: Transformer for Semantic Segmentation,"Segmenter
+: Transformer for Semantic Segmentation
+62
+Strudel et al.,
+Segmenter
+: Transformer for Semantic Segmentation, ICCV 2021,
+https://arxiv.org/abs/2105.05633
+1
+Vision Transformers can support pixel-level prediction, not just image labels."
+10,VIT,10 - VIT.pptx,63,Segmenter Architecture,"Segmenter
+Architecture
+63
+Mask Transformer turns segmentation into a similarity problem between patch features and class embeddings."
+10,VIT,10 - VIT.pptx,64,Masked Autoencoders (MAE),"Masked Autoencoders (MAE)
+Mask a large fraction of image patches
+Encode only visible patches and reconstruct the missing ones
+Learn strong visual features without labels
+64
+He et al., Masked Autoencoders Are Scalable Vision Learners, CVPR 2022
+https://arxiv.org/abs/2111.06377
+Self-supervised pretraining made
+ViTs
+much stronger and more scalable."
+10,VIT,10 - VIT.pptx,65,Self-Supervised Vision: DINO / iBOT,"Self-Supervised Vision: DINO /
+iBOT
+DINO
+: Self-distillation learns strong visual representations without labels
+iBOT
+: Masked image modeling with an online tokenizer
+Both learn meaningful structure from unlabeled images
+65
+Caron et al.,
+Emerging Properties in Self-Supervised Vision Transformers,
+ICCV 2021,
+https://arxiv.org/abs/2104.14294
+Zhou et al.,
+iBOT
+: Image BERT Pre-Training with Online Tokenizer
+, ICLR 2022,
+https://arxiv.org/abs/2111.07832
+Self-supervised
+ViTs
+can learn surprisingly rich structure from unlabeled images."
+10,VIT,10 - VIT.pptx,66,DINO: self-DIstillation with NO labels,"DINO: self-
+DI
+stillation
+with
+NO
+labels
+66
+Student
+ViT
+learns local-to-global features from a momentum Teacher
+ViT
+, with centering and sharpening preventing collapse.
+Local crops
+Global crops"
+10,VIT,10 - VIT.pptx,67,DINO: self-DIstillation with NO labels,"DINO: self-
+DI
+stillation
+with
+NO
+labels
+67
+Centering means subtracting a running mean vector from the teacher’s output before the teacher
+softmax
+."
+10,VIT,10 - VIT.pptx,68,CLIP and Multimodal Transformers,"CLIP and Multimodal Transformers
+CLIP (Contrastive Language Image Pre-training)
+Train image and text encoders jointly on image-text pairs
+Align image features with language features using contrastive learning
+Enable zero-shot classification with text prompts
+68
+Radford et al., Learning Transferable Visual Models From Natural Language Supervision, ICML 2021
+https://arxiv.org/abs/2103.00020
+Language supervision turns vision models into flexible foundation models."
+10,VIT,10 - VIT.pptx,69,CLIP Architecture,"CLIP Architecture
+69
+Radford et al., Learning Transferable Visual Models From Natural Language Supervision, ICML 2021
+https://arxiv.org/abs/2103.00020
+Language supervision turns vision models into flexible foundation models.
+WIT dataset: 400 million (image, text) pairs"
+10,VIT,10 - VIT.pptx,70,What Happened Next? (2023–2024),"What Happened Next? (2023–2024)
+DINOv2 (2023)
+: large-scale self-supervised
+ViTs
+became strong general-purpose visual feature extractors
+SigLIP
+(2023)
+: vision-language pretraining improved with a simpler sigmoid loss and strong zero-shot transfer
+DiT
+(2023)
+: transformers moved deeper into image generation by serving as diffusion backbones
+ViTamin
+(2024)
+: researchers rethought visual encoder design specifically for the vision-language era
+AIMV2 (2025):
+multimodal autoregressive pretraining produced strong general-purpose vision encoders for both vision and vision-language tasks
+70
+Vision transformers evolved from image classifiers into foundation encoders for representation learning, multimodal understanding, and generation."
+10,VIT,10 - VIT.pptx,71,Summary: How Vision Transformers Evolved,"Summary: How Vision Transformers Evolved
+Images can be split into patches and treated as tokens
+The main challenges are efficiency, locality, and data requirements
+Later models improved training, hierarchy, and self-supervised learning
+Vision Transformers now support classification, segmentation, and multimodal understanding
+71
+Transformers for vision became powerful by combining patch-based modeling with better inductive structure and better pretraining.
+ViT
+→ better training → better tokenization → hierarchical designs → self-supervised learning → multimodal models."
+10,VIT,10 - VIT.pptx,72,Reference,"Reference
+Lecture slides by Justin Johnson, University of Michigan
+72"
+10,VIT,10 - VIT.pptx,73,Backup Slides,"Backup Slides
+73"
+10,VIT,10 - VIT.pptx,74,ViT Input: Patches Instead of Pixels,"①
+②
+③
+④
+⑤
+⑥
+⑨
+⑧
+⑦
+②
+①
+③
+④
+⑤
+⑥
+ViT
+Input: Patches Instead of Pixels
+Image decomposed into 16x16 nonoverlapping patches
+Position encoding:
+Learned 1D embeddings.
+ViT
+uses a learnable vector per patch index
+pos_emb = nn.Parameter(torch.zeros(1,N,D)); then x += pos_emb
+74"
+10,VIT,10 - VIT.pptx,75,Standard Transformer on Patches,"Standard Transformer on Patches
+①
+②
+③
+④
+⑤
+Transformer Encoder
++
++
++
++
++
++
++
++
++
+CLS
+Softmax
+Classifier
+𝐩
+𝐶
+0
+𝐶
+1
+𝐶
+2
+𝐶
+3
+𝐶
+4
+𝐶
+5
+𝐶
+6
+𝐶
+7
+𝐶
+8
+𝐶
+9
+𝑍
+0
+𝑍
+1
+𝑍
+2
+𝑍
+3
+𝑍
+4
+𝑍
+5
+𝑍
+6
+𝑍
+7
+𝑍
+8
+𝑍
+9
+𝑋
+1
+𝑋
+2
+𝑋
+3
+𝑋
+4
+𝑋
+5
+𝑋
+6
+𝑋
+7
+𝑋
+8
+𝑋
+9
+𝑃
+1
+𝑃
+2
+𝑃
+3
+𝑃
+4
+𝑃
+5
+𝑃
+6
+𝑃
+7
+𝑃
+8
+𝑃
+9
+75"
+11,Generative Model,11 - Generative Model.pptx,1,"Generative Model
+How Machines Learn to Create Data","Generative Model
+How Machines Learn to Create Data
+Yifeng Zhu
+Electrical and Computer Engineering
+University of Maine"
+11,Generative Model,11 - Generative Model.pptx,2,Supervised vs Unsupervised Learning,"Supervised vs Unsupervised Learning
+2
+Learning is better viewed as a spectrum, not a strict split:
+supervised → semi-supervised → self-supervised → unsupervised."
+11,Generative Model,11 - Generative Model.pptx,3,Unsupervised Learning Example: K-Means Clustering,"Unsupervised Learning Example:
+K-Means Clustering
+3
+Example output for K=4: each red region represents a cluster, and each larger colored dot is a centroid.
+K-means discovers structure by grouping similar samples"
+11,Generative Model,11 - Generative Model.pptx,4,Unsupervised Learning Example: Density Estimation,"Unsupervised Learning Example:
+Density Estimation
+4
+Applications: anomaly detection, generative modeling, compression, and exploratory data analysis.
+Unlike clustering, density estimation asks where data are likely to occur"
+11,Generative Model,11 - Generative Model.pptx,5,From Unsupervised Learning to Generative Models,"From Unsupervised Learning to Generative Models
+5
+Generative models are a natural extension of density estimation."
+11,Generative Model,11 - Generative Model.pptx,6,Two Goals of Generative Modeling,"Two Goals of Generative Modeling
+6
+1. LEARN THE DISTRIBUTION
+2. SAMPLE NEW DATA
+Goal:
+Capture the underlying pattern of the data as a probability distribution.
+Goal:
+Produce realistic and diverse new data drawn from the learned distribution.
+newly generated samples"
+11,Generative Model,11 - Generative Model.pptx,7,End Goal of Generative Model,"End Goal of Generative Model
+7
+Example data
+Previously unseen,
+realistic data
+Generative
+Models
+Let’s formulate the problem using human face generation as an example."
+11,Generative Model,11 - Generative Model.pptx,8,Main Families of Generative Models,"Main Families of Generative Models
+Autoencoder (AE)
+Variational Autoencoder (VAE)
+Generative Adversarial Network (GAN)
+Diffusion Models
+DDPM: Denoising Diffusion Probabilistic Models
+8"
+11,Generative Model,11 - Generative Model.pptx,9,Autoencoders: Learn by Reconstructing,"Autoencoders
+: Learn by Reconstructing
+An autoencoder learns from
+unlabeled
+data
+The
+encoder
+compresses the input into a
+latent
+code 𝑧
+The
+decoder
+uses 𝑧 to reconstruct the input
+Goal: preserve the most important information in a compact representation
+Fei-
+Fei
+Li,
+Jiajun
+Wu,
+Ruohan
+Gao
+Reconstructed
+data
+Decoder
+:
+4-layer
+upconv
+Encoder
+:
+4-layer
+conv
+Decoder
+Encoder
+Input
+data
+Features (latent space)
+9"
+11,Generative Model,11 - Generative Model.pptx,10,Autoencoders: How It Is Trained,"Autoencoders
+: How It Is Trained
+Use the input itself as the target
+Train the decoder to reconstruct the original input
+Minimize reconstruction error
+No labels are required
+Fei-
+Fei
+Li,
+Jiajun
+Wu,
+Ruohan
+Gao
+Reconstructed
+data
+Decoder
+:
+4-layer
+upconv
+Encoder
+:
+4-layer
+conv
+Decoder
+Encoder
+Input
+data
+Features (latent space)
+10"
+11,Generative Model,11 - Generative Model.pptx,11,"Why Autoencoders Matter, and Their Limitation","Why Autoencoders Matter, and Their Limitation
+The encoder can learn useful features for downstream tasks
+Those features can help initialize a supervised model
+But a plain autoencoder is
+not yet a true generative model
+So, we cannot reliably sample new data from random 𝑧
+This motivates the
+Variational Autoencoder (VAE)
+11
+Kingma
+and
+Welling,
+“Auto-
+Encoding
+Variational
+Bayes”,
+ICLR
+2014"
+11,Generative Model,11 - Generative Model.pptx,12,Variational Autoencoder: From Input to a Sampleable Latent Space,"Variational Autoencoder: From Input to a Sampleable Latent Space
+12
+A VAE learns not just features, but a latent space we can sample from."
+11,Generative Model,11 - Generative Model.pptx,13,VAE Demo,"VAE Demo
+Interactive demo: explore how the latent space changes the generated output
+https://xnought.github.io/vae-explainer/
+13"
+11,Generative Model,11 - Generative Model.pptx,14,Generative Adversarial Networks (GANs),"Generative Adversarial Networks (GANs)
+The
+generator
+maps random noise 𝑧 to a synthetic sample 𝐺(𝑧)
+A
+discriminator
+predicts whether an input is real or fake
+The generator tries to fool the discriminator
+The discriminator tries to detect generated samples
+GAN learning happens through this competition
+14
+Ian
+Goodfellow
+et
+al.,
+“Generative
+Adversarial
+Nets”,
+NIPS
+2014
+Generator creates. Discriminator judges.
+Both improve by competing."
+11,Generative Model,11 - Generative Model.pptx,15,"GAN Training: Two Losses, Two Goals","GAN Training: Two Losses, Two Goals
+15
+Ian
+Goodfellow
+et
+al.,
+“Generative
+Adversarial
+Nets”,
+NIPS
+2014
+Discriminator: classify real as 1, fake as 0
+Generator: make fake be classified as 1"
+11,Generative Model,11 - Generative Model.pptx,16,GAN: Strengths and Weaknesses,"GAN: Strengths and Weaknesses
+Weaknesses
+Harder and less stable to train
+Does not answer inference questions such as 𝑝(𝑥) or 𝑝(𝑧∣𝑥)
+Training details often need tuning; there is no single best rule for update balance
+16
+Strengths
+Generates highly realistic samples
+Learns through a two-player game between generator and discriminator
+Focuses directly on sampling, without defining an explicit density function
+GANs can generate highly realistic samples, but they are harder to train and less interpretable than likelihood-based models.
+GAN research has focused heavily on better loss functions, more stable training, and extending GANs to conditional generation and other applications."
+11,Generative Model,11 - Generative Model.pptx,17,Diffusion Models,"Diffusion Models
+17
+Gradually add noise to data
+Learn to reverse the noising process
+Generate new samples from noise
+Denoise step by step
+Use the score to move toward cleaner, more likely data
+Forward diffusion creates noisy training inputs; the model learns the reverse denoising process
+High-Resolution Image Synthesis with Latent Diffusion Models
+, CVPR 2022"
+11,Generative Model,11 - Generative Model.pptx,18,Latent Conditional Diffusion Model,"Latent Conditional Diffusion Model
+18
+High-Resolution Image Synthesis with Latent Diffusion Models
+, CVPR 2022
+Latent diffusion encodes an image into a compact latent space, denoises it step by step with a U-Net, and decodes the result back to pixel space."
+11,Generative Model,11 - Generative Model.pptx,19,Summary: Main Ideas of Generative Models,"Summary: Main Ideas of Generative Models
+19
+Autoencoders (AE)
+learn compact representations by reconstructing the input
+Variational Autoencoders (VAE)
+make the latent space sampleable for generation
+GANs
+generate realistic samples through competition between generator and discriminator
+Diffusion models
+generate data by gradually reversing noise
+Different generative models make different trade-offs in
+sample quality, training stability, efficiency, and interpretability"

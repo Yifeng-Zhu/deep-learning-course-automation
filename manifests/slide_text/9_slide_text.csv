@@ -1,0 +1,459 @@
+﻿lecture_number,lecture_title,original_pptx,slide_number,possible_slide_title,visible_text
+9,LLM,9 - LLM.pptx,1,"Large Language Models (LLM)
+From Pre-Training to Alignment in Large-Scale Language Models","Large Language Models (LLM)
+From Pre-Training to Alignment in Large-Scale Language Models
+Yifeng Zhu
+Electrical and Computer Engineering
+University of Maine"
+9,LLM,9 - LLM.pptx,2,How Large Language Models Work (Big Picture),"How Large Language Models Work (Big Picture)
+LLMs predict the next token, append it, and repeat to generate text
+2"
+9,LLM,9 - LLM.pptx,3,From Text to Tokens: What the Model Actually Sees,"From Text to Tokens: What the Model Actually Sees
+Example 1:
+The weather is nice today.
+→ Six tokens:
+Token IDs: [791, 9282, 374, 6555, 3432, 627]
+Example 2:
+unbelievable
+→ Three tokens
+Token IDs: [359, 32898, 24694]
+Example 3:
+.
+DefaultCellStyle
+→ One token
+Token ID: [98518]
+3
+https://huggingface.co/spaces/Xenova/the-tokenizer-playground
+Tokens are compression artifacts, not words.
+Text is converted into
+tokens
+Tokens are
+learned chunks
+, not necessarily words
+Exact characters matter (including spaces)
+Each token is mapped to a unique ID
+https://platform.openai.com/tokenizer"
+9,LLM,9 - LLM.pptx,4,From Token to Vector: Embeddings,"From Token to Vector: Embeddings
+Example:
+“The weather is”
+Three Token:
+Token IDs: [
+791
+,
+9282
+,
+374
+]
+Embedding:
+791
+→
+[ 0.2, -1.1, 0.7, ... ]
+9282
+→
+[ -0.3, 0.8, 1.2, ... ]
+374
+→
+[ 0.5, -0.6, 0.1, ... ]
+4
+Embedding space encodes semantics through distances and directions."
+9,LLM,9 - LLM.pptx,5,Challenge: Long-Distance Dependency,"Challenge: Long-Distance Dependency
+The
+dog
+that the cat chased
+ran
+away.
+Stephen King
+, a famous author of horror and fantasy novels,
+lives
+in Bangor, Maine.
+5
+LSTMs struggle to preserve information across long sequences."
+9,LLM,9 - LLM.pptx,6,LSTM,"LSTM
+Sequential processing (no parallelism)
+Hard to capture long dependencies
+Gradient issues
+6
+Sepp
+Hochreiter
+; Jürgen
+Schmidhuber
+(1997). ""
+Long short-term memory
+"".
+Neural Computation
+. 9 (8): 1735–1780.
+𝒇
+𝒕
+∘
+𝑪
+𝒕
+−
+𝟏
+Forget Gate
+cell
+state
+C
+t-1
+cell
+state
+C
+t
+hidden
+state
+H
+t-1
+hidden
+state
+H
+t
+Output Gate
+Input Gate"
+9,LLM,9 - LLM.pptx,7,Transformer vs LSTM,"Transformer vs LSTM
+7
+LSTM
+𝑥
+1
+𝑦
+4
+𝑦
+3
+𝑦
+2
+𝑦
+1
+Self-Attention Layer
+LSTM
+𝑥
+2
+LSTM
+𝑥
+3
+LSTM
+𝑥
+4
+𝑐
+𝑥
+1
+𝑥
+2
+𝑥
+3
+𝑥
+4
+Transformers replace recurrence with self-attention and enable parallel computation
+Feature
+LSTM
+Transformer
+Processing
+Sequential
+Parallel
+Memory
+Hidden state
+Attention
+Long-range
+Weak
+Strong"
+9,LLM,9 - LLM.pptx,8,Attention Visualization,"Attention Visualization
+https://jalammar.github.io/illustrated-transformer/
+8
+“The animal didn't cross the street because
+it
+was too tired”
+What does “it” refer to?
+Attention identifies which words matter most for interpretation."
+9,LLM,9 - LLM.pptx,9,Modern LLM Training: From Knowledge to Behavior,"Modern LLM Training: From Knowledge to Behavior
+Pre-Training
+(Self-Supervised Learning)
+Trained on large-scale datasets
+Objective: predict tokens
+Learns general knowledge
+Requires massive compute and data
+Fine-Tuning
+(Alignment & Adaptation)
+Smaller, curated datasets
+Supervised + human feedback
+Shapes behavior and style
+Task-specific performance
+9
+Scaling
+unsupervised
+learning
+on
+the
+internet scale
+From general language knowledge to task-specific behavior
+Pre-training learns knowledge; fine-tuning shapes behavior."
+9,LLM,9 - LLM.pptx,10,Bidirectional Encoder Representation from Transformer (BERT),"B
+idirectional
+E
+ncoder
+R
+epresentation from
+T
+ransformer (BERT)
+Two models were released:
+BERT-Base
+:
+12-layer, 768-dim hidden states, 12-head,
+Total Parameters = 110M
+BERT-Large
+:
+24-layer, 1024-dim hidden states, 16-head
+Total Parameters = 340M
+Pretrained
+on
+64
+TPU
+chips
+for
+four
+days.
+Fine-tuning
+is
+practical
+and
+commonly done
+on
+a
+single
+GPU
+https://
+jalammar.github.io
+/illustrated-transformer/
+10
+[
+Devlin
+et
+al.,
+2018
+]
+BERT is an encoder-only transformer designed for language understanding."
+9,LLM,9 - LLM.pptx,11,BERT Input Representation,"BERT Input Representation
+BERT takes two text segments as input and was originally trained to predict whether the second segment follows the first.
+Later work suggested that next sentence prediction is not essential.
+[
+Devlin
+et
+al., 2018
+,
+Liu et
+al.,
+2019
+]
+11"
+9,LLM,9 - LLM.pptx,12,How BERT is Pre-Trained,"How BERT is Pre-Trained
+Masked Language Model (MLM)
+Mask 15% tokens; predict missing words
+My dog is hairy. → my dog is [MASK].
+Next Sentence Prediction (NSP)
+Input = [CLS] the man went to [MASK] store [SEP] he bought a gallon [MASK] milk [SEP]
+Label =
+IsNext
+Input = [CLS] the man [MASK] to the store [SEP] penguin [MASK] are flightless birds
+Label =
+NotNext
+50% of the inputs use a sentence B that follows sentence A in the original document.
+50% of the inputs are random sentences from the corpus as sentence B.
+E
+i
+= Embedding of input token
+i
+T
+i
+= Contextual representation of token
+i
+[CLS] = Special symbol for classification output
+[SEP] = Special symbol to separate non-consecutive token sequences
+12"
+9,LLM,9 - LLM.pptx,13,Fine-Tuning Example: Quora Question Pairs,"Fine-Tuning Example: Quora Question Pairs
+13
+https://
+arxiv.org
+/abs/1810.04805
+Task: determine whether two questions have the same meaning.
+Example:
+Q1: Should I learn Python or Java first?
+Q2: If I had to choose between learning Java and Python, what should I choose to learn first?
+Same model, different heads"
+9,LLM,9 - LLM.pptx,14,Fine-Tuning Example: Sentiment Analysis,"Fine-Tuning Example: Sentiment Analysis
+14
+https://
+arxiv.org
+/abs/1810.04805
+11,855 single sentences extracted from movie reviews
+Single-sentence binary classification
+This film doesn’t care about clearness, wit, or any other kind of intelligent humor. (
+Negative
+)
+The gorgeously elaborated continuation of The Lord of the Rings trilogy is so huge that a column of words can not adequately describe co-writer/director Peter Jackson’s expanded vision of J.R.R. Tolkien’s Middle-earth. (
+Positive
+)
+Same model, different heads"
+9,LLM,9 - LLM.pptx,15,Fine-Tuning Example: Question Answering,"Fine-Tuning Example: Question Answering
+15
+https://
+arxiv.org
+/abs/1810.04805
+Stanford Question Answering Dataset (
+SQuAD
+)
+Given a question and a passage from Wikipedia containing the answer, the task is to predict the answer text span in the passage.
+The model predicts the start and end positions of the answer span."
+9,LLM,9 - LLM.pptx,16,Fine-Tuning Example: Named Entity Recognition,"Fine-Tuning Example: Named Entity Recognition
+16
+https://
+arxiv.org
+/abs/1810.04805
+Named Entity Recognition (NER)
+NER identifies entities such as people, organizations, locations, times, and quantities.
+Example:
+Input: U.N official Smith heads for Baghdad.
+[
+ORG
+U.N.
+] official [
+PER
+Smith
+] heads for [
+LOC
+Baghdad
+] .
+Same model, different heads"
+9,LLM,9 - LLM.pptx,17,"GPT vs BERT
+Encoder-only vs. Decoder-only","GPT vs BERT
+Encoder-only vs. Decoder-only
+http://
+jalammar.github.io
+/illustrated-gpt2/
+17
+Model
+Architecture
+Typical Use
+BERT
+Encoder-only
+Understanding
+GPT
+Decoder-only
+Generation
+BERT reads → GPT writes"
+9,LLM,9 - LLM.pptx,18,BERT,"BERT
+http://
+jalammar.github.io
+/illustrated-gpt2/
+GPT
+18
+Causal Masking in GPT
+At position 4, GPT can attend only to the current token and earlier tokens. This masking prevents access to future tokens."
+9,LLM,9 - LLM.pptx,19,GPT Uses the Transformer Decoder,"GPT Uses the Transformer Decoder
+GPT is a decoder-only transformer for autoregressive text generation.
+Full transformer
+19
+Uses only the decoder stack
+Keys and values come form the same sequence as queries.
+Uses
+causal self-attention
+Generates one token at a time
+Causal self-attention = each token cannot see future tokens."
+9,LLM,9 - LLM.pptx,20,Autoregressive Language Models,"Autoregressive Language Models
+20
+S =
+What
+are
+you
+reading
+?
+Modeling the probability of the next token:
+GPT predicts each next token from the tokens before it.
+LLMs are transformers trained to predict the next token given context"
+9,LLM,9 - LLM.pptx,21,Next-Token Prediction Example,"Next-Token Prediction Example
+Given the text so far, predict the next token.
+Different from Seq-to-Seq models
+21
+The weekend will be lovely with
+Input to the model
+sunny
+3.3%
+warm
+3.1%
+cool
+2.8%
+seasonable
+2.5%
+dry
+1.2%
+Output of the model (top 5)
+The model outputs a probability distribution over possible next tokens."
+9,LLM,9 - LLM.pptx,22,Few-Shot Learning,"22
+https://arxiv.org/abs/2005.14165v4
+Large language models can often perform new tasks directly from prompts and examples.
+Few-Shot Learning"
+9,LLM,9 - LLM.pptx,23,In-Context Learning,"23
+In-Context Learning
+Instead of updating model weights, we provide examples directly in the prompt."
+9,LLM,9 - LLM.pptx,24,Scaling Laws,"Scaling Laws
+Validation loss follows a power-law trend as model size, data, and compute increase.
+24
+https://arxiv.org/abs/2005.14165v4
+GPT (2018)
+117M Parameters
+1GB Data
+GPT-2 (2019)
+1542M Parameters
+40GB Data
+GPT-3 (2020)
+175B Parameters
+570GB Data filtered from 45TB
+Bigger models + more data → better performance"
+9,LLM,9 - LLM.pptx,25,"InstructGPT, a sibling to ChatGPT","Published in 2022
+InstructGPT
+, a sibling to ChatGPT
+25
+InstructGPT
+fine-tunes GPT-3 to better follow user instructions."
+9,LLM,9 - LLM.pptx,26,Why Alignment Matters,"Why Alignment Matters
+Misaligned models may be:
+Unhelpful
+Inaccurate
+Toxic or harmful
+Aligned models should be:
+Helpful
+Truthful
+Harmless
+26
+Example harmful outputs: hate speech, spam, biased or unsafe content"
+9,LLM,9 - LLM.pptx,27,Survey Interface,"27
+Survey Interface"
+9,LLM,9 - LLM.pptx,28,Step 1: Supervised Fine-Tuning,"40 labelers
+1.5k training, 1.5k validation
+Step 1: Supervised Fine-Tuning
+28"
+9,LLM,9 - LLM.pptx,29,Step 2: Train a Reward Model,"29
+40 labelers
+1.5k training, 1.5k validation
+150k training, 80k validation
+Train a reward model from human preference comparisons
+Step 2: Train a Reward Model"
+9,LLM,9 - LLM.pptx,30,Step 3: Optimize with RLHF,"30
+40 labelers
+1.5k training, 1.5k validation
+150k training, 80k validation
+32k training, 16k validation
+Step 3: Optimize with RLHF
+RLHF = Reinforcement Learning from Human Feedback"
+9,LLM,9 - LLM.pptx,31,Main Result: InstructGPT,"Main Result:
+InstructGPT
+Labelers significantly prefer
+InstructGPT
+outputs over outputs from GPT-3
+A smaller aligned model can outperform a larger unaligned model
+A 1.3B aligned model outperformed unaligned 175B model.
+Data quality matters.
+https://
+arxiv.org
+/abs/2203.02155
+31"
+9,LLM,9 - LLM.pptx,32,Summary,"Summary
+Pre-training → learn language
+Fine-tuning → learn tasks
+Alignment → learn behavior
+32"

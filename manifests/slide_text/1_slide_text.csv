@@ -1,0 +1,434 @@
+﻿lecture_number,lecture_title,original_pptx,slide_number,possible_slide_title,visible_text
+1,CNN,1 - CNN.pptx,1,"ECE491/591 Deep Learning
+Convolutional Neural Networks (CNNs)","ECE
+491/591
+Deep Learning
+Convolutional Neural Networks (CNNs)
+Yifeng Zhu
+Electrical and Computer Engineering
+University of Maine
+1"
+1,CNN,1 - CNN.pptx,2,Basic Neural Networks,"Basic Neural Networks
+Multilayer Perceptron (MLP)
+2"
+1,CNN,1 - CNN.pptx,3,Multilayer Perceptron (MLP) Architecture,"Multilayer Perceptron (MLP) Architecture
+3"
+1,CNN,1 - CNN.pptx,4,Neuron,"Neuron
+w1
+w2
+w3
+f is the activation function. It introduces non-linearity into the networks.
+4"
+1,CNN,1 - CNN.pptx,5,Activation Functions: Examples,"Activation Functions: Examples
+5"
+1,CNN,1 - CNN.pptx,6,Neural Network Training Process,"Neural Network Training Process
+Training Loop: Prediction, Error, and Update
+6"
+1,CNN,1 - CNN.pptx,7,Neural Network Playground,"Neural Network
+Playground
+Website link:
+https://playground.tensorflow.org
+7"
+1,CNN,1 - CNN.pptx,8,CIFAR-10 Benchmark Dataset,"CIFAR-10 Benchmark Dataset
+Widely used image classification benchmark dataset
+60,000 color images
+50,000 training images and 10,000 test images
+Small resolution: 32 × 32 × 3
+10 object classes
+Used for prototyping
+8"
+1,CNN,1 - CNN.pptx,9,ImageNet Dataset,"ImageNet Dataset
+Large-scale visual recognition dataset
+Over 14 million labeled images
+More than 20,000 object categories
+Subset
+used for benchmarking: ImageNet Large Scale Visual Recognition Challenge (
+ILSVRC
+)
+Usually resized to
+224x224
+or
+256x256
+pixels
+1,000 classes
+Over
+1.2 million
+images
+Images collected from the web and human-annotated
+Standard benchmark for deep learning in computer vision
+Enabled breakthroughs in CNN architectures (e.g.,
+AlexNet
+, VGG,
+ResNet
+)
+Top-5 error metric widely used for evaluation
+Catalyst for modern deep learning revolution (post-2012)
+9"
+1,CNN,1 - CNN.pptx,10,Why Not Just Use an MLP for Images?,"Why Not Just Use an MLP for Images?
+Example: 32×32×3 image → 3072 inputs
+Hidden layer (1000 neurons) → 3 million parameters
+Problems:
+Too many parameters
+No spatial structure
+MLP ignores 2D geometry and local relationships.
+No translation invariance
+Shifted objects are treated as new patterns.
+Overfitting risk
+Millions of parameters relative to dataset size.
+10"
+1,CNN,1 - CNN.pptx,11,ImageNet Large Scale Visual Recognition Challenge (ILSVRC),"ImageNet Large Scale Visual Recognition Challenge (ILSVRC)
+11"
+1,CNN,1 - CNN.pptx,12,AlexNet on Two GPUs,"AlexNet
+on Two GPUs
+Feature extraction layers
+that extract input features, and most operations are convolutions.
+Classification layers
+that analyze features and classify input images into groups, like fully connected layers.
+12"
+1,CNN,1 - CNN.pptx,13,AlexNet on One GPU,"AlexNet
+on One GPU
+13"
+1,CNN,1 - CNN.pptx,14,Convolutional Neural Networks (CNNs),"Convolutional Neural Networks (CNNs)
+14"
+1,CNN,1 - CNN.pptx,15,Convolution = Local Dot Product,"Convolution = Local Dot Product
+15"
+1,CNN,1 - CNN.pptx,16,Matrix Inner Product in Convolution,"Image
+Filter
+Matrix Inner Product = 4
+Matrix Inner Product in Convolution
+16"
+1,CNN,1 - CNN.pptx,17,Convolution as a Sliding Window Operation,"Convolution as a Sliding Window Operation
+Adapted from: http://deeplearning.stanford.edu/wiki/index.php/File:Convolution_schematic.gif
+- The new size after convolution!
+17"
+1,CNN,1 - CNN.pptx,18,Step-by-Step Sliding of the Convolution Filter: Step 1,"18
+Step-by-Step Sliding of the Convolution Filter: Step 1"
+1,CNN,1 - CNN.pptx,19,Step-by-Step Sliding of the Convolution Filter: Step 2,"19
+Step-by-Step Sliding of the Convolution Filter: Step 2"
+1,CNN,1 - CNN.pptx,20,Step-by-Step Sliding of the Convolution Filter: Step 9,"20
+Step-by-Step Sliding of the Convolution Filter: Step 9"
+1,CNN,1 - CNN.pptx,21,Convolution Output Size,"21
+Convolution Output Size
+Question
+: Why is the output a 3x3
+matrix
+?"
+1,CNN,1 - CNN.pptx,22,Convolving “filters” is not a new idea,"Convolving “filters” is not a new idea
+22"
+1,CNN,1 - CNN.pptx,23,"Edge Detection Filters: Sobel X, Sobel Y, and Laplacian","Edge Detection Filters: Sobel X, Sobel Y, and Laplacian
+Sobel X
+(Detect Vertical Edges):
+[-1 0 1]
+[-2 0 2]
+[-1 0 1]
+Computes gradient in the horizontal (x) direction
+Sobel Y
+(
+Detect
+Horizontal Edges):
+[-1 -2 -1]
+[ 0 0 0]
+[ 1 2 1]
+Computes gradient in the vertical (y) direction
+Laplacian
+(
+Detect Edges in A
+ll Directions):
+[ 0 -1 0]
+[-1 4 -1]
+[ 0 -1 0]
+Measures second-order intensity change (all directions)
+Is this pixel very different from its surrounding neighbors?
+Original Image
+Sobel X Output
+Sobel Y Output
+Laplacian Output
+x
+y
+23
+CNN filters learn similar edge detectors automatically."
+1,CNN,1 - CNN.pptx,24,Convolution,"Convolution
+24"
+1,CNN,1 - CNN.pptx,25,Convolution with a 3x3 kernel,"Convolution with a 3x3 kernel
+25"
+1,CNN,1 - CNN.pptx,26,"Convolution with a 3x3 kernel:
+Step 1","26
+Convolution with a 3x3 kernel:
+Step 1"
+1,CNN,1 - CNN.pptx,27,"Convolution with a 3x3 kernel:
+Animation","27
+Convolution with a 3x3 kernel:
+Animation"
+1,CNN,1 - CNN.pptx,28,Convolution without Padding,"28
+Convolution without Padding"
+1,CNN,1 - CNN.pptx,29,Convolution without Padding: Problem,"29
+Convolution without Padding: Problem"
+1,CNN,1 - CNN.pptx,30,Convolution with padding = 1,"Convolution with padding = 1
+Filter size: 3x3
+Padding: 1
+Stride: 2
+30"
+1,CNN,1 - CNN.pptx,31,Convolution with padding = 2,"Convolution with padding = 2
+Filter size: 3x3
+Padding: 2
+Stride: 1
+31"
+1,CNN,1 - CNN.pptx,32,Convolution Animation with one Kernel,"Convolution Animation with one Kernel
+The same filter is applied to the whole input!
+inputs
+Feature map generated by one filter
+32"
+1,CNN,1 - CNN.pptx,33,Convolution Animation with Two 4x4 Kernels,"33
+Convolution Animation with Two 4x4 Kernels"
+1,CNN,1 - CNN.pptx,34,Understanding the Input Tensor,"34
+Understanding the Input Tensor
+32
+32
+3
+32x32x
+3
+image
+width
+height
+depth"
+1,CNN,1 - CNN.pptx,35,Applying a 5×5×3 Filter,"35
+Applying a 5×5×3 Filter
+32
+32
+3
+32x32x
+3
+image
+width
+height
+depth
+5x5x
+3
+filter
+Convolve
+the filter with the image
+i.e. “slide over the image spatially, computing dot products”
+Filter depth MUST equal input depth
+Each filter produces one feature map
+Number of filters = output depth"
+1,CNN,1 - CNN.pptx,36,Computing One Convolution Output Value,"36
+Computing One Convolution Output Value
+32
+32
+3
+32x32x3 image
+5x5x3 filter
+1 number:
+the result of taking a dot product between the filter and a small 5x5x3 chunk of the image
+i.e. 75 (5x5x3)-dimensional dot product + bias"
+1,CNN,1 - CNN.pptx,37,Generating a Single Feature Map,"37
+Generating a Single Feature Map
+32
+32
+3
+32x32x3 image
+5x5x3 filter
+convolve (slide) over all spatial locations
+activation maps
+1
+28
+28"
+1,CNN,1 - CNN.pptx,38,Multiple Filters Produce Multiple Feature Maps,"38
+Multiple Filters Produce Multiple Feature Maps
+32
+32
+3
+32x32x3 image
+5x5x3 filter
+convolve (slide) over all spatial locations
+activation maps
+2
+28
+28
+consider a second,
+green
+filter"
+1,CNN,1 - CNN.pptx,39,Convolution with Six Kernels,"32
+32
+3
+Convolution Layer
+activation maps
+6
+28
+28
+For example, if we had 6 5x5 filters, we’ll get 6 separate activation maps:
+We stack these up to get a new “image” of size 28x28x6!
+39
+Convolution with Six Kernels"
+1,CNN,1 - CNN.pptx,40,Two Layers of Convolution,"ConvNet is a sequence of Convolution Layers, interspersed with activation functions
+32
+32
+3
+28
+28
+6
+CONV,
+ReLU
+e.g. 6 5x5x3 filters
+40
+Two Layers of Convolution"
+1,CNN,1 - CNN.pptx,41,Multiple Layers of Convolution,"ConvNet is a sequence of Convolution Layers, interspersed with activation functions
+32
+32
+3
+28
+28
+6
+CONV,
+ReLU
+e.g. 6 5x5x
+3
+filters
+CONV,
+ReLU
+e.g. 10 5x5x
+6
+filters
+CONV,
+ReLU
+….
+10
+24
+24
+41
+Multiple Layers of Convolution"
+1,CNN,1 - CNN.pptx,42,How CNNs Differ from MLP,"How CNNs Differ from MLP
+42
+MLP
+CNN
+Fully connected
+Local connectivity
+No spatial bias
+Spatial structure preserved
+Many parameters
+Parameter sharing
+No translation invariance
+Approximate translation invariance
+Why CNNs Work for Images
+Exploit local structure
+Share filters across space
+Translation equivariant (feature maps shift when input shifts).
+Pooling → approximate invariance
+Exploit local structure"
+1,CNN,1 - CNN.pptx,43,What Is Inductive Bias?,"What Is Inductive Bias?
+Inductive bias:
+The assumptions a model makes about the structure of data before seeing any training examples.
+All models have inductive bias.
+Linear regression → assumes linear relationship
+MLP → assumes no spatial structure
+CNN → assumes local correlations and translation consistency
+Images are structured 2D signals:
+Local correlation
+Repeated patterns (edges, textures)
+Spatial hierarchy
+CNNs encode spatial inductive bias through:
+Local connectivity
+Weight sharing
+Translation consistency
+This reduces parameters and improves generalization.
+43
+Good generalization happens when the model’s inductive bias matches the true structure of the data.
+If data is images → spatial bias helps
+If data is time series → temporal bias helps"
+1,CNN,1 - CNN.pptx,44,Hierarchical Feature Learning in CNNs,"44
+Hierarchical Feature Learning in CNNs"
+1,CNN,1 - CNN.pptx,45,1×1 Convolution,"1×1 Convolution
+What Does 1×1 Convolution Do?
+Performs channel mixing
+Earlier layers detect: Edges, Textures, Colors, Simple patterns
+1×1 convolution learns how to combine them.
+Example: Combine “horizontal edge” + “skin color” → “face feature”
+So, it learns interactions between feature maps.
+Reduces dimensionality
+Less computation
+Less memory
+Lower overfitting risk
+Adds non-linearity
+Performs linear projection
+Followed by non-linear activation
+Enables bottleneck architectures (e.g.,
+ResNet
+).
+45
+56×56×64 → 1×1 conv (32 filters) → 56×56×32
+Depth=32
+Acts like a fully connected layer applied independently at each spatial location.
+Efficient Depth Reduction
+Depth=64"
+1,CNN,1 - CNN.pptx,46,Pooling Layer,"Pooling Layer
+Reduces spatial dimension
+Reduces computation
+Adds robustness to small spatial shifts.
+46
+Reduces overfitting risk
+Pooling has no learnable parameters.
+Why Pooling?"
+1,CNN,1 - CNN.pptx,47,Max pooling: Another Example,"Max pooling: Another Example
+47"
+1,CNN,1 - CNN.pptx,48,Pooling: Max vs Average,"48
+Pooling: Max vs Average
+Max Pooling
+Average Pooling
+Focus
+Strongest activation
+Overall activation level
+Edge preservation
+Preserves sharp features
+Smooths features
+Noise sensitivity
+Can amplify noise spikes
+More stable to noise
+Information retention
+Keeps strongest signal only
+Keeps more global information
+Common usage
+Most common in early CNNs
+Often used in final layers
+Intuition
+Keep the strongest evidence
+Capture overall presence.
+When to Use Which?
+Early feature extraction → Max pooling
+Final feature summarization → Global average pooling
+Small datasets → Average pooling can help reduce overfitting"
+1,CNN,1 - CNN.pptx,49,AlexNet Architecture,"INPUT
+CONV1
+CONV2
+CONV3
+CONV4
+CONV5
+FC1
+FC2
+FC4
+49
+AlexNet
+Architecture"
+1,CNN,1 - CNN.pptx,50,AlexNet Architecture: A different view,"50
+AlexNet
+Architecture: A different view
+AlexNet
+demonstrated that deep CNNs scale effectively when spatial inductive bias is properly encoded."
+1,CNN,1 - CNN.pptx,51,AlexNet Keras Implementation,"Keras
+implementation: http://dandxy89.github.io/
+ImageModels
+/
+51
+AlexNet
+Keras
+Implementation"
+1,CNN,1 - CNN.pptx,52,Summary: Convolutional Neural Networks,"Summary: Convolutional Neural Networks
+Key Takeaways
+Convolution = local dot product
+Filters are shared across space
+Depth grows with number of filters
+Padding and stride control output size
+CNNs scale to large image datasets
+Modern vision breakthroughs stem from CNN architectures
+CNNs encode spatial inductive bias for visual data.
+52
+CNN success comes from aligning architectural inductive bias with the structure of visual data."

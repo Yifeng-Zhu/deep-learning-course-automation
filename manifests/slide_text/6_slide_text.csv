@@ -1,0 +1,582 @@
+﻿lecture_number,lecture_title,original_pptx,slide_number,possible_slide_title,visible_text
+6,Segmentation,6  - Segmentation.pptx,1,"Semantic Segmentation
+From Classification to Pixel-Level Prediction","Semantic Segmentation
+From Classification to Pixel-Level Prediction
+Yifeng Zhu
+Electrical and Computer Engineering
+University of Maine
+1"
+6,Segmentation,6  - Segmentation.pptx,2,What is Semantic Segmentation?,"What is Semantic Segmentation?
+2
+Pixel-wise Multi-Class Classification
+For each pixel:
+Loss:
+Input: H × W × 3
+Output: H × W × K"
+6,Segmentation,6  - Segmentation.pptx,3,Why Sliding Windows Fail?,"Why Sliding Windows Fail?
+Problems with Sliding Window
+Massive redundant computation
+Overlapping regions recomputed
+Extremely inefficient in backpropagation
+3"
+6,Segmentation,6  - Segmentation.pptx,4,Better Approach,"Better Approach
+4
+Run one network on the whole image and predict all pixels in a single forward pass."
+6,Segmentation,6  - Segmentation.pptx,5,Fully Convolutional Inference,"Fully Convolutional Inference
+Fully Convolutional Inference
+Entire image processed at once
+Shared computation
+Dense output K × H × W
+K x H x W
+5"
+6,Segmentation,6  - Segmentation.pptx,6,From Image Classification to Semantic Segmentation,"“tabby cat”
+6
+From Image Classification to Semantic Segmentation
+use pooling layers to
+downsample
+input images"
+6,Segmentation,6  - Segmentation.pptx,7,Becoming fully convolutional,"7
+Becoming fully convolutional
+Turn the FC layers into 1×1 convolutional layers"
+6,Segmentation,6  - Segmentation.pptx,8,Becoming fully convolutional,"8
+Becoming fully convolutional
+Keep a coarse spatial grid in the output."
+6,Segmentation,6  - Segmentation.pptx,9,Upsampling output,"9
+Upsampling output
+Upsample
+back toward the input resolution."
+6,Segmentation,6  - Segmentation.pptx,10,"End-to-end, pixels-to-pixels network","10
+End-to-end, pixels-to-pixels network"
+6,Segmentation,6  - Segmentation.pptx,11,"end-to-end, pixels-to-pixels network","conv, pool,
+nonlinearity
+upsampling
+pixelwise
+output + loss
+end-to-end, pixels-to-pixels network
+11"
+6,Segmentation,6  - Segmentation.pptx,12,Fully Convolutional Network,"Fully Convolutional Network
+H x W x K
+12
+An
+encoder
+compresses the image into semantic features.
+A
+decoder
+upsamples those features back to pixel resolution.
+The loss is applied directly to the output segmentation map.
+This turns segmentation into one trainable network instead of a pipeline of separate stages."
+6,Segmentation,6  - Segmentation.pptx,13,Downsampling in CNNs,"Downsampling
+in CNNs
+padding = 1, strides = 2
+Max pooling
+13
+4×4 → 2×2"
+6,Segmentation,6  - Segmentation.pptx,14,"end-to-end, pixels-to-pixels network","end-to-end, pixels-to-pixels network
+14"
+6,Segmentation,6  - Segmentation.pptx,15,U-NET Architecture,"Input
+image
+U-NET Architecture
+http://deeplearning.net/software/theano/tutorial/conv_arithmetic.html
+Output segmentation map
+(here 2 classes)
+background and foreground
+15"
+6,Segmentation,6  - Segmentation.pptx,16,U-NET Architecture,"Input
+image
+U-NET Architecture
+http://deeplearning.net/software/theano/tutorial/conv_arithmetic.html
+16
+Why U-Net works
+Contracting path: capture context and semantics.
+Skip connections: pass high-resolution detail forward.
+Expanding path: recover pixel-level localization.
+Typical use
+Especially effective when boundaries matter and training data is limited, including biomedical imaging."
+6,Segmentation,6  - Segmentation.pptx,17,Downsampling: Reducing Spatial Resolution,"Downsampling
+: Reducing Spatial Resolution
+Strided
+Convolution
+Pooling
+17
+Non-learnable
+Aggregation
+Learnable
+Feature extraction + reduction"
+6,Segmentation,6  - Segmentation.pptx,18,Three Ways to Up-sample,"Three Ways to Up-sample
+18
+Method
+How it works
+Learnable
+Typical Effect
+Main Issue
+Nearest
+Copy pixels
+No
+Blocky edges
+Staircase artifacts
+Bilinear
+Interpolate neighbors
+No
+Smooth edges
+Blur boundaries
+Transposed Conv
+Insert zeros + convolve
+Yes
+Sharp details
+Checkerboard artifacts
+Goal: Recover spatial resolution after down-sampling
+Input: H/2 × W/2 × C → Output: H × W × C
+Fixed interpolation methods restore size.
+Transposed convolution learns how to restore structure.
+Nearest
+Copies pixels directly. Fast and simple, but edges can look blocky.
+Bilinear
+Interpolates neighboring values. Smoother than nearest, but may blur boundaries.
+Transposed conv
+Inserts zeros and learns how to convolve. Sharp and flexible, but can create checkerboard artifacts."
+6,Segmentation,6  - Segmentation.pptx,19,Unpooling Methods: Nearest Neighbor vs. Bed of Nails,"Unpooling
+Methods: Nearest Neighbor vs. Bed of Nails
+19
+Replicate each pixel into a
+k×k
+block
+Dense output
+No zeros inserted
+Not learnable
+Produces blocky edges
+Insert zeros between pixels
+Sparse output
+Creates space for convolution
+Not learnable by itself
+Used before transposed convolution
+Nearest copies values
+Bed of nails inserts space for learning"
+6,Segmentation,6  - Segmentation.pptx,20,Unpooling Using Pooling Indices,"Unpooling
+Using Pooling Indices
+20
+Use the positions (argmax indices) from the pooling layer to restore spatial structure"
+6,Segmentation,6  - Segmentation.pptx,21,Up-Sampling in Practice (PyTorch),"Up-Sampling in Practice (
+PyTorch
+)
+21
+import
+torch.nn.functional
+as F
+# Nearest
+y =
+F.
+interpolate
+(x,
+scale_factor
+=2,
+mode=
+'nearest'
+)
+# Bilinear
+y =
+F.
+interpolate
+(x,
+scale_factor
+=2,
+mode=
+'bilinear’
+,
+align_corners
+=False)
+Interpolation-Based Up-sampling (Non-Learnable)
+Characteristics
+No learnable parameters
+Fast
+Often followed by Conv layer"
+6,Segmentation,6  - Segmentation.pptx,22,Up-Sampling in Practice (PyTorch),"Up-Sampling in Practice (
+PyTorch
+)
+22
+import
+torch.nn
+as
+nn
+upsample
+= nn.
+ConvTranspose2d
+(
+in_channels
+=64,
+out_channels
+=32,
+kernel_size
+=3,
+stride=2,
+padding=1,
+output_padding
+=1
+)
+y =
+upsample
+(x)
+Learnable
+Upsampling
+Characteristics
+Learnable
+Integrated into model
+May cause checkerboard artifacts
+In modern architectures, interpolation + convolution is often preferred over pure transposed convolution."
+6,Segmentation,6  - Segmentation.pptx,23,Interpolation-Based Upsampling,"Interpolation-Based
+Upsampling
+23
+Each new pixel is a weighted average of the four surrounding pixels.
+Nearest neighbor repeats nearby values and keeps edges crisp but blocky.
+Bilinear uses a weighted combination of neighbors and smooths the result.
+Bicubic uses a larger neighborhood and can produce smoother curves.
+Bilinear rule"
+6,Segmentation,6  - Segmentation.pptx,24,Bilinear interpolation Formula,"Bilinear interpolation Formula
+24"
+6,Segmentation,6  - Segmentation.pptx,25,Overlapping Contributions in Transposed Convolution,"A Conv2DTranspose with 3x3 kernel (not seen explicitly) applied to a 4x4 input to give a 6x6 output.
+25
+In transposed convolution,
+each input pixel contributes to
+multiple output locations
+.
+When those contributions overlap,
+we
+sum them
+.
+Each input pixel generates a weighted footprint. Overlapping footprints are summed.
+Overlapping Contributions in Transposed Convolution"
+6,Segmentation,6  - Segmentation.pptx,26,A Conv2DTranspose with 3x3 kernel (seen explicitly) applied to a 4x4 input to give a 6x6 output.,"A Conv2DTranspose with 3x3 kernel (seen explicitly) applied to a 4x4 input to give a 6x6 output.
+26
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+Inputs
+Kernel
+1
+1
+1
+1
+1
+1
+1
+1
+1
+Outputs
+Simple Example Transposed Convolution (Stride = 1)
+Each input pixel writes a weighted footprint into the output.
+When footprints overlap, their contributions are summed.
+This is why transposed convolution can both enlarge and learn structure."
+6,Segmentation,6  - Segmentation.pptx,27,A Conv2DTranspose with 3x3 kernel (seen explicitly) applied to a 4x4 input to give a 6x6 output.,"A Conv2DTranspose with 3x3 kernel (seen explicitly) applied to a 4x4 input to give a 6x6 output.
+27
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+Inputs
+Kernel
+1
+1,
+1
+1,
+1
+1
+1
+1,
+1
+1,
+1
+1
+1
+1,
+1
+1,
+1
+1
+Outputs
+Simple Example Transposed Convolution (Stride = 1)
+Each input pixel writes a weighted footprint into the output.
+When footprints overlap, their contributions are summed.
+This is why transposed convolution can both enlarge and learn structure."
+6,Segmentation,6  - Segmentation.pptx,28,A Conv2DTranspose with 3x3 kernel (seen explicitly) applied to a 4x4 input to give a 6x6 output.,"A Conv2DTranspose with 3x3 kernel (seen explicitly) applied to a 4x4 input to give a 6x6 output.
+28
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+Inputs
+Kernel
+1
+1,
+1
+1,
+1
+,1
+1
+,1
+1
+1
+1,
+1
+1,
+1
+,1
+1
+,1
+1
+1
+1,
+1
+1,
+1
+,1
+1
+,1
+1
+Outputs
+Simple Example Transposed Convolution (Stride = 1)
+Each input pixel writes a weighted footprint into the output.
+When footprints overlap, their contributions are summed.
+This is why transposed convolution can both enlarge and learn structure."
+6,Segmentation,6  - Segmentation.pptx,29,A Conv2DTranspose with 3x3 kernel (seen explicitly) applied to a 4x4 input to give a 6x6 output.,"A Conv2DTranspose with 3x3 kernel (seen explicitly) applied to a 4x4 input to give a 6x6 output.
+29
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+Inputs
+Kernel
+1
+2
+3
+3
+2
+1
+2
+4
+6
+6
+4
+2
+3
+6
+9
+9
+6
+3
+3
+6
+9
+9
+6
+3
+2
+4
+6
+6
+4
+2
+1
+2
+3
+3
+2
+1
+Outputs
+Simple Example Transposed Convolution (Stride = 1)
+Each input pixel writes a weighted footprint into the output.
+When footprints overlap, their contributions are summed.
+This is why transposed convolution can both enlarge and learn structure."
+6,Segmentation,6  - Segmentation.pptx,30,Transposed Convolution (Stride = 1),"stride = 1
+30
+Transposed Convolution (Stride = 1)"
+6,Segmentation,6  - Segmentation.pptx,31,Stride = 2 vs. Stride = 1,"stride = 2
+31
+Stride = 2 vs. Stride = 1"
+6,Segmentation,6  - Segmentation.pptx,32,Matrix View of Convolution,"Matrix View of Convolution
+Output
+32"
+6,Segmentation,6  - Segmentation.pptx,33,Convolution: Flatten the input and output,"Convolution: Flatten the input and output
+Flatten the input
+Flatten the output
+33"
+6,Segmentation,6  - Segmentation.pptx,34,Matrix View of Convolution,"Matrix View of Convolution
+34"
+6,Segmentation,6  - Segmentation.pptx,35,Expanding the Grid by Inserting Zeros,"Expanding the Grid by Inserting Zeros
+35"
+6,Segmentation,6  - Segmentation.pptx,36,Transposed Convolution as a Transpose Operation,"Transposed Convolution as a Transpose Operation
+Transpose
+36"
+6,Segmentation,6  - Segmentation.pptx,37,Transpose convolution: Flatten the input,"Transpose convolution: Flatten the input
+Flatten the input
+37"
+6,Segmentation,6  - Segmentation.pptx,38,Matrix View of Transposed Convolution,"Matrix View of Transposed Convolution
+38"
+6,Segmentation,6  - Segmentation.pptx,39,Worked Example: Stride-2 Transposed Convolution,"[[1 2]
+[3 4]]
+[[1 1 1]
+[1 1 1]
+[1 1 1]]
+Image
+Filter
+padding = 0, stride = 2
+[[1 1 3 2
+2
+]
+[1 1 3 2
+2
+]
+[4 4 10 6
+6
+]
+[3 3 7 4
+4
+]
+[
+3 3 7 4 4
+]
+[[
+0 0 0 0 0 0 0
+]
+[
+0 0 0 0 0 0 0
+]
+[
+0 0
+1
+0
+2
+0 0
+]
+[
+0 0 0 0 0 0 0
+]
+[
+0 0
+3
+0
+4
+0 0
+]
+[
+0 0 0 0 0 0 0
+]
+[
+0 0 0 0 0 0 0
+]]
+padding = 0, stride = 2
+Convolution result
+Transposed Convolution
+No padding, stride = 2, Kernel = 3x3
+39
+Worked Example: Stride-2 Transposed Convolution
+Insert zeros according to the stride.
+Apply a standard convolutional kernel on the expanded grid.
+Sum the overlapping responses to form the final output.
+Practical implication
+Kernel size, stride, and padding jointly determine the final output size and the overlap pattern."
+6,Segmentation,6  - Segmentation.pptx,40,Limitations of Transposed Convolution: Checkerboard Artifacts,"Limitations of Transposed Convolution: Checkerboard Artifacts
+https://
+towardsdatascience.com
+/transposed-convolution-demystified-84ca81b4baba
+Chequered
+board Artifacts
+40
+Uneven overlap can create periodic texture patterns in the output.
+The problem is most visible when stride and kernel size interact poorly.
+A reliable mitigation is interpolation or resize followed by a regular convolution."
+6,Segmentation,6  - Segmentation.pptx,41,Summary,"Summary
+41
+Transposed Convolution (Core Idea)
+Zero insertion
+Standard convolution
+Overlapping summation
+Matrix interpretation: transpose of convolution operator.
+Practical Insight
+Interpolation + Conv is often stable and effective
+Transposed Conv may cause checkerboard artifacts
+Design choice depends on task and architecture
+Segmentation is structured prediction: preserve spatial reasoning while learning semantic meaning."

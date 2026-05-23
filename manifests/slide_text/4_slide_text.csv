@@ -1,0 +1,464 @@
+﻿lecture_number,lecture_title,original_pptx,slide_number,possible_slide_title,visible_text
+4,Overfit & Underfit,4  - Overfit & Underfit.pptx,1,Overfitting & Underfitting,"Overfitting & Underfitting
+Yifeng Zhu
+Electrical and Computer Engineering
+University of Maine"
+4,Overfit & Underfit,4  - Overfit & Underfit.pptx,2,Regression: Underfitting vs. Good Fit vs. Overfitting,"2
+Regression: Underfitting vs. Good Fit vs. Overfitting
+Model too simple to capture the true pattern
+High training error
+High test error
+Fails to learn important structure
+Captures underlying trend
+Low training error
+Low test error
+Generalizes well to unseen data
+Model too complex
+Very low training error
+High test error
+Learns noise instead of signal"
+4,Overfit & Underfit,4  - Overfit & Underfit.pptx,3,Classification: Underfitting vs. Good Fit vs. Overfitting,"3
+Classification: Underfitting vs. Good Fit vs. Overfitting
+Too simple →
+misses structure.
+Balanced complexity → generalizes well.
+Too complex → memorizes noise."
+4,Overfit & Underfit,4  - Overfit & Underfit.pptx,4,Which cases correspond to underfitting or overfitting?,"Which cases correspond to underfitting or overfitting?
+4
+High Bias
+= being consistently wrong.
+High Variance
+= being unpredictably inconsistent."
+4,Overfit & Underfit,4  - Overfit & Underfit.pptx,5,Bias–Variance and Model Behavior,"Bias–Variance and Model Behavior
+Underfitting
+Overfitting
+5
+Low Bias, Low Variance
+Predictions are accurate and consistent.
+Model is both correct on average and stable.
+Low Bias, High Variance
+Predictions are accurate on average but highly unstable.
+Model is sensitive to small changes in data (overfitting risk).
+High Bias, Low Variance
+Predictions are consistently wrong in the same direction.
+Model is too simple (underfitting).
+High Bias, High Variance
+Predictions are inaccurate and inconsistent.
+Model is both wrong and unstable."
+4,Overfit & Underfit,4  - Overfit & Underfit.pptx,6,Managing Overfitting and Underfitting,"Managing Overfitting and Underfitting
+Underfitting
+Solution:
+Train longer
+More layers (deeper network)
+Overfitting
+Solution:
+More data
+Regularization
+Other architecture
+6"
+4,Overfit & Underfit,4  - Overfit & Underfit.pptx,7,Bias–Variance Tradeoff,"7
+Bias–Variance Tradeoff
+As model complexity increases:
+Bias ↓
+Variance ↑
+Simpler models miss patterns; overly complex models chase noise.
+Goal: find the minimum.
+Bias ↓
+Total test error = Bias² + Variance + Noise"
+4,Overfit & Underfit,4  - Overfit & Underfit.pptx,8,Generalization: The Train-Test Split,"Generalization
+:
+The Train-Test Split
+Training Data:
+used to fit model
+Test Data:
+check generalization error
+How to split?
+Randomly, Temporally, Geo
+…
+Depends on application (usually randomly)
+What size? (90%-10%)
+Larger training set
+ more complex models
+Larger test set  better estimate of generalization error
+Typically between 75%-25% and
+90%-10%
+Data
+Train
+Test
+Train - Test
+Split
+8"
+4,Overfit & Underfit,4  - Overfit & Underfit.pptx,9,Generalization: The Train-Validation-Test Split,"Generalization
+:
+The Train-Validation-Test Split
+Data
+Train
+Test
+Train - Test
+Split
+9
+Data
+Train
+Test
+Train – Validation- Test
+Split
+Validation
+Training Set → learn
+Learn model parameters
+Validation Set → choose
+Tune hyperparameters
+Model selection
+Early stopping
+Test Set → evaluate
+Final unbiased evaluation
+Used once, after model is fixed"
+4,Overfit & Underfit,4  - Overfit & Underfit.pptx,10,Training vs Test Error,"Training
+vs
+Test
+Error
+Epochs
+Error
+Training Error
+Test Error
+Best Fit
+Overfitting
+
+
+Underfitting
+Training error
+typically
+under-estimates
+test error
+.
+10"
+4,Overfit & Underfit,4  - Overfit & Underfit.pptx,11,Cross Validation,"Cross Validation
+Why use cross-validation?
+When the dataset is small
+When a single train–test split is unreliable
+When we want a more stable estimate of performance
+11
+k-Fold Cross-Validation
+Split data into k equal folds
+Train on k−1 folds
+Validate on the remaining fold
+Repeat k times
+Average the validation results
+Purpose:
+reduce variance in performance estimation."
+4,Overfit & Underfit,4  - Overfit & Underfit.pptx,12,Generalization: Validation Split,"Generalization:
+Validation Split
+Training Data:
+used to fit model
+Test Data:
+check generalization error
+How to split?
+Randomly, Temporally, Geo
+…
+Depends on application (usually randomly)
+What size? (90%-10%)
+Larger training set
+ more complex models
+Larger test set  better estimate of generalization error
+Typically between 75%-25% and
+90%-10%
+You can only use the test dataset once after deciding on the model.
+Cross validation
+simulates multiple train test-splits
+on the training data.
+Data
+Train
+Test
+Train - Test
+Split
+Validation
+Split
+Train
+V
+5-Fold
+Cross Validation
+V
+Train
+V
+Train
+V
+Train
+V
+Train
+Validate
+Generalization
+12"
+4,Overfit & Underfit,4  - Overfit & Underfit.pptx,13,Regularized Loss Minimization,"Regularized Loss Minimization
+Larger values of
+λ
+⇒ more regularization
+Regularization Parameter
+13"
+4,Overfit & Underfit,4  - Overfit & Underfit.pptx,14,Determining the Optimal 𝜆,"Determining the Optimal 𝜆
+Value of 𝜆 determines bias-variance tradeoff
+Larger values
+ more regularization  more bias  less variance
+Increasing 𝜆
+Error
+Variance
+Test Error
+(Bias)
+2
+Optimal Value
+Validation Error
+How do we determine 𝜆?
+Determined through cross validation
+14"
+4,Overfit & Underfit,4  - Overfit & Underfit.pptx,15,Notation: p-Norm,"Notation: p-Norm
+15"
+4,Overfit & Underfit,4  - Overfit & Underfit.pptx,16,Notation,"Notation
+L0 Norm
+# of non-zero entries
+L1 Norm
+Sum of absolute values
+L2 Norm & Squared L2 Norm
+Sum of squares
+Sqrt
+(sum of squares)
+L-infinity Norm
+Max absolute value
+16"
+4,Overfit & Underfit,4  - Overfit & Underfit.pptx,17,Example,"Example
+Give a vector w = [3, 4]
+What is L0, L1, and L2 norm?
+L0 Norm = 2
+L1 Norm = 7
+L2 Norm = 5
+17"
+4,Overfit & Underfit,4  - Overfit & Underfit.pptx,18,Example: Regularized Least Square,"Example: Regularized Least Square
+L2 Norm:
+L1 Norm:
+L1 + L2 Norm:
+𝐶𝑜𝑠𝑡
+=
+𝑖
+=0
+𝑛
+𝑦
+𝑖
+−
+𝑤
+𝑥
+𝑖
+2
+argmin
+𝑤
+𝐶𝑜𝑠𝑡
+(
+𝑤
+)
+18"
+4,Overfit & Underfit,4  - Overfit & Underfit.pptx,19,Understanding the Contours with L1 Regularization,"Understanding the Contours with L1 Regularization
+19
+The ellipses are contours of equal training loss.
+Moving toward the center → lower loss
+The center → minimum without regularization
+L
+1
+Norm Ball
+diamond
+The diamond shape is the L1 constraint region.
+It represents all parameter values with limited total absolute magnitude.
+Where is the solution?
+The first point where a loss contour touches the L1 boundary.
+Why does L1 create sparsity?
+The L1 ball has sharp corners on the axes.
+Since contours often touch the diamond at a corner, one parameter becomes exactly zero.
+That is why
+L1 produces sparse solutions
+.
+L1 regularization pushes the solution toward the axes, making some weights exactly zero."
+4,Overfit & Underfit,4  - Overfit & Underfit.pptx,20,2D Example with L1 Regularization,"2D Example with L1 Regularization
+Suppose we minimize:
+20
+Without regularization:
+That is the center of the ellipses.
+Add L1 Constraint:
+Penalized Form (what we usually write)
+Constrained Form (used for geometry intuition)
+Same idea. Different perspective.
+Large λ ⟺ Small c
+For every λ, there exists a corresponding C that gives the same solution.
+There is no simple closed-form formula for converting between λ and C?"
+4,Overfit & Underfit,4  - Overfit & Underfit.pptx,21,L1 Regularization: Geometry Without Constraint,"L1 Regularization: Geometry Without Constraint
+Suppose we minimize:
+21
+Without regularization:
+That is the center of the ellipses.
+Add L1 Constraint:
+Penalized Form (what we usually write)
+Constrained Form (used for geometry intuition)
+Same idea. Different perspective.
+Large λ ⟺ Small c
+Suppose c = 2.
+We shrink the loss contours inward until one becomes tangent to the L1 boundary. That tangency point is the optimal solution."
+4,Overfit & Underfit,4  - Overfit & Underfit.pptx,22,Adding the L1 Constraint (Diamond Region),"Adding the L1 Constraint (Diamond Region)
+Suppose we minimize:
+22
+Without regularization:
+That is the center of the ellipses.
+Add L1 Constraint:
+Penalized Form (what we usually write)
+Constrained Form (used for geometry intuition)
+Same idea. Different perspective.
+Large λ ⟺ Small c
+Suppose c = 2."
+4,Overfit & Underfit,4  - Overfit & Underfit.pptx,23,Tangency Principle: Where Is the Optimal Solution?,"Tangency Principle: Where Is the Optimal Solution?
+Suppose we minimize:
+23
+Without regularization:
+That is the center of the ellipses.
+Add L1 Constraint:
+Penalized Form (what we usually write)
+Constrained Form (used for geometry intuition)
+Same idea. Different perspective.
+Large λ ⟺ Small c
+Suppose c = 2.
+In this example, L1 shrinks both parameters but does not set any to zero."
+4,Overfit & Underfit,4  - Overfit & Underfit.pptx,24,When Does L1 Create Sparsity?,"When Does L1 Create Sparsity?
+Suppose we minimize:
+24
+Add L1 Constraint:
+Suppose c = 2.
+The contour hits a corner of the L1 diamond, so one coefficient becomes zero.
+You get exact zeros when:
+One coordinate is much smaller than the others.
+The L1 ball boundary is reached at a corner.
+The soft-thresholding step eliminates a variable.
+Important Clarification
+L1 encourages sparsity.
+It does not guarantee sparsity in every example.
+In higher dimensions, sparsity becomes much more common.
+In 2D, it depends strongly on geometry."
+4,Overfit & Underfit,4  - Overfit & Underfit.pptx,25,Shrinkage vs. Sparsity,"Shrinkage vs. Sparsity
+25
+L1 Constraint (Diamond)
+Has sharp corners.
+Contour often becomes tangent at a corner.
+One coefficient becomes exactly zero.
+Produces sparse solutions.
+L2 Constraint (Circle)
+Has smooth boundary.
+Contour becomes tangent on a curved edge.
+Coefficients shrink smoothly.
+Does not produce sparsity."
+4,Overfit & Underfit,4  - Overfit & Underfit.pptx,26,L,"L
+2
+Norm Ball
+L
+1
+Norm Ball
+L
+0
+Norm Ball
+L
+1
++ L
+2
+Norm
+Elastic Net
+Counts number of nonzero parameters
+Directly controls sparsity
+Leads to feature selection
+Combinatorial and hard to optimize
+Encourages many weights to become zero
+Easier to optimize
+Penalizes large weights
+Shrinks parameters smoothly
+Does not produce sparsity
+Combines sparsity and stability
+Requires tuning two hyperparameters
+Contours of the error
+26
+Effect: strongest sparsity control
+Effect: sparse solutions
+Effect: improves stability
+Effect: compromise between L1 and L2"
+4,Overfit & Underfit,4  - Overfit & Underfit.pptx,27,L2 vs. L1 Regularization,"27
+L1: Weights shrink by a constant amount toward 0.
+L2: Weights shrink by an amount which is proportional to w.
+For a weight that has a large magnitude, L1 regularization shrinks the weight much less than L2 regularization does.
+By contrast, when |w| is small, L1 regularization shrinks the weight much more than L2 regularization.
+Summary
+Sparsity: L1 > L2
+Stability: L2 > L1
+Computational complexity: L2 > L1
+L2 vs. L1 Regularization"
+4,Overfit & Underfit,4  - Overfit & Underfit.pptx,28,What Is Dropout?,"What Is Dropout?
+Dropout Rate = 50%
+Dropout for this layer
+Half of neurons removed each iteration.
+28
+Applied only during training
+Dropout reduces overfitting by making the network robust to missing features."
+4,Overfit & Underfit,4  - Overfit & Underfit.pptx,29,Why Does Dropout Work?,"Why Does Dropout Work?
+Why Dropout Reduces Overfitting
+Prevents neurons from relying on specific other neurons.
+Forces each neuron to learn independently useful features
+Acts like training many smaller subnetworks
+Improves generalization
+29"
+4,Overfit & Underfit,4  - Overfit & Underfit.pptx,30,Dropout: Training vs Test,"Dropout: Training vs Test
+Inference with Dropout
+All neurons are active
+We scale activations (or weights) appropriately
+Equivalent to averaging many subnetworks
+30
+Test-time network approximates averaging many subnetworks."
+4,Overfit & Underfit,4  - Overfit & Underfit.pptx,31,How Dropout Reduces Overfitting,"How Dropout Reduces Overfitting
+Learn from partial features
+More iterations required to converge
+Alleviate overfitting
+31"
+4,Overfit & Underfit,4  - Overfit & Underfit.pptx,32,Data augmentation,"Data augmentation
+Flipping
+Color filter
+32
+Increase effective dataset size by:
+Flipping
+Rotation
+Cropping
+Distortion
+Color jitter
+Goal:
+Improve robustness without changing architecture."
+4,Overfit & Underfit,4  - Overfit & Underfit.pptx,33,Data augmentation: More examples,"Data augmentation: More examples
+Distortion
+Patches
+Zooming
+33"
+4,Overfit & Underfit,4  - Overfit & Underfit.pptx,34,Early Stopping,"Early Stopping
+34
+Monitor validation error
+Stop training when it increases
+Prevent overfitting
+Training error ↓
+Validation error ↓ then ↑
+Stop at minimum validation error."
+4,Overfit & Underfit,4  - Overfit & Underfit.pptx,35,Learning Rate,"Learning Rate
+35"
+4,Overfit & Underfit,4  - Overfit & Underfit.pptx,36,Effect of Learning Rate on Convergence,"Effect of Learning Rate on Convergence
+36"
+4,Overfit & Underfit,4  - Overfit & Underfit.pptx,37,Learning Rate Scheduling,"Learning Rate Scheduling
+37
+Keep learning rate high at the beginning → fast progress
+Reduce learning rate later → fine convergence
+Prevent oscillation and improve final accuracy"
+4,Overfit & Underfit,4  - Overfit & Underfit.pptx,38,Recipe for Learning,"Recipe for Learning
+38"
+4,Overfit & Underfit,4  - Overfit & Underfit.pptx,39,Summary: Generalization and Regularization,"Summary: Generalization and Regularization
+Generalization = Controlling Complexity
+Underfit → High Bias
+Overfit → High Variance
+Tools:
+Regularization
+Dropout
+Data Augmentation
+Early Stopping
+Cross Validation
+Goal: Match model complexity to data complexity.
+39"

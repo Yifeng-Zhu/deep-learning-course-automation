@@ -1,0 +1,22 @@
+slide_number,main_topic,difficulty_level,estimated_teaching_time_minutes,recommendation,suggested_improvement_for_online_teaching
+1,Course title and instructor introduction,low,1.0,keep,Add brief speaker notes that frame the module purpose and what students should expect from the introduction.
+2,Examples of deep learning success across domains,low,1.5,revise,Use fewer examples and group them by domain so online learners can scan the motivation quickly.
+3,"Relationship among artificial intelligence, machine learning, and deep learning",medium,2.0,revise,Convert the timeline into a guided explanation in notes and emphasize the definitions before the historical milestones.
+4,Why deep learning became practical recently,low,1.0,keep,Use this as a transition slide and add notes that preview data scale computing and model depth.
+5,Scaling behavior of neural networks with data and model size,medium,1.5,revise,Explain the chart verbally in notes and state the takeaway explicitly for viewers who cannot inspect the plot closely.
+6,Modern conditions enabling deep learning,low,1.5,merge,Merge with the previous scaling slide or use as a short build slide to avoid repeating the same motivation.
+7,Depth trend in modern neural network architectures,medium,2.0,revise,Add notes explaining why depth helped and caution that depth alone is not the full story.
+8,ABCD framework for deep learning success,low,1.5,keep,Use this as an organizer slide and revisit the four components in the next slides.
+9,Algorithms and neural network architectures,medium,1.5,keep,Add one concrete example each for image sequence and language architectures in speaker notes.
+10,Big data as a requirement for learning,medium,1.5,revise,Simplify the data statistics on the slide and move source details and interpretation into notes.
+11,Computing hardware for deep learning,medium,1.5,revise,Separate mainstream accelerators from emerging memory technologies so students do not confuse production tools with research directions.
+12,Computing as part of the ABCD framework,low,1.0,merge,Merge with slide 11 unless this slide contains an animation or visual build not captured in the text extraction.
+13,Neural networks as input-output functions,low,1.5,keep,Add a simple notation example in notes such as input x mapped to output y.
+14,Neural networks as parameterized functions,medium,2.0,revise,Connect parameters to weights learned from data and include a short spoken example of training changing parameters.
+15,Image classification example,low,1.5,keep,Use speaker notes to explain hierarchical features from edges to shapes to object concepts.
+16,Speech-to-text example,low,1.0,keep,Add notes identifying the input as audio and the output as text to reinforce the mapping idea.
+17,Language translation example,low,1.0,keep,Add a short note that translation maps one symbolic sequence to another while preserving meaning.
+18,Image captioning example,medium,1.5,keep,Emphasize that the output is a generated sequence rather than a single class label.
+19,Common input-output mappings in deep learning,medium,2.0,revise,Reduce visual clutter and use notes to walk through one example at a time.
+20,Generative deep learning and reversed mappings,medium,2.0,revise,Clarify that generation is conditional modeling rather than a literal reverse of every task.
+21,Summary definition of deep learning,low,1.5,keep,Add a checkpoint question asking students to distinguish deep learning from general machine learning.

@@ -18,6 +18,24 @@ Read shared folder names and policies from:
 
 Do not hardcode drive letters such as `H:\` or `G:\` in scripts.
 
+## PowerPoint filename convention
+
+Original lecture PowerPoint files use this pattern:
+
+- `0 - Title.pptx`
+- `1 - Title.pptx`
+- `2 - Title.pptx`
+
+The number before the hyphen is the lecture number.
+
+When processing files:
+
+- Sort PowerPoint files numerically by the leading lecture number.
+- Treat `0 - *.pptx` as Lecture 0.
+- Lecture 0 is a special case and is already approximately one 30-minute video.
+- Batch segmentation should process files starting from `1 - *.pptx` unless explicitly instructed otherwise.
+- Do not assume filenames such as `Lecture_00_Intro.pptx`.
+
 ## Rules
 
 - Do not overwrite original PowerPoint files.

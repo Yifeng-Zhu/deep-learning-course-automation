@@ -1,0 +1,13 @@
+﻿lecture_number,lecture_title,original_pptx,total_slides,processing_status,slide_count_error
+0,Intro,0 - Intro.pptx,21,special_case_already_30min,
+1,CNN,1 - CNN.pptx,52,ready_for_inventory,
+2,Metrics,2  - Metrics.pptx,32,ready_for_inventory,
+3,Loss Function,3  - Loss Function.pptx,38,ready_for_inventory,
+4,Overfit & Underfit,4  - Overfit & Underfit.pptx,39,ready_for_inventory,
+5,Modern CNN,5  - Modern CNN.pptx,69,ready_for_inventory,
+6,Segmentation,6  - Segmentation.pptx,41,ready_for_inventory,
+7,LSTM,7 - LSTM.pptx,47,ready_for_inventory,
+8,Transformer,8 -Transformer.pptx,47,ready_for_inventory,
+9,LLM,9 - LLM.pptx,32,ready_for_inventory,
+10,VIT,10 - VIT.pptx,75,ready_for_inventory,
+11,Generative Model,11 - Generative Model.pptx,19,ready_for_inventory,

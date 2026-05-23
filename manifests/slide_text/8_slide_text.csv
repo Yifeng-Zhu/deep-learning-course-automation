@@ -1,0 +1,1277 @@
+﻿lecture_number,lecture_title,original_pptx,slide_number,possible_slide_title,visible_text
+8,Transformer,8 -Transformer.pptx,1,"Transformers
+From Seq2Seq Bottlenecks to Attention and Transformers","Transformers
+From Seq2Seq Bottlenecks to Attention and Transformers
+Yifeng Zhu
+Electrical and Computer Engineering
+University of Maine
+1"
+8,Transformer,8 -Transformer.pptx,2,Roadmap: From Seq2Seq to Transformers,"Roadmap: From Seq2Seq to Transformers
+2
+Why
+vanilla seq2seq
+struggles with long sequences
+How
+attention
+addresses the encoder–decoder bottleneck
+What
+self-attention
+is and why it matters
+How
+query, key, and value
+produce attention weights
+How
+multi-head attention
+and
+positional encoding
+enable Transformers"
+8,Transformer,8 -Transformer.pptx,3,Sequence-to-Sequence (seq2seq): Basic Idea,"Sequence-to-Sequence (seq2seq): Basic Idea
+Maps an
+input sequence
+to an
+output sequence
+Input and output may have
+different lengths
+Uses two RNNs:
+Encoder
+: reads the source sequence
+Decoder
+: generates the target sequence
+Example:
+Translate “The brown dog ran” to French.
+3"
+8,Transformer,8 -Transformer.pptx,4,Seq2Seq: Encoder Reads the Input,"Hidden layer
+Input layer
+h
+1
+𝐸
+h
+2
+𝐸
+h
+3
+𝐸
+h
+4
+𝐸
+The
+brown
+dog
+ran
+ENCODER RNN
+Seq2Seq: Encoder Reads the Input
+4"
+8,Transformer,8 -Transformer.pptx,5,Seq2Seq: Final Encoder State,"Input layer
+Hidden layer
+h
+1
+𝐸
+h
+2
+𝐸
+h
+3
+𝐸
+h
+4
+𝐸
+The
+brown
+dog
+ran
+The final hidden state of the encoder RNN is the initial state of the decoder RNN
+ENCODER RNN
+Seq2Seq: Final Encoder State
+5"
+8,Transformer,8 -Transformer.pptx,6,Seq2Seq: Decoder Initialization,"ENCODER RNN
+DECODER RNN
+Input layer
+Hidden layer
+h
+1
+𝐸
+h
+2
+𝐸
+h
+3
+𝐸
+h
+4
+𝐸
+The
+brown
+dog
+ran
+h
+1
+𝐷
+<s>
+The final hidden state of the encoder RNN is the initial state of the decoder RNN
+Seq2Seq: Decoder Initialization
+6"
+8,Transformer,8 -Transformer.pptx,7,Seq2Seq: Predicting the First Token,"Hidden layer
+ENCODER RNN
+DECODER RNN
+The final hidden state of the encoder RNN is the initial state of the decoder RNN
+Input layer
+h
+1
+𝐸
+h
+2
+𝐸
+h
+3
+𝐸
+h
+4
+𝐸
+The
+brown
+dog
+ran
+h
+1
+𝐷
+<s>
+Le
+Seq2Seq: Predicting the First Token
+7"
+8,Transformer,8 -Transformer.pptx,8,Seq2Seq: Completing the Decoding Process,"ENCODER RNN
+DECODER RNN
+Decoding happens step by step.
+Seq2Seq: Completing the Decoding Process
+8
+Input layer
+Hidden layer
+h
+1
+𝐸
+h
+2
+𝐸
+h
+3
+𝐸
+h
+4
+𝐸
+The
+brown
+dog
+ran
+h
+1
+𝐷
+h
+2
+𝐷
+<s>
+chien
+a
+couru
+h
+3
+𝐷
+h
+4
+𝐷
+h
+5
+𝐷
+Le
+h
+6
+𝐷
+Le
+chien
+a
+couru
+</s>
+marron
+marron"
+8,Transformer,8 -Transformer.pptx,9,Seq2Seq: Training with Teacher Forcing,"ENCODER RNN
+DECODER RNN
+Training: decoder loss updates both encoder and decoder weights.
+Seq2Seq: Training with Teacher Forcing
+9
+Input layer
+Hidden layer
+h
+1
+𝐸
+h
+2
+𝐸
+h
+3
+𝐸
+h
+4
+𝐸
+The
+brown
+dog
+ran
+h
+1
+𝐷
+h
+2
+𝐷
+h
+3
+𝐷
+Le
+chien
+a
+h
+4
+𝐷
+h
+5
+𝐷
+couru
+𝑦
+1
+𝑦
+2
+𝑦
+3
+𝑦
+4
+𝑦
+5
+marron"
+8,Transformer,8 -Transformer.pptx,10,Seq2Seq: Information Bottleneck,"Seq2Seq: Information Bottleneck
+The entire source sequence is compressed into
+one fixed context vector
+The decoder cannot directly revisit earlier encoder states
+This becomes more problematic for
+longer sequences
+This bottleneck motivates attention.
+ENCODER RNN
+DECODER RNN
+10
+Input layer
+Hidden layer
+h
+1
+𝐸
+h
+2
+𝐸
+h
+3
+𝐸
+h
+4
+𝐸
+The
+brown
+dog
+ran
+h
+1
+𝐷
+h
+2
+𝐷
+h
+3
+𝐷
+Le
+chien
+a
+h
+4
+𝐷
+h
+5
+𝐷
+couru
+𝑦
+1
+𝑦
+2
+𝑦
+3
+𝑦
+4
+𝑦
+5
+marron"
+8,Transformer,8 -Transformer.pptx,11,Replacing Recurrence with Self-Attention,"Replacing Recurrence with Self-Attention
+11
+LSTM
+𝑥
+1
+𝑦
+4
+𝑦
+3
+𝑦
+2
+𝑦
+1
+Self-Attention Layer
+LSTM
+𝑥
+2
+LSTM
+𝑥
+3
+LSTM
+𝑥
+4
+𝑐
+𝑥
+1
+𝑥
+2
+𝑥
+3
+𝑥
+4
+Why did Transformers replace recurrence?
+RNN/LSTM → sequential, harder to parallelize
+Self-attention → global access, parallelizable."
+8,Transformer,8 -Transformer.pptx,12,Attention: The Decoder Looks Back at the Whole Input,"Attention: The Decoder Looks Back at the Whole Input
+Seq2Seq compresses the whole input into one vector.
+Attention removes this restriction.
+At each decoding step, the decoder can use all encoder states.
+12
+Attention lets the decoder dynamically choose where to look in the input."
+8,Transformer,8 -Transformer.pptx,13,Attention: Forming a Context Vector,"Attention: Forming a Context Vector
+ENCODER RNN
+DECODER RNN
+Input layer
+Hidden layer
+The
+brown
+dog
+ran
+[
+𝒄
+𝟏
+𝑫
+,
+h
+4
+𝐸
+]
+𝑦
+1
+Le
+𝒄
+𝟏
+𝑫
+𝑎
+1
+1
+𝑎
+2
+1
+𝑎
+3
+1
+𝑎
+4
+1
+13
+At each decoding step, the decoder computes attention over all encoder states."
+8,Transformer,8 -Transformer.pptx,14,Attention: Measuring Relevance,"Attention: Measuring Relevance
+ENCODER RNN
+DECODER RNN
+Input layer
+Hidden layer
+The
+brown
+dog
+ran
+𝒄
+𝟐
+𝑫
+𝑎
+1
+2
+𝑎
+2
+2
+𝑎
+3
+2
+𝑎
+4
+2
+[
+𝑐
+1
+𝐷
+,
+h
+4
+𝐸
+]
+𝑦
+1
+[
+𝒄
+𝟐
+𝑫
+,
+𝑦
+1
+]
+𝑦
+2
+Le
+chien
+14
+At each decoding step, the decoder computes attention over all encoder states."
+8,Transformer,8 -Transformer.pptx,15,Attention: Normalized Attention Weights,"Attention: Normalized Attention Weights
+ENCODER RNN
+DECODER RNN
+Input layer
+Hidden layer
+The
+brown
+dog
+ran
+𝒄
+𝟑
+𝑫
+𝑎
+1
+3
+𝑎
+2
+3
+𝑎
+3
+3
+𝑎
+4
+3
+[
+𝑐
+1
+𝐷
+,
+h
+4
+𝐸
+]
+𝑦
+1
+[
+𝑐
+2
+𝐷
+,
+𝑦
+1
+]
+[
+𝒄
+𝟑
+𝑫
+,
+𝑦
+2
+]
+𝑦
+2
+𝑦
+3
+Le
+chien
+brun
+15
+At each decoding step, the decoder computes attention over all encoder states."
+8,Transformer,8 -Transformer.pptx,16,Attention: Interpreting Alignment,"Attention: Interpreting Alignment
+ENCODER RNN
+DECODER RNN
+Input layer
+Hidden layer
+The
+brown
+dog
+ran
+𝒄
+𝟒
+𝑫
+𝑎
+1
+4
+𝑎
+2
+4
+𝑎
+3
+4
+𝑎
+4
+4
+[
+𝑐
+1
+𝐷
+,
+h
+4
+𝐸
+]
+𝑦
+1
+[
+𝑐
+2
+𝐷
+,
+𝑦
+1
+]
+[
+𝑐
+3
+𝐷
+,
+𝑦
+2
+]
+[
+𝒄
+𝟒
+𝑫
+,
+𝑦
+3
+]
+𝑦
+2
+𝑦
+3
+𝑦
+4
+Le
+chien
+brun
+a
+16
+At each decoding step, the decoder computes attention over all encoder states."
+8,Transformer,8 -Transformer.pptx,17,Self-Attention: Tokens Attend to One Another,"Self-Attention: Tokens Attend to One Another
+ran
+ENCODER RNN
+DECODER RNN
+Input layer
+Hidden layer
+The
+brown
+dog
+𝒄
+𝟓
+𝑫
+𝑎
+1
+5
+𝑎
+2
+5
+𝑎
+3
+5
+𝑎
+4
+5
+[
+𝑐
+1
+𝐷
+,
+h
+4
+𝐸
+]
+𝑦
+1
+[
+𝑐
+2
+𝐷
+,
+𝑦
+1
+]
+[
+𝑐
+3
+𝐷
+,
+𝑦
+2
+]
+[
+𝑐
+4
+𝐷
+,
+𝑦
+3
+]
+[
+𝒄
+𝟓
+𝑫
+,
+𝑦
+4
+]
+𝑦
+2
+𝑦
+3
+𝑦
+4
+𝑦
+5
+Le
+chien
+brun
+a
+couru
+17
+At each decoding step, the decoder computes attention over all encoder states."
+8,Transformer,8 -Transformer.pptx,18,Attention: Alignment Improves Seq2Seq,"Attention: Alignment Improves Seq2Seq
+Attention:
+greatly improves seq2seq results
+makes source–target alignment interpretable
+Image source: Fig 3 in
+Bahdanau et al., 2015
+18
+Attention removes the single-vector bottleneck by letting the decoder revisit the whole source sentence."
+8,Transformer,8 -Transformer.pptx,19,Self-Attention: Basic Idea,"Self-Attention: Basic Idea
+Models relationships among tokens in the same sequence
+Each token attends to other tokens in that sequence
+Produces a contextualized representation for each token
+19"
+8,Transformer,8 -Transformer.pptx,20,Self-Attention Layer: Basic Structure,"Self-Attention Layer: Basic Structure
+𝑦
+3
+𝑥
+4
+𝑥
+3
+𝑥
+2
+𝑥
+1
+𝑦
+1
+𝑦
+2
+𝑦
+4
+20
+each input vector 𝑥
+𝑖
+​ is projected into 𝑞
+𝑖
+, 𝑘
+𝑖
+, and 𝑣
+𝑖
+​
+these learned projections let the model compare tokens in different ways"
+8,Transformer,8 -Transformer.pptx,21,Self-Attention: From Scores to Weights,"Self-Attention: From Scores to Weights
+Query
+(Q): what the current token is looking for
+Key
+(K): how each token can be matched
+Value
+(V): the information contributed by each token
+21
+Step 1: Compute similarity scores between the query and all keys
+Step 2: Apply
+softmax
+to convert the scores into attention weights
+Step 3: Take the weighted sum of the values"
+8,Transformer,8 -Transformer.pptx,22,22,"22
+Without scaling, dot products grow with dimension, making
+softmax
+too sharp."
+8,Transformer,8 -Transformer.pptx,23,𝑎,"𝑎
+1
+,1
+𝑎
+1
+,
+2
+𝑎
+1
+,
+3
+𝑎
+1
+,
+4
+Softmax
+over
+𝛼
+1
+,1
+,
+𝛼
+1
+,2
+,
+𝛼
+1
+,3
+,
+𝛼
+1
+,4
+𝑣
+1
+𝑘
+1
+𝑞
+1
+𝑣
+2
+𝑘
+2
+𝑞
+2
+𝑣
+3
+𝑘
+3
+𝑞
+3
+𝑣
+4
+𝑘
+4
+𝑞
+4
+𝑦
+1
+23
+https://arxiv.org/abs/1706.03762"
+8,Transformer,8 -Transformer.pptx,24,𝑎,"𝑎
+2
+,1
+𝑎
+2
+,
+2
+𝑎
+2
+,
+3
+𝑎
+2
+,
+4
+Softmax
+over
+𝛼
+2
+,1
+,
+𝛼
+2
+,2
+,
+𝛼
+2
+,3
+,
+𝛼
+2
+,4
+𝑣
+1
+𝑘
+1
+𝑞
+1
+𝑣
+2
+𝑘
+2
+𝑞
+2
+𝑣
+3
+𝑘
+3
+𝑞
+3
+𝑣
+4
+𝑘
+4
+𝑞
+4
+𝑦
+1
+24
+𝑦
+2
+https://arxiv.org/abs/1706.03762"
+8,Transformer,8 -Transformer.pptx,25,𝑣,"𝑣
+1
+𝑘
+1
+𝑞
+1
+𝑣
+2
+𝑘
+2
+𝑞
+2
+𝑣
+3
+𝑘
+3
+𝑞
+3
+𝑣
+4
+𝑘
+4
+𝑞
+4
+𝑦
+1
+25
+𝑦
+2
+𝑦
+3
+https://arxiv.org/abs/1706.03762
+𝑎
+3
+,1
+𝑎
+3
+,
+2
+𝑎
+3
+,
+3
+𝑎
+3
+,
+4
+Softmax
+over
+𝛼
+3
+,1
+,
+𝛼
+3
+,2
+,
+𝛼
+3
+,3
+,
+𝛼
+3
+,4"
+8,Transformer,8 -Transformer.pptx,26,26,"26
+https://arxiv.org/abs/1706.03762
+𝑣
+1
+𝑘
+1
+𝑞
+1
+𝛼
+4
+,1
+𝛼
+4
+,2
+𝛼
+4
+,3
+𝛼
+4
+,4
+𝑥
+4
+𝑥
+3
+𝑥
+2
+𝑥
+1
+𝑣
+2
+𝑘
+2
+𝑞
+2
+𝑣
+3
+𝑘
+3
+𝑞
+3
+𝑣
+4
+𝑘
+4
+𝑞
+4
+𝑦
+1
+𝑦
+2
+𝑦
+3
+𝑦
+4
+𝑎
+4
+,1
+𝑎
+4
+,
+2
+𝑎
+4
+,
+3
+𝑎
+4
+,
+4"
+8,Transformer,8 -Transformer.pptx,27,27,"27
+Scaled
+Dot-Product Attention: Matrix Dimensions"
+8,Transformer,8 -Transformer.pptx,28,Dot Product is a Similarity Score,"Dot Product is a Similarity Score
+If two vectors are identical → Cosine similarity = 1.0
+If two vectors are unrelated (perpendicular) → Cosine similarity = 0.0
+If two vectors are opposite → Cosine similarity = -1.0
+28
+𝑎
+𝑏
+𝜃
+Geometric interpretation of the dot product
+In attention, the dot product between a query and a key measures how strongly they match."
+8,Transformer,8 -Transformer.pptx,29,Self-Attention: Example,"Represents what a word is trying to understand.
+Represents how each word describes itself.
+compute similarity.
+Dot product of Query ( 𝑄 ) and Key ( 𝐾 ) to determine how much each token should focus on others.
+Step 1:
+Apply
+softmax
+Step 2:
+Converts the similarity scores into probabilities (weights).
+29
+Self-Attention: Example"
+8,Transformer,8 -Transformer.pptx,30,Self-Attention: Example with Dimensions,"Represents the actual meaning that is passed forward
+Compute similarity.
+Dot product of Query ( 𝑄 ) and Key ( 𝐾 ) to determine how much each token should focus on others.
+Step 1:
+Apply
+softmax
+Step 2:
+Converts the similarity scores into probabilities (weights).
+Multiply by Value
+Step 3:
+Extracts relevant information based on attention weights.
+30
+Self-Attention: Example with Dimensions"
+8,Transformer,8 -Transformer.pptx,31,"Self-Attention: Roles of Query, Key, and Value","Term
+Meaning
+Role in Self-Attention
+Query (Q)
+The search request
+What information does this token need?
+Key (K)
+The available knowledge
+How important is this token to others?
+Value (V)
+The actual content
+What information is passed forward?
+Physical Interpretation: Self-attention is like searching a knowledge base.
+Query (Q): what information this token needs
+Key (K): how this token can be matched
+Value (V): the information this token contributes
+31
+Self-Attention: Roles of Query, Key, and Value"
+8,Transformer,8 -Transformer.pptx,32,Attention Visualization,"Attention Visualization
+https://jalammar.github.io/illustrated-transformer/
+32
+“The animal didn't cross the street because
+it
+was too tired”
+when processing “it,” the model assigns more weight to “animal”
+attention maps help visualize which earlier tokens most influence the current token
+What does “it” in this sentence refer to?
+Attention weights show which earlier tokens most influence the current token."
+8,Transformer,8 -Transformer.pptx,33,Self-Attention: Why Positional Information Is Needed,"𝑤
+1
+Dog
+𝑞
+1
+𝑘
+1
+𝑣
+1
+𝑤
+2
+bites
+𝑞
+2
+𝑤
+3
+a
+𝑤
+𝑇
+man
+𝑘
+𝑇
+𝑞
+𝑇
+𝑣
+𝑇
+…
+𝑞
+1
+𝑘
+1
+𝑣
+1
+𝑘
+2
+𝑞
+2
+𝑞
+3
+𝑣
+2
+𝑘
+3
+𝑣
+3
+𝑘
+𝑇
+𝑞
+𝑇
+𝑣
+𝑇
+…
+self-attention
+𝑘
+2
+𝑣
+2
+𝑘
+3
+𝑞
+3
+𝑣
+3
+s
+el
+f
+-
+att
+e
+n
+tion
+Self-attention
+doesn’t know
+the order
+of
+its
+inputs.
+33
+Self-Attention: Why Positional Information Is Needed
+Example:
+“dog bites a man” vs
+“man bites a dog”"
+8,Transformer,8 -Transformer.pptx,34,Positional Encoding in the Transformer,"Positional Encoding in the Transformer
+34
+Next question: What makes a good positional encoding?
+The Transformer sees each token through both what it is and where it is."
+8,Transformer,8 -Transformer.pptx,35,Intuition for Positional Encoding,"Intuition for Positional Encoding
+35
+𝒙
+𝑨
+𝒙
+𝑩
+𝒌
+𝑩
+𝒒
+𝑩
+𝒗
+𝑩
+𝒌
+𝑨
+𝒒
+𝑨
+𝒗
+𝑨
+𝒑
+𝒏
+𝒑
+𝒎
++
++
+𝑎
+Attention depends on both the
+token embedding
+, which encodes meaning, and the
+positional encoding
+, which encodes where the token appears."
+8,Transformer,8 -Transformer.pptx,36,What makes a good positional encoding?,"What makes a good positional encoding?
+A good positional encoding should preserve order information without depending on a fixed sequence length.
+provide a
+unique encoding
+for each position
+reflect
+relative
+position relationships
+avoid depending on the
+total sequence length
+work for positions not seen during training
+integrate naturally with
+token embeddings
+36
+Self-attention
+𝒙
+A
+𝒙
+B
+𝒙
+C
+𝒙
+D
+𝒐
+D
+𝒑
+𝟏
+𝒑
+𝟐
+𝒑
+𝟑
+𝒑
+𝟒
++
++
++
++
+The model now sees both what a word is and where it appears."
+8,Transformer,8 -Transformer.pptx,37,Sinusoidal Positional Encoding: Basic Idea,"Sinusoidal Positional Encoding: Basic Idea
+Each token position is represented by a deterministic vector built from sine and cosine functions at different frequencies.
+37
+https://arxiv.org/abs/1706.03762
+……"
+8,Transformer,8 -Transformer.pptx,38,Sinusoidal Positional Encoding: Results,"Sinusoidal Positional Encoding: Results
+Each token position is represented by a deterministic vector built from sine and cosine functions at different frequencies.
+38
+Low-frequency dimensions capture coarse position; high-frequency dimensions capture fine position."
+8,Transformer,8 -Transformer.pptx,39,Intuition for Sinusoidal Positional Encoding,"Intuition for Sinusoidal Positional Encoding
+Different dimensions use sine and cosine waves with different frequencies, so each position gets a distinct pattern.
+Nearby positions have similar encodings
+Different frequencies capture both local and global position patterns
+The encoding extends naturally to unseen positions
+Sinusoidal encoding gives each position a unique, multi-scale signature.
+39"
+8,Transformer,8 -Transformer.pptx,40,Sinusoidal Positional Encoding: Visualization,"Sinusoidal Positional Encoding: Visualization
+How Sinusoidal Encoding Represents Relative Position
+Nearby positions have similar encodings
+Different frequencies capture both small and large offsets
+Relative distance is reflected in how the encoding changes across positions
+Attention can use these patterns to reason about token order
+Relative position is reflected by how the sinusoidal pattern changes from one token to the next.
+40
+Dimension
+Position"
+8,Transformer,8 -Transformer.pptx,41,Multi-Head Attention: Multiple Views of the Same Sequence,"http://jalammar.github.io/illustrated-transformer/
+41
+Multi-Head Attention: Multiple Views of the Same Sequence"
+8,Transformer,8 -Transformer.pptx,42,Attention vs. Self-Attention,"Attention
+: relates tokens in one sequence to tokens in another sequence
+Self-attention
+: relates tokens within the same sequence
+In the original Transformer, the encoder and decoder use self-attention, and the decoder also uses encoder–decoder attention
+Attention vs. Self-Attention
+42"
+8,Transformer,8 -Transformer.pptx,43,Cross-Attention: Another Example with Dimensions,"43
+Cross-Attention: Another Example with Dimensions
+Queries (Q) come from one sequence
+Keys (K) and Values (V) come from another sequence
+The output is a weighted combination of the values, based on query–key similarity
+Cross-attention lets one sequence retrieve relevant information from another sequence.
+W
+V
+W
+K
+W
+Q
+V
+K
+Q
+Encoder vectors
+Decoder vectors"
+8,Transformer,8 -Transformer.pptx,44,Multi-Head Attention: Why Use Multiple Heads?,"44
+Multi-Head Attention: Why Use Multiple Heads?
+Head 1
+Head 2
+Head 3
+A single attention head captures only one type of relationship at a time
+Multiple heads allow the model to attend to different patterns in parallel
+Different heads may focus on different tokens or different types of dependencies
+Multiple heads provide multiple views of the same sequence."
+8,Transformer,8 -Transformer.pptx,45,Multi-Head Attention: Concatenate and Project,"Multi-Head Attention: Concatenate and Project
+Each head works in a lower-dimensional subspace.
+45"
+8,Transformer,8 -Transformer.pptx,46,Transformer: Summary,"Transformer: Summary
+The Transformer models a sequence by combining content, context, and position.
+46
+input embeddings + positional encodings
+→ Q/K/V projections
+→ self-attention
+→ multi-head combination
+→ feed-forward layer
+→ contextualized token representations."
+8,Transformer,8 -Transformer.pptx,47,References,"Vaswani et al. Attention is all you need,
+https://arxiv.org/abs/1706.03762
+Abigail See’s lectures: http://web.stanford.edu/class/cs224n/index.html
+Illustrated BERT:
+http://jalammar.github.io/illustrated-bert/
+Andrew Ng (Attention):
+https://www.youtube.com/watch?v=quoGRI-1l0A
+Illustrated Transformer:
+https://jalammar.github.io/illustrated-transformer/
+Google (Transformers):
+https://ai.googleblog.com/2017/08/transformer-novel-neural-network.html
+ELMo paper:
+https://arxiv.org/pdf/1802.05365.pdf
+Key recommended resource:
+http://nlp.seas.harvard.edu/2018/04/03/attention.html
+The Annotated Transformer by Sasha Rush
+Jupyter
+Notebook using
+PyTorch
+that explains everything!
+The Illustrated Transformer:
+http://jalammar.github.io/illustrated-transformer/
+Attention visualizer:
+https://github.com/jessevig/bertviz
+47
+References"

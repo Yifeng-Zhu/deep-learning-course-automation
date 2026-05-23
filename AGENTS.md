@@ -63,6 +63,30 @@ When processing files:
 6. Suggest revisions.
 7. Only after review, generate revised PowerPoint files.
 
+## Speaker script quality
+
+The exact speaker script is the primary teaching product. When creating or revising scripts:
+
+- Write exact word-for-word read-aloud narration, not outlines, bullet notes, or metadata summaries.
+- Keep spoken narration natural, clear, and instructor-like. Avoid dense textbook prose, generic filler, and directions such as "explain this" or "mention that".
+- Do not mention lecture numbers, video numbers, slide ranges, filenames, manifests, generated decks, or segmentation details in spoken narration.
+- Do not put raw URLs in spoken narration. If a slide includes a URL, describe the resource briefly and put the URL in a separate reference note.
+- Teach the meaning behind each slide, not just the visible bullets. Explain why the concept matters and connect it to the previous and next ideas.
+- Keep narration slide-aligned. Explain equations, diagrams, arrows, architectures, examples, comparisons, and code only when they are supported by the slide context.
+- Do not force a fixed 25-30 minute duration. Estimate speaking time after narration is generated using about 125-135 spoken words per minute.
+- Allocate more time to equations, algorithms, model architectures, code, diagrams, and worked examples; use less time for title, agenda, transition, recap, and simple checkpoint slides.
+
+## Technical correction rules
+
+For each slide script:
+
+- Identify the main technical claim before writing narration.
+- Check whether the claim is accurate for a deep learning course.
+- Correct misleading, incomplete, outdated, ambiguous, or imprecise explanations in the spoken narration while preserving the intended meaning.
+- Add a separate technical correction note when the slide itself appears technically wrong, ambiguous, outdated, or potentially misleading.
+- Do not silently introduce unsupported technical claims.
+- Be especially careful with loss functions vs. objectives, gradient descent vs. backpropagation, gradients vs. parameter updates, training vs. inference, validation vs. testing, overfitting vs. underfitting, capacity vs. generalization, activations and nonlinear representations, softmax scores vs. calibrated probabilities, cross-entropy vs. accuracy, convolution vs. correlation, pooling and translation invariance, embeddings and representations, attention weights and interpretability, encoder/decoder/transformer terminology, generative vs. discriminative models, likelihood vs. sampling vs. prediction, and supervised vs. unsupervised vs. self-supervised learning.
+
 ## Safety
 
 Never edit the same PowerPoint file from two machines at the same time.
